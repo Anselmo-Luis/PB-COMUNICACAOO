@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Playwright artifacts
+.playwright-cli/
+output/
+
+# Vite dev server artifacts
+vite.out.log
+vite.err.log
+preview-out.log
+preview-err.log
+
+# Toolchain temp files
+toolchain-http.out.log
+
+# Claude Code
+.claude/

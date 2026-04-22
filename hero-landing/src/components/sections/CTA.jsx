@@ -1,7 +1,6 @@
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Phone, MessageSquare } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import MagneticButton from '../ui/MagneticButton';
-import WhatsAppIcon from '../ui/WhatsAppIcon';
 import { siteData } from '../../data/siteData';
 
 export default function CTA() {
@@ -40,16 +39,14 @@ export default function CTA() {
                   return (
                     <MagneticButton key={cta.text} strength={0.35} className="w-full">
                       <a
-                        href={siteData.contact.whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="#contato"
                         className="cta-primary-button group relative flex w-full items-center justify-between rounded-[1.35rem] px-6 py-5 font-semibold text-white"
                         style={{
                           background: 'linear-gradient(135deg, var(--color-pb-accent-on-light), var(--color-pb-accent-blue))',
                         }}
                       >
                         <span className="flex items-center gap-3">
-                          <WhatsAppIcon className="h-5 w-5" />
+                          <MessageSquare size={20} strokeWidth={1.75} aria-hidden="true" />
                           {cta.text}
                         </span>
                         <ArrowRight

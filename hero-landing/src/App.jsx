@@ -9,6 +9,7 @@ import Portfolio from './components/sections/Portfolio'
 import Testimonials from './components/sections/Testimonials'
 import FAQ from './components/sections/FAQ'
 import CTA from './components/sections/CTA'
+import ContactForm from './components/sections/ContactForm'
 import LocationMapSection from './components/sections/LocationMapSection'
 import Footer from './components/layout/Footer'
 
@@ -27,6 +28,7 @@ function App() {
         <Testimonials />
         <FAQ />
         <CTA />
+        <ContactForm />
         <LocationMapSection />
       </main>
       <Footer />

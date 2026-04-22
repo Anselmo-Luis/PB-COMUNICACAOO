@@ -28,6 +28,8 @@ export const siteData = {
       osmId: 5184059577,
       googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=-23.5213003,-46.7062256',
       directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=-23.5213003,-46.7062256',
+      embedUrl:
+        'https://www.google.com/maps?q=-23.5213003,-46.7062256&hl=pt-BR&z=16&output=embed',
     },
   },
 
@@ -51,6 +53,7 @@ export const siteData = {
       { label: 'Portfólio', href: '#portfolio' },
       { label: 'Depoimentos', href: '#depoimentos' },
       { label: 'FAQ', href: '#faq' },
+      { label: 'Contato', href: '#contato' },
     ],
     cta: { label: 'Solicite seu Orçamento' },
     mobileMenuCloseLabel: 'Fechar menu',
@@ -71,8 +74,15 @@ export const siteData = {
       highlight: '500 grandes marcas',
       after: 'que confiam na P&B',
     },
-    scrollLabel: 'Role para explorar',
-    loadingText: 'Carregando experiência...',
+    video: {
+      frames: {
+        pattern: '/frames/ezgif-frame-{n}.jpg',
+        count: 40,
+        pad: 3,
+        fps: 8,
+      },
+      poster: '/frames/ezgif-frame-040.jpg',
+    },
   },
 
   clients: {
@@ -348,6 +358,50 @@ export const siteData = {
         a: 'Varia conforme a complexidade e volume do projeto. Projetos padrão são entregues entre 5 a 15 dias úteis. Projetos de grande escala corporativa possuem cronograma dedicado com acompanhamento em tempo real.',
       },
     ],
+  },
+
+  form: {
+    id: 'contato',
+    kicker: 'Fale com a P&B',
+    headline: {
+      before: 'Conte seu projeto em',
+      accent: '60 segundos',
+    },
+    subheadline:
+      'Responda em menos de um minuto. Enviamos sua mensagem direto ao WhatsApp do comercial — sem cadastro, sem cookies, sem rastreamento.',
+    fields: {
+      name: { label: 'Nome', placeholder: 'Como devemos te chamar?', required: true },
+      company: { label: 'Empresa (opcional)', placeholder: 'Nome da sua empresa' },
+      contact: {
+        label: 'E-mail ou WhatsApp',
+        placeholder: 'voce@empresa.com.br ou (11) 99999-9999',
+        required: true,
+      },
+      message: {
+        label: 'Conte sobre seu projeto',
+        placeholder: 'Ex.: adesivação de 20 veículos, fachada em ACM, sinalização interna…',
+        required: true,
+      },
+    },
+    consent: {
+      label:
+        'Li e concordo em compartilhar estes dados para que a P&B entre em contato sobre meu orçamento.',
+      required: true,
+    },
+    submit: 'Enviar pelo WhatsApp',
+    submitSecondary: 'Prefiro enviar por e-mail',
+    successMessage:
+      'Tudo certo! Abrimos o WhatsApp com sua mensagem — confira e aperte enviar.',
+    lgpd: {
+      title: 'Privacidade e LGPD',
+      bullets: [
+        'Coletamos apenas o necessário para responder: nome, contato e descrição do projeto.',
+        'Nunca pedimos CPF, RG, endereço residencial ou dados financeiros neste formulário.',
+        'Os dados não saem do seu navegador: são enviados direto ao WhatsApp/e-mail do comercial.',
+        'Você pode pedir correção ou exclusão a qualquer momento pelo e-mail do DPO.',
+      ],
+      dpoLabel: 'Encarregado de Dados (DPO):',
+    },
   },
 
   ctaBanner: {

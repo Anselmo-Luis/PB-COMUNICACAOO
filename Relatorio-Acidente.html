@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio de Prompts - Veo 3.1 Lite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b; /* Zinc 950 */
+            color: #fafafa; /* Zinc 50 */
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #18181b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b;
+        }
+        
+        .copy-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Barra Lateral de Navegação -->
+    <aside class="w-full md:w-80 bg-zinc-900 border-r border-zinc-800 flex flex-col h-auto md:h-full flex-shrink-0">
+        <div class="p-6 border-b border-zinc-800">
+            <h1 class="text-xl font-bold text-white flex items-center gap-2">
+                <i data-lucide="film" class="text-amber-500"></i>
+                Veo 3.1 Studio
+            </h1>
+            <p class="text-xs text-zinc-400 mt-2">Campanha: Heróis da Estrada (TikTok 9:16)</p>
+        </div>
+        
+        <div class="p-4 flex-1 overflow-y-auto">
+            <h2 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3 px-2">Novos Guiões (Projetos)</h2>
+            <nav id="nav-concepts" class="space-y-1">
+                <!-- Gerado via JavaScript -->
+            </nav>
+        </div>
+        
+        <div class="p-4 border-t border-zinc-800 bg-zinc-950/50">
+            <p class="text-[11px] text-zinc-500 text-center leading-relaxed">
+                <i data-lucide="info" class="w-3 h-3 inline mb-0.5"></i>
+                Clique no ícone de cópia para transferir o prompt em Inglês (para o Veo) e a fala em PT-BR (para a dobragem).
+            </p>
+        </div>
+    </aside>
+
+    <!-- Área Principal -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-zinc-950 relative">
+        <!-- Cabeçalho -->
+        <header class="p-6 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur z-10 sticky top-0 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div>
+                <h2 id="current-title" class="text-2xl font-bold text-white tracking-tight">A carregar...</h2>
+                <p id="current-desc" class="text-sm text-zinc-400 mt-1">A preparar os detalhes do projeto...</p>
+            </div>
+            <div class="flex gap-2 self-start sm:self-auto">
+                <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-500 text-[11px] font-bold uppercase tracking-wide flex items-center gap-1.5 border border-amber-500/20">
+                    <i data-lucide="clock" class="w-3 h-3"></i> 32s Total
+                </span>
+                <span class="px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 text-[11px] font-bold uppercase tracking-wide flex items-center gap-1.5 border border-indigo-500/20">
+                    <i data-lucide="smartphone" class="w-3 h-3"></i> 9:16
+                </span>
+            </div>
+        </header>
+
+        <!-- Contentor de Clipes -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth">
+            <div id="clips-container" class="max-w-4xl mx-auto space-y-6 pb-20">
+                <!-- Gerado via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Notificação Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-emerald-500 text-white px-4 py-3 rounded-lg shadow-2xl transform transition-all duration-300 translate-y-20 opacity-0 flex items-center gap-2 z-50">
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        <span class="font-medium text-sm">Copiado com sucesso!</span>
+    </div>
+
+    <script>
+        // Dados dos 5 Novos Projetos
+        const roteiros = [
+            {
+                id: 'garrafa',
+                icon: 'coffee',
+                title: 'A Garrafa Térmica',
+                desc: 'Foco: Fadiga e Sono vs. Cafeína. Personagem: Hiperativa e Consciente.',
+                parts: [
+                    {
+                        time: '00:00 - 00:08s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Cinematic close-up of a classic, heavily scratched stainless steel coffee thermos resting on a truck dashboard. The metallic surface has a subtle, highly expressive anthropomorphic face formed by dents, scratches, and reflections. Sunlight hits the metal, creating bright highlights. The mouth moves fluidly, stretching the metallic texture realistically. The camera is locked in a stable, low-angle shot. The thermos looks hyperactive, its metallic eyes wide open, vibrating slightly as it speaks.',
+                        dialog: 'Opa, chefe! Já é a terceira vez que você me enche de café hoje.',
+                        sound: 'Efeito de líquido sendo agitado dentro de uma garrafa de metal, com uma trilha acústica agitada (violão).'
+                    },
+                    {
+                        time: '00:08 - 00:16s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Cinematic close-up of a classic, heavily scratched stainless steel coffee thermos on a truck dashboard. The metallic surface has a subtle, expressive anthropomorphic face formed by dents. Sunlight creates bright highlights. The camera angle remains exactly the same. The thermos stops vibrating, takes a deep breath, and its expression turns into a serious, concerned warning, looking directly at the driver.',
+                        dialog: 'Eu seguro a temperatura, mas não seguro o seu sono. Milagre eu não faço!',
+                        sound: 'O som da tampa da garrafa sendo rosqueada rapidamente. A música pausa por um segundo para dar ênfase.'
+                    },
+                    {
+                        time: '00:16 - 00:24s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Cinematic close-up of a scratched stainless steel coffee thermos on a truck dashboard. The metallic face formed by dents is highly expressive. Bright sunlight highlights the metal. The camera is locked in place. The thermos furrows its metallic brow, adopting an empathetic and lecturing tone, moving its mouth clearly to enunciate each word.',
+                        dialog: 'Cafeína não substitui uma cama macia. Seu cérebro precisa resetar, parceiro.',
+                        sound: 'Som sutil de um bocejo ou de um relógio tic-tac ao fundo, reforçando a ideia de tempo e cansaço.'
+                    },
+                    {
+                        time: '00:24 - 00:32s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Cinematic close-up of a scratched stainless steel coffee thermos on a truck dashboard. The metallic face is highly expressive. Bright sunlight highlights the metal. The camera remains fixed. The thermos gives a warm, friendly smile, its metallic features softening, and winks playfully, looking calm and reassuring.',
+                        dialog: 'Encosta o bruto, tira um cochilo de respeito e depois tomamos um quente!',
+                        sound: 'Som de café sendo servido em um copo plástico com uma fumaça (som de vapor) e um assobio amigável.'
+                    }
+                ]
+            },
+            {
+                id: 'radio',
+                icon: 'radio',
+                title: 'O Rádio PX (Comunicador)',
+                desc: 'Foco: Saúde Mental e Solidão. Personagem: O Locutor Companheiro (Nostálgico).',
+                parts: [
+                    {
+                        time: '00:00 - 00:08s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Macro shot of an old-school CB radio microphone (PTT) hanging inside a truck cabin. The black plastic grill of the microphone forms a subtle, friendly anthropomorphic face. A coiled black cable hangs below it. Warm afternoon light illuminates the dusty plastic texture. The camera sways very gently with the motion of the truck. The radio mic smiles warmly, its plastic grill moving like lips, speaking with the authority of an old friend.',
+                        dialog: 'Câmbio, motorista! Aqui é o seu escudeiro, quebrando esse silêncio pesado da cabine.',
+                        sound: 'Som de estática de rádio (chiado característico "psshhh"), seguido de uma música ambiente estilo lofi nostálgico.'
+                    },
+                    {
+                        time: '00:08 - 00:16s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Macro shot of an old-school CB radio microphone hanging inside a truck cabin. The black plastic grill forms a subtle anthropomorphic face. Warm afternoon light illuminates the plastic texture. The camera maintains its gentle, swaying motion. The microphone\'s face looks deeply empathetic and slightly melancholic, conveying understanding and partnership.',
+                        dialog: 'A estrada é longa e a solidão bate, mas você nunca tá sozinho.',
+                        sound: 'Um bipe agudo de rádio PX ("pip-pip") em harmonia com a batida lenta e tranquila da música.'
+                    },
+                    {
+                        time: '00:16 - 00:24s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Macro shot of an old-school CB radio microphone hanging inside a truck cabin. The black plastic grill forms a subtle anthropomorphic face. Warm afternoon light illuminates the plastic texture. The gentle camera sway continues. The radio mic suddenly looks highly encouraging and energetic, urging the driver to take action and socialize.',
+                        dialog: 'Bateu tristeza? Chama no rádio, puxa assunto com a turma. Falar faz bem!',
+                        sound: 'Efeito do botão lateral sendo apertado ("click-clack") e vozes ininteligíveis e amigáveis ao fundo em tom de estática.'
+                    },
+                    {
+                        time: '00:24 - 00:32s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Macro shot of an old-school CB radio microphone hanging inside a truck cabin. The black plastic grill forms a subtle anthropomorphic face. Warm afternoon light illuminates the plastic texture. The camera continues its gentle sway. The microphone gives a big, reassuring smile, looking proud and ready for the journey, finishing its transmission.',
+                        dialog: 'Saúde mental também é segurança. Modula com a gente e segue viagem. Positivo?',
+                        sound: 'O famoso som de final de transmissão "Câmbio desligo" (psshhh duplo) com um acorde final de violão.'
+                    }
+                ]
+            },
+            {
+                id: 'painel',
+                icon: 'gauge',
+                title: 'A Luz do Painel',
+                desc: 'Foco: Manutenção Preventiva. Personagem: A Fiscal Desesperada.',
+                parts: [
+                    {
+                        time: '00:00 - 00:08s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme close-up of a modern truck dashboard in a dark cabin. Focus tightly on a bright, glowing amber "Check Engine" indicator light. Inside the glowing amber shape, a highly detailed, panicked anthropomorphic face is visible. The surrounding dashboard is dark, making the amber glow intense. The camera shakes slightly, conveying anxiety. The face inside the light is screaming, eyes wide, looking frantic and completely ignored.',
+                        dialog: 'Alô! Terra chamando! Eu tô piscando igual árvore de Natal e você me ignorando!',
+                        sound: 'Um bipe agudo e insistente de alerta de painel ("piiii-piiii") misturado com um ritmo de comédia acelerado.'
+                    },
+                    {
+                        time: '00:08 - 00:16s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme close-up of a bright, glowing amber indicator light on a dark truck dashboard. Inside the amber shape is a panicked anthropomorphic face. The dashboard remains dark. The slight camera shake continues. The face stops screaming, crosses its glowing eyes in frustration, and then delivers a stern, severe lecture directly to the camera.',
+                        dialog: 'Uma luzinha amarela hoje pode virar um guincho amanhã. Não brinca com a sorte.',
+                        sound: 'Efeito sonoro de um guincho metálico sendo puxado ou correntes arrastando, de forma rápida e humorística.'
+                    },
+                    {
+                        time: '00:16 - 00:24s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme close-up of a bright, glowing amber indicator light on a dark truck dashboard. Inside the amber shape is an anthropomorphic face. The dark dashboard contrasts with the amber glow. The camera shake stops, becoming dead steady. The glowing face squints suspiciously, giving a highly sarcastic and knowing look to the driver.',
+                        dialog: 'Aquele barulho estranho não some só porque você aumentou o volume do rádio, viu?',
+                        sound: 'O som de um rádio FM sendo sintonizado subitamente no volume máximo e abaixando logo em seguida.'
+                    },
+                    {
+                        time: '00:24 - 00:32s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme close-up of a bright, glowing amber indicator light on a dark truck dashboard. Inside the amber shape is an anthropomorphic face. Suddenly, the amber light turns off, replaced by a calm, green glowing "OK" symbol that forms a peaceful, smiling face. The camera is perfectly still. The green face looks relieved and happy.',
+                        dialog: 'Faz a revisão preventiva, meu consagrado. Cuidar da máquina é cuidar da vida!',
+                        sound: 'Um som de confirmação digital muito satisfatório ("ding!") que traz sensação de paz e segurança.'
+                    }
+                ]
+            },
+            {
+                id: 'palheta',
+                icon: 'cloud-rain',
+                title: 'A Palheta do Limpa-vidros',
+                desc: 'Foco: Chuva e Visibilidade. Personagem: A Trabalhadora Focada.',
+                parts: [
+                    {
+                        time: '00:00 - 00:08s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Close-up shot from outside a truck windshield looking in. Heavy rain is pouring down on the glass. A thick black rubber windshield wiper blade swipes across the frame. Integrated into the rubber profile of the blade is a determined, slightly exhausted anthropomorphic face. Raindrops splash constantly. The background is a blurry gray highway. The camera moves side-to-side in perfect sync with the wiper. The rubber face is panting, speaking loudly over the storm.',
+                        dialog: 'Ufa! Pra lá e pra cá! Com essa chuva grossa, tô trabalhando dobrado aqui.',
+                        sound: 'O som forte de borracha raspando no vidro molhado (vruum-vruum), barulho de tempestade e uma batida eletrônica tensa.'
+                    },
+                    {
+                        time: '00:08 - 00:16s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Close-up shot from outside a truck windshield in heavy rain. A thick black rubber windshield wiper blade with an integrated anthropomorphic face swipes across the glass. Raindrops splash constantly. The background is a blurry gray highway. The camera continues to track the wiper\'s side-to-side motion. The face stops complaining, its rubber eyes widening in alarm as it looks down at the wet road.',
+                        dialog: 'A pista molhada vira sabão. Se a visibilidade baixar, diminui logo essa velocidade aí.',
+                        sound: 'Efeito sonoro simulando aquaplanagem (pneus deslizando na água) muito rápido, para dar o alerta.'
+                    },
+                    {
+                        time: '00:16 - 00:24s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Close-up shot outside a truck windshield in heavy rain. The black rubber wiper blade with a face swipes across the glass. The background is a blurry gray highway. The camera tracking motion remains perfectly synchronized. The rubber face adopts a strict, authoritative expression, pointing forward with a crease in the rubber to emphasize distance.',
+                        dialog: 'Distância do carro da frente é a regra de ouro. Não cola na traseira!',
+                        sound: 'Som de freio a disco molhado rangendo levemente, mantendo a chuva forte ao fundo da trilha.'
+                    },
+                    {
+                        time: '00:24 - 00:32s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Close-up shot outside a truck windshield. The rain suddenly stops, leaving only a few drops on the glass. The black rubber wiper blade with a face comes to a halt at the bottom of the screen. The background clears up. The camera is steady. The rubber face wipes an imaginary bead of sweat from its forehead, smiling proudly with a job well done.',
+                        dialog: 'Deixa que a água eu limpo, mas a prudência é você quem pilota!',
+                        sound: 'Som do motor do limpador desligando ("clack"). O barulho da chuva cessa e entra um cantar de pássaros sutil.'
+                    }
+                ]
+            },
+            {
+                id: 'catraca',
+                icon: 'anchor',
+                title: 'A Catraca de Carga (Cinta)',
+                desc: 'Foco: Fixação de Carga e Segurança. Personagem: O Guarda-costas Bruto.',
+                parts: [
+                    {
+                        time: '00:00 - 00:08s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme macro shot of a heavy-duty orange cargo tie-down strap and its thick steel ratchet tensioner (catraca), securing a large load on a flatbed trailer. Carved directly into the heavy steel mechanism of the ratchet is a tough, rugged anthropomorphic face. The lighting is harsh midday sun, casting strong shadows on the metal and bright orange nylon strap. The camera is fixed. The metallic face looks straining, speaking with a deep, gruff attitude.',
+                        dialog: 'E aí, capitão! Acha que eu aguento segurar essas toneladas todas sem sua ajuda?',
+                        sound: 'O som metálico e pesado de uma catraca sendo tensionada ("clack-clack-clack") marcando o ritmo de um rock clássico.'
+                    },
+                    {
+                        time: '00:08 - 00:16s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme macro shot of a heavy-duty orange cargo tie-down strap and its thick steel ratchet tensioner securing a load. The steel mechanism has a tough anthropomorphic face. Harsh midday sun casts strong shadows. The camera remains fixed. The steel face softens slightly from its gruff look, becoming serious and instructive, emphasizing the importance of checking the equipment.',
+                        dialog: 'Sempre dá aquela conferida no meu aperto antes de pegar a rodovia, não custa.',
+                        sound: 'O som de alguém batendo a mão na lona esticada da carreta (som de tambor abafado).'
+                    },
+                    {
+                        time: '00:16 - 00:24s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme macro shot of an orange cargo strap and steel ratchet tensioner securing a load. The steel mechanism features a tough anthropomorphic face. Harsh midday sun illuminates the scene. The camera is locked in place. The face looks highly concerned, staring fiercely at the viewer, warning about the extreme dangers of negligence.',
+                        dialog: 'Carga solta é um perigo na certa pra você e pra quem vem atrás.',
+                        sound: 'Um efeito dramático de suspense (um "swoosh" grave) interrompendo a música por um milissegundo.'
+                    },
+                    {
+                        time: '00:24 - 00:32s',
+                        prompt: 'Vertical 9:16 aspect ratio, 1x speed. Extreme macro shot of an orange cargo strap and steel ratchet tensioner. The steel mechanism features a tough anthropomorphic face. Harsh midday sun illuminates the scene. The camera is perfectly stable. The steel face gives a tough but reassuring wink, smiling confidently, looking completely locked-in and secure.',
+                        dialog: 'Aperta bem as catracas, garante a segurança da firma e boa viagem pra nós!',
+                        sound: 'O último e definitivo estalo metálico da catraca travando, fundindo-se com o som de um caminhão arrancando forte.'
+                    }
+                ]
+            }
+        ];
+
+        let activeConceptId = roteiros[0].id;
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            renderContent(activeConceptId);
+            lucide.createIcons();
+        });
+
+        // Renderizar Menu Lateral
+        function renderNav() {
+            const nav = document.getElementById('nav-concepts');
+            nav.innerHTML = roteiros.map(r => `
+                <button onclick="changeConcept('${r.id}')" 
+                    class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all duration-200 border ${activeConceptId === r.id ? 'bg-zinc-800 border-zinc-700 text-white shadow-lg shadow-black/20' : 'bg-transparent border-transparent text-zinc-500 hover:bg-zinc-800/50 hover:text-zinc-300'}">
+                    <div class="p-1.5 rounded-lg ${activeConceptId === r.id ? 'bg-amber-500/20 text-amber-500' : 'bg-zinc-800 text-zinc-500'}">
+                        <i data-lucide="${r.icon}" class="w-4 h-4"></i>
+                    </div>
+                    ${r.title}
+                </button>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // Alterar Conceito Ativo
+        function changeConcept(id) {
+            activeConceptId = id;
+            renderNav();
+            renderContent(id);
+        }
+
+        // Renderizar Conteúdo Principal
+        function renderContent(id) {
+            const concept = roteiros.find(r => r.id === id);
+            if(!concept) return;
+
+            document.getElementById('current-title').textContent = concept.title;
+            document.getElementById('current-desc').textContent = concept.desc;
+
+            const container = document.getElementById('clips-container');
+            container.innerHTML = concept.parts.map((part, index) => `
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row transition-all hover:border-zinc-700">
+                    
+                    <!-- Indicador de Clipe -->
+                    <div class="bg-zinc-950 p-6 md:w-32 flex flex-row md:flex-col items-center justify-between md:justify-center border-b md:border-b-0 md:border-r border-zinc-800">
+                        <div class="text-center">
+                            <span class="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-2">Parte</span>
+                            <span class="block text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-orange-600">${index + 1}</span>
+                        </div>
+                        <div class="text-[11px] text-zinc-400 font-mono bg-zinc-900 px-2.5 py-1.5 rounded-md mt-0 md:mt-4 border border-zinc-800">
+                            ${part.time}
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo do Clipe -->
+                    <div class="flex-1 p-5 sm:p-6 space-y-6">
+                        
+                        <!-- Prompt Visual -->
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-[11px] font-bold text-zinc-400 flex items-center gap-1.5 uppercase tracking-widest">
+                                    <i data-lucide="video" class="w-3.5 h-3.5 text-indigo-400"></i>
+                                    Prompt de Geração (Veo 3.1)
+                                </label>
+                                <button onclick="copyText(this, \`${part.prompt.replace(/`/g, '\\`')}\`)" class="copy-btn flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-indigo-500/10 hover:bg-indigo-500 text-indigo-400 hover:text-white rounded-lg border border-indigo-500/20 hover:border-indigo-500 transition-all">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Prompt
+                                </button>
+                            </div>
+                            <div class="bg-zinc-950 border border-zinc-800/50 rounded-xl p-4 text-sm text-zinc-300 font-mono leading-relaxed relative">
+                                ${part.prompt}
+                            </div>
+                        </div>
+
+                        <!-- Grelha Áudio / SFX -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            
+                            <!-- Fala (PT-BR) -->
+                            <div class="bg-emerald-950/20 p-4 sm:p-5 rounded-xl border border-emerald-900/30">
+                                <div class="flex justify-between items-center mb-3">
+                                    <label class="text-[11px] font-bold text-emerald-500 flex items-center gap-1.5 uppercase tracking-widest">
+                                        <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+                                        Guião de Voz (PT-BR)
+                                    </label>
+                                    <button onclick="copyText(this, \`${part.dialog.replace(/`/g, '\\`')}\`)" class="copy-btn text-emerald-600 hover:text-emerald-400 transition-colors p-1 bg-emerald-950/50 rounded-md" title="Copiar Fala">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                                <p class="text-zinc-100 font-medium text-base leading-relaxed">"${part.dialog}"</p>
+                            </div>
+
+                            <!-- Efeitos Sonoros -->
+                            <div class="bg-zinc-950/50 p-4 sm:p-5 rounded-xl border border-zinc-800/50">
+                                <label class="text-[11px] font-bold text-amber-500 flex items-center gap-1.5 uppercase tracking-widest mb-3">
+                                    <i data-lucide="music" class="w-3.5 h-3.5"></i>
+                                    Sons & Música
+                                </label>
+                                <p class="text-zinc-400 text-sm leading-relaxed">${part.sound}</p>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        // Função de Cópia
+        function copyText(btnElement, text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast(btnElement))
+                    .catch(err => copyFallback(text, btnElement));
+            } else {
+                copyFallback(text, btnElement);
+            }
+        }
+
+        function copyFallback(text, btnElement) {
+            let textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(btnElement);
+            } catch (err) {
+                console.error('Erro ao copiar texto: ', err);
+                alert("Falha ao copiar. Por favor, copie manualmente.");
+            }
+            textArea.remove();
+        }
+
+        // Feedback Visual
+        let toastTimeout;
+        function showToast(btnElement) {
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> Copiado`;
+            btnElement.classList.add('bg-emerald-500', 'text-white', 'border-emerald-500');
+            btnElement.classList.remove('bg-indigo-500/10', 'text-indigo-400', 'border-indigo-500/20');
+            lucide.createIcons();
+
+            setTimeout(() => {
+                btnElement.innerHTML = originalHTML;
+                btnElement.classList.remove('bg-emerald-500', 'text-white', 'border-emerald-500');
+                btnElement.classList.add('bg-indigo-500/10', 'text-indigo-400', 'border-indigo-500/20');
+                lucide.createIcons();
+            }, 2000);
+
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

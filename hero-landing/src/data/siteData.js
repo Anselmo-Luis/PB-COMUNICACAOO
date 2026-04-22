@@ -1,3 +1,12 @@
+const WHATSAPP_PHONE = '5511965698725';
+
+const DEFAULT_WHATSAPP_MESSAGE =
+  'Olá, P&B Comunicação Visual! Cheguei aqui pelo site e gostaria de solicitar um orçamento de comunicação visual (adesivação de frota, fachadas, painéis, banners ou PDV). Podem me passar as informações?';
+
+export function buildWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
+  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
+}
+
 export const siteData = {
   company: {
     name: 'P&B Comunicação Visual',
@@ -15,9 +24,9 @@ export const siteData = {
     phones: '(11) 3836-0196 / 3644-8907',
     phoneLink: 'tel:+551138360196',
     email: 'vendas1@pbcomunicacao.com.br',
-    whatsappUrl:
-      'https://api.whatsapp.com/send?phone=5511965698725&text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento.',
-    whatsappPhone: '5511965698725',
+    whatsappPhone: WHATSAPP_PHONE,
+    whatsappMessage: DEFAULT_WHATSAPP_MESSAGE,
+    whatsappUrl: buildWhatsAppUrl(),
     location: {
       lat: -23.5213003,
       lng: -46.7062256,

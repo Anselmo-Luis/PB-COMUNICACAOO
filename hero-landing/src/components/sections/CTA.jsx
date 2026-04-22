@@ -39,7 +39,9 @@ export default function CTA() {
                   return (
                     <MagneticButton key={cta.text} strength={0.35} className="w-full">
                       <a
-                        href="#contato"
+                        href={siteData.contact.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="cta-primary-button group relative flex w-full items-center justify-between rounded-[1.35rem] px-6 py-5 font-semibold text-white"
                         style={{
                           background: 'linear-gradient(135deg, var(--color-pb-accent-on-light), var(--color-pb-accent-blue))',

@@ -150,7 +150,9 @@ export default function Hero() {
         <div className="fade-in-up-delay-3 mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {primaryCta && (
             <a
-              href="#contato"
+              href={siteData.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hero-cta-primary group inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold text-white sm:text-base"
             >
               {primaryCta.text}

@@ -1,107 +1,133 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { siteData } from '../../data/siteData';
 
-function buildFrameList({ pattern, count, pad = 0 }) {
-  const frames = new Array(count);
-  for (let i = 0; i < count; i++) {
-    const n = pad > 0 ? String(i + 1).padStart(pad, '0') : String(i + 1);
-    frames[i] = pattern.replace('{n}', n);
-  }
-  return frames;
-}
-
 export default function Hero() {
-  const imgARef = useRef(null);
-  const imgBRef = useRef(null);
   const sectionRef = useRef(null);
-  const rafRef = useRef(0);
-  const playingRef = useRef(false);
+  const videoRef = useRef(null);
 
-  const [ready, setReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [isVideoEnabled, setIsVideoEnabled] = useState(() => {
+    if (typeof window === 'undefined') return true;
+
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection?.saveData === true;
+    return !prefersReducedMotion && !saveData;
+  });
 
   const { video, headline, highlight, subheadline, socialProof, ctas, badge } = siteData.hero;
-  const frames = useMemo(() => buildFrameList(video.frames), [video.frames]);
-  const frameInterval = 1000 / video.frames.fps;
-
-  // Preload all frames up front so src swaps don't flicker or hit the network mid-loop.
-  useEffect(() => {
-    let cancelled = false;
-    const loaders = frames.map(
-      (src) =>
-        new Promise((resolve) => {
-          const img = new Image();
-          img.onload = img.onerror = () => resolve();
-          img.src = src;
-        })
-    );
-
-    Promise.all(loaders).then(() => {
-      if (!cancelled) setReady(true);
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [frames]);
 
   useEffect(() => {
-    const imgA = imgARef.current;
-    const imgB = imgBRef.current;
     const section = sectionRef.current;
-    if (!ready || !imgA || !imgB || !section) return;
+    const media = videoRef.current;
 
-    // A starts visible with frame 0; B is hidden and will be swapped to frame 1 on first tick.
-    imgA.src = frames[0];
-    imgA.style.opacity = '1';
-    imgB.style.opacity = '0';
+    if (!isVideoEnabled || !section || !media) return;
 
-    let index = 0;
-    let showingA = true;
-    let last = 0;
+    let isVisible = false;
+    let recoveryFrame = 0;
+    const cancelRecoveryFrame = () => {
+      if (!recoveryFrame) return;
+      cancelAnimationFrame(recoveryFrame);
+      recoveryFrame = 0;
+    };
 
-    const tick = (now) => {
-      if (!playingRef.current) return;
-      if (now - last >= frameInterval) {
-        index = (index + 1) % frames.length;
-        const incoming = showingA ? imgB : imgA;
-        const outgoing = showingA ? imgA : imgB;
-        incoming.src = frames[index];
-        incoming.style.opacity = '1';
-        outgoing.style.opacity = '0';
-        showingA = !showingA;
-        last = now;
+    const pauseVideo = () => {
+      cancelRecoveryFrame();
+      media.pause();
+    };
+
+    const playVideo = async () => {
+      if (!isVisible || document.hidden) return false;
+
+      media.muted = true;
+      media.defaultMuted = true;
+      media.playsInline = true;
+
+      try {
+        const playback = media.play();
+        if (playback && typeof playback.then === 'function') {
+          await playback;
+        }
+        return true;
+      } catch {
+        return false;
       }
-      rafRef.current = requestAnimationFrame(tick);
     };
 
-    const start = () => {
-      if (playingRef.current) return;
-      playingRef.current = true;
-      last = 0;
-      rafRef.current = requestAnimationFrame(tick);
+    const queueRecovery = () => {
+      if (recoveryFrame || !isVisible || document.hidden || !media.paused) return;
+
+      recoveryFrame = requestAnimationFrame(() => {
+        recoveryFrame = 0;
+        void playVideo();
+      });
     };
 
-    const stop = () => {
-      playingRef.current = false;
-      cancelAnimationFrame(rafRef.current);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseVideo();
+        return;
+      }
+      queueRecovery();
+    };
+
+    const handleAutoplayRecovery = () => {
+      if (!media.paused) return;
+      void playVideo();
+    };
+
+    const handleCanPlay = () => {
+      setIsReady(true);
+      queueRecovery();
+    };
+
+    const handleVideoError = () => {
+      setIsVideoEnabled(false);
     };
 
     const io = new IntersectionObserver(
-      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+
+        if (isVisible) {
+          queueRecovery();
+          return;
+        }
+
+        pauseVideo();
+      },
       { threshold: 0.1 }
     );
+
     io.observe(section);
 
-    const onVisibility = () => (document.hidden ? stop() : null);
-    document.addEventListener('visibilitychange', onVisibility);
+    media.addEventListener('loadeddata', handleCanPlay);
+    media.addEventListener('canplay', handleCanPlay);
+    media.addEventListener('playing', handleCanPlay);
+    media.addEventListener('error', handleVideoError);
+
+    if (media.readyState >= 2) {
+      handleCanPlay();
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pointerdown', handleAutoplayRecovery);
+    window.addEventListener('touchstart', handleAutoplayRecovery);
+    window.addEventListener('keydown', handleAutoplayRecovery);
 
     return () => {
       io.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
-      stop();
+      media.removeEventListener('loadeddata', handleCanPlay);
+      media.removeEventListener('canplay', handleCanPlay);
+      media.removeEventListener('playing', handleCanPlay);
+      media.removeEventListener('error', handleVideoError);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pointerdown', handleAutoplayRecovery);
+      window.removeEventListener('touchstart', handleAutoplayRecovery);
+      window.removeEventListener('keydown', handleAutoplayRecovery);
+      pauseVideo();
     };
-  }, [ready, frames, frameInterval]);
+  }, [isVideoEnabled]);
 
   const primaryCta = ctas.find((c) => c.variant === 'primary');
   const secondaryCta = ctas.find((c) => c.variant === 'secondary');
@@ -113,24 +139,35 @@ export default function Hero() {
     >
       <div className="hero-media" aria-hidden="true">
         <img
-          ref={imgARef}
           src={video.poster}
           alt=""
-          className={`hero-video hero-video-layer ${ready ? 'is-ready' : ''}`}
+          className="hero-poster"
           loading="eager"
+          fetchPriority="high"
           decoding="async"
           draggable="false"
         />
-        <img
-          ref={imgBRef}
-          src={video.poster}
-          alt=""
-          className={`hero-video hero-video-layer ${ready ? 'is-ready' : ''}`}
-          loading="eager"
-          decoding="async"
-          draggable="false"
-          style={{ opacity: 0 }}
-        />
+
+        {isVideoEnabled && (
+          <video
+            ref={videoRef}
+            className={`hero-video ${isReady ? 'is-ready' : ''}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            disablePictureInPicture
+            disableRemotePlayback
+            preload="metadata"
+            poster={video.poster}
+            tabIndex={-1}
+          >
+            {video.sources.map((source) => (
+              <source key={source.src} src={source.src} type={source.type} />
+            ))}
+          </video>
+        )}
+
         <div className="hero-media-overlay" />
       </div>
 

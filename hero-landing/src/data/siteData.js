@@ -84,13 +84,8 @@ export const siteData = {
       after: 'que confiam na P&B',
     },
     video: {
-      frames: {
-        pattern: '/frames/ezgif-frame-{n}.jpg',
-        count: 40,
-        pad: 3,
-        fps: 8,
-      },
-      poster: '/frames/ezgif-frame-040.jpg',
+      poster: '/assets/hero/hero-poster.jpg',
+      sources: [{ src: '/assets/hero/hero.mp4', type: 'video/mp4' }],
     },
   },
 

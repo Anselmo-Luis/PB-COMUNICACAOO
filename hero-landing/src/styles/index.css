@@ -50,6 +50,27 @@ body {
   min-height: 100svh;
 }
 
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10000;
+  transform: translateY(-150%);
+  border-radius: 999px;
+  background: var(--color-pb-accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #fff 0%, var(--color-pb-muted) 100%);
@@ -1144,6 +1165,27 @@ section[aria-label] > .reveal-section p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .accent-gradient,
+  .accent-gradient-light {
+    animation: none !important;
+    background-position: 0 center;
+  }
+
+  .logo-glass-card,
+  .logo-glass-card-light,
+  .marquee-track {
+    animation: none !important;
+  }
+
   .hero-video {
     transition: none;
   }

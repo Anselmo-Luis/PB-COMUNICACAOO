@@ -92,6 +92,8 @@ export default function LocationMapSection() {
               <iframe
                 title={`Mapa de localização — ${company.name}`}
                 src={mapUrl}
+                width={640}
+                height={520}
                 className="block h-[320px] w-full border-0 sm:h-[420px] lg:h-[520px]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

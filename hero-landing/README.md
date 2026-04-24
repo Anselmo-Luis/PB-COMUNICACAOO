@@ -1,16 +1,34 @@
-# React + Vite
+# Hero Landing - P&B Comunicacao Visual
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Landing page React/Vite para a P&B Comunicacao Visual.
 
-Currently, two official plugins are available:
+## Comandos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+npm run build
+npm run build:full
+npm run lint
+npm run preview
+```
 
-## React Compiler
+## Scripts de Assets
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `npm run optimize-images`: remove assets mortos de `public`, converte imagens usadas para WebP e gera posters responsivos do hero.
+- `npm run generate-assets`: gera `og-image.jpg`, favicons e `apple-touch-icon`.
+- `npm run build`: gera `robots.txt`/`sitemap.xml` e compila com Vite.
+- `npm run build:full`: executa otimizacao de imagens, geracao de assets e build.
 
-## Expanding the ESLint configuration
+## Variaveis
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copie `.env.example` se precisar configurar ambiente local.
+
+- `VITE_SITE_URL`: URL canonica para canonical, OG, sitemap e JSON-LD. Se ausente, usa `https://hero-landing-alpha.vercel.app/`.
+- `VITE_GOOGLE_MAPS_EMBED_KEY`: opcional para usar a Google Maps Embed API oficial.
+
+## Observacoes
+
+- SEO/social metadata e JSON-LD sao injetados no HTML inicial via plugin Vite.
+- A galeria usa WebP gerado em `public/assets/gallery`.
+- Depoimentos foram removidos ate existirem citacoes verificaveis.

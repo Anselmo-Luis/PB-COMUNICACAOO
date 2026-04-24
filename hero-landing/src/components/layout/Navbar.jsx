@@ -85,6 +85,8 @@ export default function Navbar() {
             <img
               src={siteData.company.logoSrc}
               alt={siteData.company.name}
+              width={80}
+              height={40}
               className="h-10 w-auto transition-[filter] duration-300"
               style={scrolled ? { filter: 'brightness(0)' } : undefined}
             />
@@ -119,6 +121,7 @@ export default function Navbar() {
                 : 'text-white/70 hover:text-white'
             }`}
             aria-label="Menu"
+            aria-controls="mobile-navigation-drawer"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((prev) => !prev)}
           >
@@ -128,71 +131,72 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Semi-transparent Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/60 z-[99] transition-opacity duration-300 ${
-          menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
-
-      {/* Slide-in Drawer */}
-      <div
-        ref={drawerRef}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu de navegação"
-        className={`fixed top-0 right-0 h-full w-72 z-[101] bg-[#0a0a0a]/95 backdrop-blur-xl border-l border-white/5 transition-transform duration-300 ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        {/* Close Button */}
-        <div className="flex items-center justify-end px-6 py-5">
-          <button
-            type="button"
-            className="flex items-center justify-center w-10 h-10 rounded-lg text-white/60 hover:text-white transition-colors"
-            aria-label={siteData.nav.mobileMenuCloseLabel}
+      {menuOpen && (
+        <>
+          {/* Semi-transparent Overlay */}
+          <div
+            className="fixed inset-0 bg-black/60 z-[99] transition-opacity duration-300 opacity-100"
             onClick={closeMenu}
-          >
-            <X size={24} strokeWidth={1.75} aria-hidden="true" />
-          </button>
-        </div>
+            aria-hidden="true"
+          />
 
-        {/* Nav Links */}
-        <nav aria-label="Menu mobile" className="flex flex-col px-6">
-          {siteData.nav.links.map((link, index) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`py-4 text-base text-white/60 hover:text-white transition-colors ${
-                index < siteData.nav.links.length - 1 ? 'border-b border-white/5' : ''
-              }`}
-              onClick={closeMenu}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* WhatsApp CTA Button */}
-        <div className="absolute bottom-8 left-0 right-0 px-6">
-          <a
-            href={siteData.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95"
-            style={{
-              background: 'linear-gradient(135deg, var(--color-pb-accent), var(--color-pb-accent-blue))',
-              boxShadow: '0 4px 20px rgba(46, 167, 41, 0.25)',
-            }}
-            onClick={closeMenu}
+          {/* Slide-in Drawer */}
+          <div
+            id="mobile-navigation-drawer"
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu de navegação"
+            className="fixed top-0 right-0 h-full w-72 z-[101] bg-[#0a0a0a]/95 backdrop-blur-xl border-l border-white/5 transition-transform duration-300 translate-x-0"
           >
-            <WhatsAppIcon className="w-4 h-4" />
-            {siteData.nav.cta.label}
-          </a>
-        </div>
-      </div>
+            {/* Close Button */}
+            <div className="flex items-center justify-end px-6 py-5">
+              <button
+                type="button"
+                className="flex items-center justify-center w-10 h-10 rounded-lg text-white/60 hover:text-white transition-colors"
+                aria-label={siteData.nav.mobileMenuCloseLabel}
+                onClick={closeMenu}
+              >
+                <X size={24} strokeWidth={1.75} aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Nav Links */}
+            <nav aria-label="Menu mobile" className="flex flex-col px-6">
+              {siteData.nav.links.map((link, index) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`py-4 text-base text-white/60 hover:text-white transition-colors ${
+                    index < siteData.nav.links.length - 1 ? 'border-b border-white/5' : ''
+                  }`}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* WhatsApp CTA Button */}
+            <div className="absolute bottom-8 left-0 right-0 px-6">
+              <a
+                href={siteData.contact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95"
+                style={{
+                  background: 'linear-gradient(135deg, var(--color-pb-accent), var(--color-pb-accent-blue))',
+                  boxShadow: '0 4px 20px rgba(46, 167, 41, 0.25)',
+                }}
+                onClick={closeMenu}
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                {siteData.nav.cta.label}
+              </a>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

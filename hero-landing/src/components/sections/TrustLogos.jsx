@@ -23,7 +23,7 @@ export default function TrustLogos() {
       </div>
 
       <div
-        className="relative py-3"
+        className="relative overflow-hidden py-3"
         style={{
           WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 96px, black calc(100% - 96px), transparent 100%)',
           maskImage: 'linear-gradient(to right, transparent 0%, black 96px, black calc(100% - 96px), transparent 100%)',

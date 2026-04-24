@@ -1,7 +1,124 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { siteData } from './src/data/siteData.js'
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
+const fallbackSiteUrl = 'https://hero-landing-alpha.vercel.app/'
+
+function normalizeSiteUrl(value = fallbackSiteUrl) {
+  const candidate = value?.trim() || fallbackSiteUrl
+  const withProtocol = /^https?:\/\//i.test(candidate) ? candidate : `https://${candidate}`
+  const url = new URL(withProtocol)
+  url.hash = ''
+  url.search = ''
+  url.pathname = '/'
+  return url.href
+}
+
+function absoluteUrl(siteUrl, pathname) {
+  return new URL(pathname, siteUrl).href
+}
+
+function buildJsonLd(siteUrl) {
+  const { company, contact, social, faq } = siteData
+  const logoUrl = absoluteUrl(siteUrl, company.logoSrc)
+  const imageUrl = absoluteUrl(siteUrl, '/assets/og-image.jpg')
+
+  return JSON.stringify(
+    [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        name: company.name,
+        description: company.description,
+        url: siteUrl,
+        logo: logoUrl,
+        image: imageUrl,
+        foundingDate: String(company.founded),
+        taxID: company.cnpj,
+        email: contact.email,
+        telephone: contact.phones,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Rua Antonio Raposo, 149',
+          addressLocality: 'São Paulo',
+          addressRegion: 'SP',
+          postalCode: '05074-020',
+          addressCountry: 'BR',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: contact.location.lat,
+          longitude: contact.location.lng,
+        },
+        sameAs: social.map((item) => item.href),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: company.name,
+        url: siteUrl,
+        description: company.description,
+        inLanguage: 'pt-BR',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.items.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      },
+    ],
+    null,
+    0,
+  )
+}
+
+function htmlMetadataPlugin(siteUrl) {
+  return {
+    name: 'pb-html-metadata',
+    transformIndexHtml(html) {
+      const ogImageUrl = absoluteUrl(siteUrl, '/assets/og-image.jpg')
+
+      return html
+        .replaceAll('__SITE_URL__', siteUrl)
+        .replaceAll('__OG_IMAGE_URL__', ogImageUrl)
+        .replace('__JSON_LD__', buildJsonLd(siteUrl))
+    },
+  }
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL)
+
+  return {
+    plugins: [htmlMetadataPlugin(siteUrl), react(), tailwindcss()],
+    build: {
+      target: 'es2020',
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return undefined
+            if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
+              return 'vendor-react'
+            }
+            if (/[\\/]node_modules[\\/]gsap[\\/]/.test(id)) {
+              return 'vendor-gsap'
+            }
+            if (/[\\/]node_modules[\\/]lucide-react[\\/]/.test(id)) {
+              return 'vendor-icons'
+            }
+            return 'vendor'
+          },
+        },
+      },
+    },
+  }
 })

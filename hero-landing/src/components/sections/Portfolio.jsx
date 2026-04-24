@@ -6,15 +6,15 @@ const CATEGORIES = ['Todos', 'Veículos', 'Painéis', 'Banners'];
 
 const GALLERY_ITEMS = [
   ...Array.from({ length: 16 }, (_, i) => ({
-    src: `/assets/gallery/veiculos/veiculo-${String(i + 1).padStart(2, '0')}.jpg`,
+    src: `/assets/gallery/veiculos/veiculo-${String(i + 1).padStart(2, '0')}.webp`,
     category: 'Veículos',
     alt: `Adesivação de veículos ${i + 1}`,
   })),
   ...[
-    'painel-01.jpg','painel-02.jpg','painel-03.jpg','painel-04.webp',
-    'painel-05.webp','painel-06.webp','painel-07.jpg','painel-08.webp',
-    'painel-09.webp','painel-10.webp','painel-11.jpg','painel-12.jpg',
-    'painel-13.jpg','painel-14.jpg','painel-15.jpg','painel-16.jpg',
+    'painel-01.webp','painel-02.webp','painel-03.webp','painel-04.webp',
+    'painel-05.webp','painel-06.webp','painel-07.webp','painel-08.webp',
+    'painel-09.webp','painel-10.webp','painel-11.webp','painel-12.webp',
+    'painel-13.webp','painel-14.webp','painel-15.webp','painel-16.webp',
   ].map((f, i) => ({
     src: `/assets/gallery/paineis/${f}`,
     category: 'Painéis',
@@ -23,7 +23,7 @@ const GALLERY_ITEMS = [
   ...[
     'banner-01.webp','banner-02.webp','banner-03.webp','banner-04.webp',
     'banner-05.webp','banner-06.webp','banner-07.webp','banner-08.webp',
-    'banner-09.webp','banner-10.jpg',
+    'banner-09.webp','banner-10.webp',
   ].map((f, i) => ({
     src: `/assets/gallery/banners/${f}`,
     category: 'Banners',

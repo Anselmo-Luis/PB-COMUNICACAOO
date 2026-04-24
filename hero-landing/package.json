@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-seo-files.mjs && vite build",
+    "build:full": "npm run optimize-images && npm run generate-assets && npm run build",
+    "generate-assets": "node scripts/generate-og-image.mjs && node scripts/generate-favicons.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.2.2",
     "gsap": "^3.14.2",
     "lucide-react": "^1.7.0",

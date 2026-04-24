@@ -60,7 +60,6 @@ export const siteData = {
       { label: 'Sobre', href: '#sobre' },
       { label: 'Serviços', href: '#servicos' },
       { label: 'Portfólio', href: '#portfolio' },
-      { label: 'Depoimentos', href: '#depoimentos' },
       { label: 'FAQ', href: '#faq' },
       { label: 'Contato', href: '#contato' },
     ],
@@ -79,12 +78,14 @@ export const siteData = {
       { text: 'Nossos Serviços', href: '#servicos', variant: 'secondary' },
     ],
     socialProof: {
-      before: 'Junte-se a mais de',
-      highlight: '500 grandes marcas',
-      after: 'que confiam na P&B',
+      before: 'Projetos para',
+      highlight: 'marcas de diferentes setores',
+      after: 'com produção e instalação especializada',
     },
     video: {
-      poster: '/assets/hero/hero-poster.jpg',
+      poster: '/assets/hero/hero-poster-1920.webp',
+      posterSrcSet:
+        '/assets/hero/hero-poster-640.webp 640w, /assets/hero/hero-poster-1024.webp 1024w, /assets/hero/hero-poster-1920.webp 1920w',
       sources: [{ src: '/assets/hero/hero.mp4', type: 'video/mp4' }],
     },
   },
@@ -143,7 +144,7 @@ export const siteData = {
     ],
     stats: [
       { value: '20+', label: 'Anos de Mercado' },
-      { value: '500+', label: 'Marcas Atendidas' },
+      { value: 'B2B', label: 'Projetos Corporativos' },
       { value: 'Nacional', label: 'Cobertura' },
       { value: '2002', label: 'Desde' },
     ],
@@ -237,7 +238,7 @@ export const siteData = {
     items: [
       {
         title: 'Adesivação e Envelopamento de Frotas',
-        description: 'Transforme cada veículo em mídia de alta performance. Mais de 70.000 impressões visuais diárias com proteção física total para frotas corporativas de escala nacional.',
+        description: 'Transforme cada veículo em mídia de alta presença. Identidade visual aplicada com acabamento profissional e proteção física para frotas corporativas de escala nacional.',
         image: 'https://pbcomunicacao.com.br/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-14-at-16.39.10.jpeg',
         gallery: [
           'https://pbcomunicacao.com.br/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-14-at-16.39.10.jpeg',
@@ -285,45 +286,16 @@ export const siteData = {
       {
         title: 'PDVs e Sinalização de Ponto de Venda',
         description: 'Domínio do comportamento do shopper. Materiais de PDV que impulsionam decisões instintivas e convertem no corredor — a última milha do marketing de varejo.',
-        image: '/assets/portfolio/pdv.jpg',
+        image: '/assets/portfolio/pdv.webp',
         gallery: [
-          '/assets/portfolio/pdv.jpg',
-          '/assets/portfolio/veiculos.jpeg',
-          '/assets/portfolio/banners.jpeg',
-          '/assets/portfolio/paineis.jpeg',
+          '/assets/portfolio/pdv.webp',
+          '/assets/portfolio/veiculos.webp',
+          '/assets/portfolio/banners.webp',
+          '/assets/portfolio/paineis.webp',
         ],
         category: 'PDV',
         metric: 'Conversão no Ponto de Venda e Compras por Impulso',
         link: 'https://pbcomunicacao.com.br/pdvs-e-materiais-diversos/',
-      },
-    ],
-  },
-
-  testimonials: {
-    label: 'Prova Social',
-    headline: {
-      before: 'O que nossos',
-      accent: 'parceiros',
-      after: 'dizem',
-    },
-    items: [
-      {
-        quote:
-          'A padronização das nossas 50 filiais em tempo recorde elevou exponencialmente nossa presença de marca. A equipe da P&B entregou não apenas fachadas impecáveis, mas tranquilidade logística em nível nacional.',
-        name: 'Carlos Mendes',
-        role: 'Diretor de Marketing — Grande Varejo',
-      },
-      {
-        quote:
-          'Tínhamos receio com a uniformidade das cores ao adesivar nossa frota em diferentes estados. A P&B unificou a estética com precisão cirúrgica, e a agilidade permitiu que a operação não parasse um único dia.',
-        name: 'Roberto Takahashi',
-        role: 'Gerente de Logística — Operação Nacional',
-      },
-      {
-        quote:
-          'Os displays de PDV transformaram o corredor da nossa marca. O impacto visual nos pontos de venda refletiu diretamente no aumento das vendas por impulso e na consistência da experiência do shopper.',
-        name: 'Ana Paula Ferreira',
-        role: 'Coordenadora de Trade Marketing — Indústria Alimentícia',
       },
     ],
   },

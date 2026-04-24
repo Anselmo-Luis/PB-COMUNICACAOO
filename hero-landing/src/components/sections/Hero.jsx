@@ -140,8 +140,12 @@ export default function Hero() {
       <div className="hero-media" aria-hidden="true">
         <img
           src={video.poster}
+          srcSet={video.posterSrcSet}
+          sizes="100vw"
           alt=""
           className="hero-poster"
+          width={1920}
+          height={1080}
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -160,6 +164,8 @@ export default function Hero() {
             disableRemotePlayback
             preload="metadata"
             poster={video.poster}
+            width={1920}
+            height={1080}
             tabIndex={-1}
           >
             {video.sources.map((source) => (

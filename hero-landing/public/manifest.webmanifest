@@ -1,0 +1,29 @@
+{
+  "name": "P&B Comunicação Visual",
+  "short_name": "P&B",
+  "description": "Projetos integrados de sinalização corporativa, produção e instalação em nível nacional desde 2002.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A0D0A",
+  "theme_color": "#2EA729",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

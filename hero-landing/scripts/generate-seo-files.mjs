@@ -16,7 +16,11 @@ function normalizeSiteUrl(value = fallbackSiteUrl) {
   return url.href;
 }
 
-const siteUrl = normalizeSiteUrl(process.env.VITE_SITE_URL);
+function resolveSiteUrl(env) {
+  return normalizeSiteUrl(env.VITE_SITE_URL || env.VERCEL_URL || fallbackSiteUrl);
+}
+
+const siteUrl = resolveSiteUrl(process.env);
 const today = new Date().toISOString().slice(0, 10);
 
 await fs.mkdir(publicDir, { recursive: true });

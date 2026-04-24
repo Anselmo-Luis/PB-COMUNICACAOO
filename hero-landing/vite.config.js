@@ -15,6 +15,10 @@ function normalizeSiteUrl(value = fallbackSiteUrl) {
   return url.href
 }
 
+function resolveSiteUrl(env) {
+  return normalizeSiteUrl(env.VITE_SITE_URL || env.VERCEL_URL || fallbackSiteUrl)
+}
+
 function absoluteUrl(siteUrl, pathname) {
   return new URL(pathname, siteUrl).href
 }
@@ -94,8 +98,8 @@ function htmlMetadataPlugin(siteUrl) {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL)
+  const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
+  const siteUrl = resolveSiteUrl(env)
 
   return {
     plugins: [htmlMetadataPlugin(siteUrl), react(), tailwindcss()],

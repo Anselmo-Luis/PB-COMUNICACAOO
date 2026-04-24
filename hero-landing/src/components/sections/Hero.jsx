@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 import { siteData } from '../../data/siteData';
 
 export default function Hero() {
@@ -7,12 +7,12 @@ export default function Hero() {
   const videoRef = useRef(null);
 
   const [isReady, setIsReady] = useState(false);
+  const [isPlaybackBlocked, setIsPlaybackBlocked] = useState(false);
   const [isVideoEnabled, setIsVideoEnabled] = useState(() => {
     if (typeof window === 'undefined') return true;
 
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const saveData = navigator.connection?.saveData === true;
-    return !prefersReducedMotion && !saveData;
+    return !saveData;
   });
 
   const { video, headline, highlight, subheadline, socialProof, ctas, badge } = siteData.hero;
@@ -23,7 +23,7 @@ export default function Hero() {
 
     if (!isVideoEnabled || !section || !media) return;
 
-    let isVisible = false;
+    let isVisible = true;
     let recoveryFrame = 0;
     const cancelRecoveryFrame = () => {
       if (!recoveryFrame) return;
@@ -48,8 +48,10 @@ export default function Hero() {
         if (playback && typeof playback.then === 'function') {
           await playback;
         }
+        setIsPlaybackBlocked(false);
         return true;
       } catch {
+        setIsPlaybackBlocked(true);
         return false;
       }
     };
@@ -71,7 +73,8 @@ export default function Hero() {
       queueRecovery();
     };
 
-    const handleAutoplayRecovery = () => {
+    const handleAutoplayRecovery = (event) => {
+      if (event.target?.closest?.('.hero-video-unblock')) return;
       if (!media.paused) return;
       void playVideo();
     };
@@ -110,6 +113,8 @@ export default function Hero() {
       handleCanPlay();
     }
 
+    void playVideo();
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('pointerdown', handleAutoplayRecovery);
     window.addEventListener('touchstart', handleAutoplayRecovery);
@@ -128,6 +133,23 @@ export default function Hero() {
       pauseVideo();
     };
   }, [isVideoEnabled]);
+
+  const handleManualPlayback = async () => {
+    const media = videoRef.current;
+    if (!media) return;
+
+    media.muted = true;
+    media.defaultMuted = true;
+    media.playsInline = true;
+
+    try {
+      await media.play();
+      setIsReady(true);
+      setIsPlaybackBlocked(false);
+    } catch {
+      setIsPlaybackBlocked(true);
+    }
+  };
 
   const primaryCta = ctas.find((c) => c.variant === 'primary');
   const secondaryCta = ctas.find((c) => c.variant === 'secondary');
@@ -162,11 +184,12 @@ export default function Hero() {
             playsInline
             disablePictureInPicture
             disableRemotePlayback
-            preload="metadata"
+            preload="auto"
             poster={video.poster}
             width={1920}
             height={1080}
             tabIndex={-1}
+            aria-hidden="true"
           >
             {video.sources.map((source) => (
               <source key={source.src} src={source.src} type={source.type} />
@@ -221,6 +244,17 @@ export default function Hero() {
           {socialProof.before}{' '}
           <strong className="text-white/75">{socialProof.highlight}</strong> {socialProof.after}
         </p>
+
+        {isVideoEnabled && isPlaybackBlocked && (
+          <button
+            type="button"
+            className="hero-video-unblock fade-in-up-delay-3 mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold text-white/80"
+            onClick={handleManualPlayback}
+          >
+            <Play size={14} fill="currentColor" strokeWidth={1.75} aria-hidden="true" />
+            Reproduzir video
+          </button>
+        )}
       </div>
     </section>
   );

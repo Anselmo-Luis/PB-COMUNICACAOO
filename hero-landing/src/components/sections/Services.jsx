@@ -10,20 +10,37 @@ const SERVICE_ICONS = [
     <circle cx="7.5" cy="17.5" r="2.5" />
     <circle cx="17.5" cy="17.5" r="2.5" />
   </svg>,
-  // Painéis — building/fachada
+  // Frota — caminhão
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <path d="M3 9h18M9 21V9" />
+    <path d="M1 16V7a1 1 0 011-1h11v10" />
+    <path d="M13 10h4l4 3v3h-8" />
+    <circle cx="6" cy="18" r="2" />
+    <circle cx="17" cy="18" r="2" />
+  </svg>,
+  // Totens — placa autoportante
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="6" y="2" width="12" height="16" rx="1.5" />
+    <path d="M9 22h6M12 18v4" />
+  </svg>,
+  // Fachadas — loja
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l1-5h16l1 5" />
+    <path d="M4 9v11h16V9M9 20v-6h6v6" />
+  </svg>,
+  // Painéis — mural/quadro na parede
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="13" rx="1.5" />
+    <path d="M3 17l5-5 4 4 3-3 6 4" />
   </svg>,
   // Banners — flag/banner
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 3v18M4 3h14l-3 5 3 5H4" />
   </svg>,
-  // PDV — shopping/store
+  // Produção — impressora
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-    <line x1="3" y1="6" x2="21" y2="6" />
-    <path d="M16 10a4 4 0 01-8 0" />
+    <path d="M6 9V3h12v6" />
+    <rect x="3" y="9" width="18" height="8" rx="1.5" />
+    <path d="M6 17v4h12v-4" />
   </svg>,
 ];
 
@@ -54,6 +71,14 @@ function ServiceCard({ service, index, ctaText }) {
   const thumbs      = service.gallery?.slice(2, 5) ?? [];
   const icon        = SERVICE_ICONS[index] ?? SERVICE_ICONS[0];
 
+  const goToPortfolio = (e) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('pb:filter-portfolio', { detail: service.category }));
+    requestAnimationFrame(() => {
+      document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
   return (
     <div
       id={`service-card-${index}`}
@@ -62,9 +87,8 @@ function ServiceCard({ service, index, ctaText }) {
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
       <a
-        href={service.link}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="#portfolio"
+        onClick={goToPortfolio}
         className="group relative flex flex-col md:flex-row glass-strong-light rounded-2xl overflow-hidden transition-all duration-500 hover:bg-black/[0.015] hover:shadow-[0_4px_40px_rgba(0,0,0,0.08)] hover:scale-[1.01]"
         aria-label={`Ver portfólio: ${service.title}`}
       >

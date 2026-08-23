@@ -326,6 +326,15 @@ export default function Portfolio() {
   const gridRef = useRef(null);
   const cursorPreviewRef = useRef(null);
 
+  // Let Services cards deep-link straight into the matching filter tab
+  useEffect(() => {
+    const onFilterRequest = (e) => {
+      if (CATEGORIES.includes(e.detail)) setActiveFilter(e.detail);
+    };
+    window.addEventListener('pb:filter-portfolio', onFilterRequest);
+    return () => window.removeEventListener('pb:filter-portfolio', onFilterRequest);
+  }, []);
+
   const filtered = activeFilter === 'Todos'
     ? GALLERY_ITEMS
     : GALLERY_ITEMS.filter(item => item.category === activeFilter);

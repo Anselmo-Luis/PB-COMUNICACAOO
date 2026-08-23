@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { siteData } from './src/data/siteData.js'
 
-const fallbackSiteUrl = 'https://hero-landing-alpha.vercel.app/'
+const fallbackSiteUrl = 'https://pb-comunicacao.vercel.app/'
 
 function normalizeSiteUrl(value = fallbackSiteUrl) {
   const candidate = value?.trim() || fallbackSiteUrl
@@ -16,7 +16,13 @@ function normalizeSiteUrl(value = fallbackSiteUrl) {
 }
 
 function resolveSiteUrl(env) {
-  return normalizeSiteUrl(env.VITE_SITE_URL || env.VERCEL_URL || fallbackSiteUrl)
+  // VERCEL_PROJECT_PRODUCTION_URL is the stable assigned domain (same for every
+  // deployment); VERCEL_URL is unique per-deployment and must never end up in
+  // canonical/og:url/sitemap URLs, or link previews (WhatsApp, etc.) break the
+  // moment a newer deployment supersedes the one that was shared.
+  return normalizeSiteUrl(
+    env.VITE_SITE_URL || env.VERCEL_PROJECT_PRODUCTION_URL || env.VERCEL_URL || fallbackSiteUrl,
+  )
 }
 
 function absoluteUrl(siteUrl, pathname) {

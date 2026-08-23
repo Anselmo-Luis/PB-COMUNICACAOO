@@ -1,13 +1,6 @@
-import { FileText, Diamond, Truck } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import { siteData } from '../../data/siteData';
 import ShowcaseSlideshow from '../ui/ShowcaseSlideshow';
-
-const stepIcons = {
-  document: <FileText size={13} strokeWidth={2} />,
-  diamond:  <Diamond  size={13} strokeWidth={2} />,
-  truck:    <Truck    size={13} strokeWidth={2} />,
-};
 
 export default function Process() {
   const revealRef = useReveal();
@@ -31,28 +24,23 @@ export default function Process() {
             )}
           </div>
 
-          <div className="relative space-y-5 lg:pl-10">
-            <div className="absolute bottom-5 left-7 top-5 hidden w-px bg-gradient-to-b from-[rgba(26,122,23,0.4)] via-black/8 to-transparent lg:block" />
+          <div className="editorial-surface-light rounded-[1.75rem] px-6 sm:px-8">
             {process.steps.map((step, index) => (
-              <article key={index} className="editorial-surface-light rounded-[1.75rem] p-6 sm:p-8">
-                <div className="grid gap-5 lg:grid-cols-[150px_minmax(0,1fr)] lg:gap-7">
-                  <div className="h-40 w-full overflow-hidden rounded-xl lg:h-full">
-                    <img src={step.image} alt="" loading="lazy" className="h-full w-full object-cover" />
-                  </div>
-
-                  <div className="min-w-0 border-t border-black/8 pt-5 lg:border-l lg:border-t-0 lg:border-black/8 lg:pl-7 lg:pt-0">
-                    <div className="flex items-center gap-1.5 font-[var(--font-display)] text-xs font-bold tracking-[0.34em] text-[var(--color-pb-ink-2)]">
-                      <span className="text-[var(--color-pb-accent-on-light)]">{stepIcons[step.icon]}</span>
-                      {step.num}
-                    </div>
-                    <h3 className="mt-1 font-[var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-pb-ink)] sm:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-[var(--color-pb-ink-2)] sm:text-[0.96rem]">
-                      {step.description}
-                    </p>
-                  </div>
+              <article key={index} className="spec-row-light">
+                <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
+                  <img src={step.image} alt="" loading="lazy" className="h-full w-full object-cover" />
                 </div>
+                <div>
+                  <div className="font-[var(--font-display)] text-xs font-bold tracking-[0.34em] text-[var(--color-pb-ink-2)]">
+                    {step.num}
+                  </div>
+                  <h3 className="mt-1 font-[var(--font-display)] text-lg font-semibold tracking-tight text-[var(--color-pb-ink)] sm:text-xl">
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="text-sm leading-7 text-[var(--color-pb-ink-2)] sm:text-[0.95rem]">
+                  {step.description}
+                </p>
               </article>
             ))}
           </div>

@@ -169,7 +169,6 @@ export const siteData = {
     steps: [
       {
         num: '01',
-        icon: 'document',
         title: 'Imersão Técnica e Briefing',
         image: '/assets/gallery/paineis/paineis-04.webp',
         description:
@@ -177,7 +176,6 @@ export const siteData = {
       },
       {
         num: '02',
-        icon: 'diamond',
         title: 'Produção Industrial Rigorosa',
         image: '/assets/gallery/producao/producao-01-poster.webp',
         description:
@@ -185,7 +183,6 @@ export const siteData = {
       },
       {
         num: '03',
-        icon: 'truck',
         title: 'Instalação Nacional Segura',
         image: '/assets/gallery/frota/frota-15.webp',
         description:

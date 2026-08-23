@@ -161,7 +161,7 @@ export const siteData = {
       'Três etapas que eliminam o caos logístico e transformam complexidade em tranquilidade.',
     showcaseImages: [
       '/assets/gallery/paineis/paineis-01.webp',
-      '/assets/gallery/producao/producao-01-poster.webp',
+      '/assets/gallery/banners/banner-01.webp',
       '/assets/gallery/frota/frota-08.webp',
       '/assets/gallery/fachadas/fachadas-04.webp',
       '/assets/gallery/totens/totens-03.webp',

@@ -2,34 +2,48 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useReveal } from '../../hooks/useReveal';
 
-const CATEGORIES = ['Todos', 'Veículos', 'Painéis', 'Banners'];
+const CATEGORIES = ['Todos', 'Veículos', 'Frota', 'Totens', 'Fachadas', 'Painéis', 'Banners', 'Produção'];
+
+function imageSet(folder, prefix, count, category, altBase) {
+  return Array.from({ length: count }, (_, i) => ({
+    type: 'image',
+    src: `/assets/gallery/${folder}/${prefix}-${String(i + 1).padStart(2, '0')}.webp`,
+    category,
+    alt: `${altBase} ${i + 1}`,
+  }));
+}
 
 const GALLERY_ITEMS = [
-  ...Array.from({ length: 16 }, (_, i) => ({
-    src: `/assets/gallery/veiculos/veiculo-${String(i + 1).padStart(2, '0')}.webp`,
-    category: 'Veículos',
-    alt: `Adesivação de veículos ${i + 1}`,
-  })),
-  ...[
-    'painel-01.webp','painel-02.webp','painel-03.webp','painel-04.webp',
-    'painel-05.webp','painel-06.webp','painel-07.webp','painel-08.webp',
-    'painel-09.webp','painel-10.webp','painel-11.webp','painel-12.webp',
-    'painel-13.webp','painel-14.webp','painel-15.webp','painel-16.webp',
-  ].map((f, i) => ({
-    src: `/assets/gallery/paineis/${f}`,
+  ...imageSet('veiculos', 'veiculo', 16, 'Veículos', 'Adesivação de veículos'),
+  ...imageSet('paineis', 'painel', 16, 'Painéis', 'Fachadas e painéis'),
+  ...imageSet('banners', 'banner', 10, 'Banners', 'Banners e backdrops'),
+  ...imageSet('frota', 'frota', 20, 'Frota', 'Frota de veículos em campo'),
+  {
+    type: 'video',
+    src: '/assets/gallery/frota/frota-video-01.mp4',
+    poster: '/assets/gallery/frota/frota-video-01-poster.webp',
+    category: 'Frota',
+    alt: 'Entrega e instalação em veículo de frota',
+  },
+  ...imageSet('totens', 'totens', 7, 'Totens', 'Totem de sinalização'),
+  ...imageSet('fachadas', 'fachadas', 6, 'Fachadas', 'Fachada de loja'),
+  ...imageSet('paineis', 'paineis', 19, 'Painéis', 'Ambiente e mural corporativo'),
+  {
+    type: 'video',
+    src: '/assets/gallery/paineis/paineis-video-01.mp4',
+    poster: '/assets/gallery/paineis/paineis-video-01-poster.webp',
     category: 'Painéis',
-    alt: `Fachadas e painéis ${i + 1}`,
-  })),
-  ...[
-    'banner-01.webp','banner-02.webp','banner-03.webp','banner-04.webp',
-    'banner-05.webp','banner-06.webp','banner-07.webp','banner-08.webp',
-    'banner-09.webp','banner-10.webp',
-  ].map((f, i) => ({
-    src: `/assets/gallery/banners/${f}`,
-    category: 'Banners',
-    alt: `Banners e backdrops ${i + 1}`,
-  })),
-];
+    alt: 'Instalação de adesivo em elevador',
+  },
+  ...imageSet('banners', 'banners', 6, 'Banners', 'Banner e display promocional'),
+  {
+    type: 'video',
+    src: '/assets/gallery/producao/producao-01.mp4',
+    poster: '/assets/gallery/producao/producao-01-poster.webp',
+    category: 'Produção',
+    alt: 'Máquina de impressão em produção',
+  },
+].map((item, i) => ({ ...item, type: item.type || 'image', key: `${item.category}-${i}` }));
 
 // ── Lightbox with thumbnail filmstrip ─────────────────────
 function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
@@ -136,18 +150,31 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
         </button>
       )}
 
-      {/* Main image */}
+      {/* Main image / video */}
       <div
         className="flex-1 flex items-center justify-center w-full px-16 pt-14 pb-28"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          key={item.src}
-          src={item.src}
-          alt={item.alt}
-          className="max-w-full max-h-[72vh] object-contain rounded-xl"
-          style={{ boxShadow: '0 0 80px rgba(0,0,0,0.8), 0 2px 40px rgba(0,0,0,0.5)' }}
-        />
+        {item.type === 'video' ? (
+          <video
+            key={item.src}
+            src={item.src}
+            poster={item.poster}
+            controls
+            autoPlay
+            playsInline
+            className="max-w-full max-h-[72vh] object-contain rounded-xl"
+            style={{ boxShadow: '0 0 80px rgba(0,0,0,0.8), 0 2px 40px rgba(0,0,0,0.5)' }}
+          />
+        ) : (
+          <img
+            key={item.src}
+            src={item.src}
+            alt={item.alt}
+            className="max-w-full max-h-[72vh] object-contain rounded-xl"
+            style={{ boxShadow: '0 0 80px rgba(0,0,0,0.8), 0 2px 40px rgba(0,0,0,0.5)' }}
+          />
+        )}
       </div>
 
       {/* Category badge */}
@@ -183,10 +210,60 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
               }}
               aria-label={`Ir para imagem ${i + 1}`}
             >
-              <img src={thumb.src} alt="" className="w-full h-full object-cover" />
+              <img src={thumb.type === 'video' ? thumb.poster : thumb.src} alt="" className="w-full h-full object-cover" />
             </button>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Gallery media (image, or lazy-autoplay video preview) ──
+function GalleryMedia({ item, className }) {
+  const containerRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (item.type !== 'video') return;
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [item.type]);
+
+  if (item.type !== 'video') {
+    return <img src={item.src} alt={item.alt} loading="lazy" className={className} />;
+  }
+
+  return (
+    <div ref={containerRef} className="relative">
+      {inView ? (
+        <video
+          src={item.src}
+          poster={item.poster}
+          className={className}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+        />
+      ) : (
+        <img src={item.poster} alt={item.alt} loading="lazy" className={className} />
+      )}
+      <div
+        className="absolute bottom-2 right-2 w-6 h-6 rounded-full flex items-center justify-center pointer-events-none"
+        style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(2px)' }}
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 24 24" fill="white" className="w-2.5 h-2.5 ml-0.5">
+          <path d="M8 5v14l11-7z" />
+        </svg>
       </div>
     </div>
   );
@@ -370,10 +447,8 @@ export default function Portfolio() {
                 onClick={() => openLightbox(i)}
                 aria-label={`Abrir ${item.alt}`}
               >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
+                <GalleryMedia
+                  item={item}
                   className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.04]"
                 />
                 <div
@@ -409,7 +484,7 @@ export default function Portfolio() {
                 type="button"
                 className="gallery-card group w-full flex items-center justify-between py-4 sm:py-5 border-b border-black/[0.07] hover:border-black/[0.16] transition-all duration-300 cursor-pointer text-left bg-transparent"
                 onClick={() => openLightbox(i)}
-                onMouseEnter={() => setPreviewSrc(item.src)}
+                onMouseEnter={() => setPreviewSrc(item.type === 'video' ? item.poster : item.src)}
                 onMouseLeave={() => setPreviewSrc(null)}
                 aria-label={`${item.alt} — ${item.category}`}
               >
@@ -419,7 +494,7 @@ export default function Portfolio() {
                   </span>
                   <div className="flex-shrink-0 w-10 h-10 sm:w-14 sm:h-10 rounded-md overflow-hidden"
                     style={{ background: 'rgba(0,0,0,0.04)' }}>
-                    <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    <img src={item.type === 'video' ? item.poster : item.src} alt="" loading="lazy" className="w-full h-full object-cover" />
                   </div>
                   <span className="text-[var(--color-pb-ink-2)] group-hover:text-[var(--color-pb-ink)] text-sm sm:text-base font-medium transition-colors duration-200 truncate">
                     {item.alt}

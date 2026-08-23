@@ -160,18 +160,18 @@ export const siteData = {
     subheadline:
       'Três etapas que eliminam o caos logístico e transformam complexidade em tranquilidade.',
     showcaseImages: [
-      '/assets/gallery/paineis/paineis-01.webp',
-      '/assets/gallery/banners/banner-01.webp',
-      '/assets/gallery/frota/frota-08.webp',
-      '/assets/gallery/fachadas/fachadas-04.webp',
-      '/assets/gallery/totens/totens-03.webp',
+      '/assets/gallery/fachadas/fachadas-05.webp',
+      '/assets/gallery/totens/totens-06.webp',
+      '/assets/gallery/frota/frota-12.webp',
+      '/assets/gallery/banners/banners-02.webp',
+      '/assets/gallery/paineis/paineis-06.webp',
     ],
     steps: [
       {
         num: '01',
         icon: 'document',
         title: 'Imersão Técnica e Briefing',
-        image: '/assets/gallery/paineis/paineis-02.webp',
+        image: '/assets/gallery/paineis/paineis-04.webp',
         description:
           'Diagnóstico completo das necessidades do projeto. Análise de superfícies, ambientes, normas técnicas e alinhamento com o manual da marca do cliente.',
       },
@@ -187,7 +187,7 @@ export const siteData = {
         num: '03',
         icon: 'truck',
         title: 'Instalação Nacional Segura',
-        image: '/assets/gallery/frota/frota-01.webp',
+        image: '/assets/gallery/frota/frota-15.webp',
         description:
           'Equipes especializadas para instalação em todo o território brasileiro. Logística coordenada com mínima interferência na operação do cliente.',
       },

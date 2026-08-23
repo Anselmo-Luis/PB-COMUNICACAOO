@@ -333,6 +333,7 @@ export const siteData = {
         title: 'Produção Própria em Grande Formato',
         description: 'Impressão digital de alta resolução com controle de qualidade em cada etapa, sem depender de terceirizados. Da arte final à instalação, tudo sob o mesmo teto.',
         image: '/assets/gallery/producao/producao-01-poster.webp',
+        video: '/assets/gallery/producao/producao-01.mp4',
         category: 'Produção',
         metric: 'Prazo médio de 5 a 15 dias úteis',
         link: '#portfolio',

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useReveal } from '../../hooks/useReveal';
 import { siteData } from '../../data/siteData';
 
@@ -66,10 +66,16 @@ function ServiceNavTabs({ items, activeIndex, onTabClick }) {
 function ServiceCard({ service, index, ctaText }) {
   const revealRef = useReveal();
   const num = String(index + 1).padStart(2, '0');
-  const primaryImg  = service.gallery?.[0] ?? service.image;
-  const hoverImg    = service.gallery?.[1] ?? null;
-  const thumbs      = service.gallery?.slice(2, 5) ?? [];
-  const icon        = SERVICE_ICONS[index] ?? SERVICE_ICONS[0];
+  const gallery = service.gallery?.length ? service.gallery : [service.image];
+  const icon = SERVICE_ICONS[index] ?? SERVICE_ICONS[0];
+
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    if (service.video || gallery.length < 2) return;
+    const id = setInterval(() => setSlide((s) => (s + 1) % gallery.length), 3800);
+    return () => clearInterval(id);
+  }, [gallery.length, service.video]);
 
   const goToPortfolio = (e) => {
     e.preventDefault();
@@ -104,52 +110,58 @@ function ServiceCard({ service, index, ctaText }) {
           {num}
         </span>
 
-        {/* ── LEFT: image panel (55%) ───────────────────────────── */}
+        {/* ── LEFT: image/video panel (55%) ─────────────────────── */}
         <div className="relative md:w-[55%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0">
-          {/* Primary image */}
-          <img
-            src={primaryImg}
-            alt={service.title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            loading="lazy"
-            style={{ zIndex: 1 }}
-          />
-
-          {/* Hover crossfade image */}
-          {hoverImg && hoverImg !== primaryImg && (
-            <img
-              src={hoverImg}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              loading="lazy"
-              style={{ zIndex: 2 }}
+          {service.video ? (
+            <video
+              src={service.video}
+              poster={service.image}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              style={{ zIndex: 1 }}
             />
+          ) : (
+            gallery.map((url, gi) => (
+              <img
+                key={url}
+                src={url}
+                alt={gi === slide ? service.title : ''}
+                aria-hidden={gi === slide ? undefined : 'true'}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 group-hover:scale-[1.04]"
+                style={{
+                  zIndex: gi === slide ? 2 : 1,
+                  opacity: gi === slide ? 1 : 0,
+                  transitionProperty: 'opacity, transform',
+                }}
+                loading={gi === 0 ? 'eager' : 'lazy'}
+              />
+            ))
           )}
 
-          {/* Dark gradient for thumbnails readability */}
+          {/* Dark gradient for readability */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none"
-            style={{ zIndex: 3, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 35%, transparent 100%)' }}
+            style={{ zIndex: 3, background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 35%, transparent 100%)' }}
           />
 
-          {/* Thumbnail strip */}
-          {thumbs.length > 0 && (
-            <div
-              className="absolute bottom-0 left-0 right-0 flex gap-1.5 p-2"
-              style={{ zIndex: 4 }}
-            >
-              {thumbs.map((url, ti) => (
-                <div key={ti} className="flex-1 h-14 overflow-hidden rounded-md">
-                  <img
-                    src={url}
-                    alt=""
-                    aria-hidden="true"
-                    className="service-gallery-thumb"
-                    loading="lazy"
-                  />
-                </div>
+          {/* Slide indicators — shows the gallery is cycling on its own */}
+          {!service.video && gallery.length > 1 && (
+            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5" style={{ zIndex: 4 }}>
+              {gallery.map((url, gi) => (
+                <span
+                  key={url}
+                  aria-hidden="true"
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{
+                    width: gi === slide ? '1.25rem' : '0.375rem',
+                    background: gi === slide ? '#fff' : 'rgba(255,255,255,0.45)',
+                  }}
+                />
               ))}
             </div>
           )}

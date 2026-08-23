@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
 import { useReveal } from '../../hooks/useReveal';
@@ -243,7 +243,7 @@ function GalleryMedia({ item, className }) {
   }
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="absolute inset-0">
       {inView ? (
         <video
           src={item.src}
@@ -269,27 +269,6 @@ function GalleryMedia({ item, className }) {
       </div>
     </div>
   );
-}
-
-// ── Column count (mirrors the sm/lg/xl breakpoints below) ──
-function useColumnCount() {
-  const getCount = () => {
-    if (typeof window === 'undefined') return 1;
-    if (window.innerWidth >= 1280) return 4;
-    if (window.innerWidth >= 1024) return 3;
-    if (window.innerWidth >= 640) return 2;
-    return 1;
-  };
-
-  const [count, setCount] = useState(getCount);
-
-  useEffect(() => {
-    const onResize = () => setCount(getCount());
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  return count;
 }
 
 // ── Icons ─────────────────────────────────────────────────
@@ -338,16 +317,6 @@ export default function Portfolio() {
   const filtered = activeFilter === 'Todos'
     ? GALLERY_ITEMS
     : GALLERY_ITEMS.filter(item => item.category === activeFilter);
-
-  // Manually bucketed columns (round-robin) instead of CSS multi-column —
-  // Chrome doesn't balance auto-height columns, so a handful of filtered
-  // items (or one tall outlier) can pile into column 1 and leave the rest empty.
-  const columnCount = useColumnCount();
-  const columns = useMemo(() => {
-    const cols = Array.from({ length: columnCount }, () => []);
-    filtered.forEach((item, i) => cols[i % columnCount].push({ item, i }));
-    return cols;
-  }, [filtered, columnCount]);
 
   // GSAP stagger when filter or view changes
   useEffect(() => {
@@ -475,43 +444,42 @@ export default function Portfolio() {
 
         {/* ── Grid mode ── */}
         {viewMode === 'grid' && (
-          <div ref={gridRef} className="flex gap-3 items-start">
-            {columns.map((col, ci) => (
-              <div key={ci} className="flex-1 flex flex-col gap-3 min-w-0">
-                {col.map(({ item, i }) => (
-                  <button
-                    key={`g-${activeFilter}-${i}`}
-                    type="button"
-                    className="gallery-card group relative overflow-hidden rounded-xl w-full border-0 bg-transparent p-0 text-left cursor-pointer"
-                    onClick={() => openLightbox(i)}
-                    aria-label={`Abrir ${item.alt}`}
+          <div
+            ref={gridRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"
+          >
+            {filtered.map((item, i) => (
+              <button
+                key={`g-${activeFilter}-${i}`}
+                type="button"
+                className="gallery-card group relative aspect-[4/3] overflow-hidden rounded-xl w-full border-0 bg-transparent p-0 text-left cursor-pointer"
+                onClick={() => openLightbox(i)}
+                aria-label={`Abrir ${item.alt}`}
+              >
+                <GalleryMedia
+                  item={item}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2"
+                  style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(3px)' }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center"
+                    style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.05)' }}
                   >
-                    <GalleryMedia
-                      item={item}
-                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2"
-                      style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(3px)' }}
-                    >
-                      <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center"
-                        style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.05)' }}
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-white">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                        </svg>
-                      </div>
-                      <span
-                        className="text-[0.6rem] font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
-                        style={{ background: 'rgba(46,167,41,0.2)', border: '1px solid rgba(46,167,41,0.4)', color: 'var(--color-pb-accent)' }}
-                      >
-                        {item.category}
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-white">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                  <span
+                    className="text-[0.6rem] font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                    style={{ background: 'rgba(46,167,41,0.2)', border: '1px solid rgba(46,167,41,0.4)', color: 'var(--color-pb-accent)' }}
+                  >
+                    {item.category}
+                  </span>
+                </div>
+              </button>
             ))}
           </div>
         )}

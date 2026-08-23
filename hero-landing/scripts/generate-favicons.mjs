@@ -5,26 +5,16 @@ import sharp from 'sharp';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(rootDir, 'public');
+const logoPath = path.join(publicDir, 'assets', 'logo.png');
 
-function iconSvg(size) {
-  const fontSize = Math.round(size * 0.34);
-  return `
-  <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#2EA729"/>
-        <stop offset="1" stop-color="#0071E3"/>
-      </linearGradient>
-    </defs>
-    <rect width="${size}" height="${size}" rx="${Math.round(size * 0.22)}" fill="#0A0D0A"/>
-    <circle cx="${Math.round(size * 0.78)}" cy="${Math.round(size * 0.22)}" r="${Math.round(size * 0.35)}" fill="url(#g)" opacity="0.42"/>
-    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="800" letter-spacing="-1">P&amp;B</text>
-  </svg>`;
-}
+const trimmedLogo = await sharp(logoPath).trim().toBuffer();
 
 async function writePng(size, fileName) {
   const outputPath = path.join(publicDir, fileName);
-  await sharp(Buffer.from(iconSvg(size))).png().toFile(outputPath);
+  await sharp(trimmedLogo)
+    .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png()
+    .toFile(outputPath);
   console.log(`generated ${path.relative(rootDir, outputPath)}`);
   return fs.readFile(outputPath);
 }
@@ -47,8 +37,15 @@ function wrapPngAsIco(png) {
 
 await fs.mkdir(publicDir, { recursive: true });
 
+const svgLogoPng = await sharp(trimmedLogo)
+  .resize(128, 128, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png()
+  .toBuffer();
 const svgPath = path.join(publicDir, 'favicon.svg');
-await fs.writeFile(svgPath, iconSvg(128).trim());
+await fs.writeFile(
+  svgPath,
+  `<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><image width="128" height="128" href="data:image/png;base64,${svgLogoPng.toString('base64')}"/></svg>`
+);
 console.log(`generated ${path.relative(rootDir, svgPath)}`);
 
 const png32 = await writePng(32, 'favicon-32x32.png');

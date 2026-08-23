@@ -21,13 +21,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
           <div className="sm:col-span-2">
-            <div className="mb-4 inline-flex rounded-[1.15rem] bg-[var(--color-pb-dark)] px-4 py-3 shadow-[0_12px_36px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.06]">
-              <img
-                src={siteData.company.logoSrc}
-                alt={siteData.company.name}
-                className="h-10 w-auto"
-              />
-            </div>
+            <img
+              src={siteData.company.logoSrc}
+              alt={siteData.company.name}
+              className="mb-4 h-12 w-auto"
+            />
             <p className="text-sm text-[var(--color-pb-ink-2)] leading-relaxed max-w-sm">
               {siteData.company.description}
             </p>

@@ -35,8 +35,8 @@ export default function Process() {
             <div className="absolute bottom-5 left-7 top-5 hidden w-px bg-gradient-to-b from-[rgba(26,122,23,0.4)] via-black/8 to-transparent lg:block" />
             {process.steps.map((step, index) => (
               <article key={index} className="editorial-surface-light rounded-[1.75rem] p-6 sm:p-8">
-                <div className="grid gap-5 lg:grid-cols-[88px_minmax(0,1fr)] lg:gap-7">
-                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
+                <div className="grid gap-5 lg:grid-cols-[150px_minmax(0,1fr)] lg:gap-7">
+                  <div className="h-40 w-full overflow-hidden rounded-xl lg:h-full">
                     <img src={step.image} alt="" loading="lazy" className="h-full w-full object-cover" />
                   </div>
 

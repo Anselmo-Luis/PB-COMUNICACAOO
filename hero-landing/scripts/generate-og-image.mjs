@@ -20,7 +20,6 @@ const logo = await fs.readFile(logoPath);
 const logoData = `data:image/png;base64,${logo.toString('base64')}`;
 
 const title = 'P&B Comunicacao Visual';
-const subtitle = 'Sinalizacao corporativa, fachadas, letras caixa, totens, adesivos e projetos visuais desde 2002.';
 
 const svg = `
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
@@ -48,11 +47,10 @@ const svg = `
   <text x="98" y="374" fill="#D8E9D6" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500">
     ${escapeXml('Projetos visuais corporativos de alto impacto')}
   </text>
-  <foreignObject x="98" y="408" width="760" height="96">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, Helvetica, sans-serif; color: rgba(255,255,255,0.72); font-size: 26px; line-height: 1.32;">
-      ${escapeXml(subtitle)}
-    </div>
-  </foreignObject>
+  <text x="98" y="440" fill="#ffffff" fill-opacity="0.72" font-family="Arial, Helvetica, sans-serif" font-size="26">
+    <tspan x="98" dy="0">${escapeXml('Sinalizacao corporativa, fachadas, letras caixa, totens,')}</tspan>
+    <tspan x="98" dy="34">${escapeXml('adesivos e projetos visuais desde 2002.')}</tspan>
+  </text>
   <rect x="98" y="500" width="278" height="42" rx="21" fill="#2EA729"/>
   <text x="123" y="528" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="1.5">
     DESDE 2002
@@ -60,5 +58,9 @@ const svg = `
 </svg>`;
 
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
-await sharp(Buffer.from(svg)).jpeg({ quality: 84, mozjpeg: true }).toFile(outputPath);
+// mozjpeg's preset forces progressive encoding regardless of the `progressive`
+// flag — Facebook/WhatsApp's link-preview crawler has long-standing bugs with
+// progressive JPEGs silently failing to render an og:image thumbnail, so mozjpeg
+// is intentionally not used here.
+await sharp(Buffer.from(svg)).jpeg({ quality: 84, progressive: false }).toFile(outputPath);
 console.log(`generated ${path.relative(rootDir, outputPath)}`);

@@ -24,9 +24,12 @@ export default function Footer() {
             <img
               src={siteData.company.logoSrc}
               alt={siteData.company.name}
-              className="mb-4 h-12 w-auto"
+              className="mb-4 h-20 w-auto sm:h-24"
             />
-            <p className="text-sm text-[var(--color-pb-ink-2)] leading-relaxed max-w-sm">
+            <h3 className="font-[var(--font-display)] text-lg sm:text-xl font-bold text-[var(--color-pb-ink)] mb-2">
+              {siteData.company.name}
+            </h3>
+            <p className="text-sm sm:text-base text-[var(--color-pb-ink)] leading-relaxed max-w-sm" style={{ opacity: 0.72 }}>
               {siteData.company.description}
             </p>
           </div>

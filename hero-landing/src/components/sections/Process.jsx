@@ -1,6 +1,7 @@
 import { FileText, Diamond, Truck } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import { siteData } from '../../data/siteData';
+import ShowcaseSlideshow from '../ui/ShowcaseSlideshow';
 
 const stepIcons = {
   document: <FileText size={32} strokeWidth={1.5} />,
@@ -24,6 +25,10 @@ export default function Process() {
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
               {process.subheadline}
             </p>
+
+            {process.showcaseImages?.length > 0 && (
+              <ShowcaseSlideshow images={process.showcaseImages} />
+            )}
           </div>
 
           <div className="relative space-y-5 lg:pl-10">

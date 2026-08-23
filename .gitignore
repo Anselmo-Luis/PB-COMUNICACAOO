@@ -41,3 +41,7 @@ toolchain-http.out.log
 
 # Claude Code
 .claude/
+
+# Raw source material not yet curated into the site's asset pipeline
+/assets/assetsNEWS/
+/assets/imgs/logo.jpeg

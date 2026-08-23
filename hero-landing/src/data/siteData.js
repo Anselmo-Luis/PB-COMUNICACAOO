@@ -192,36 +192,49 @@ export const siteData = {
     },
     subheadline:
       'Robustez técnica ao serviço da visibilidade corporativa. Cada material escolhido para maximizar durabilidade e impacto visual.',
+    showcaseImages: [
+      '/assets/gallery/fachadas/fachadas-02.webp',
+      '/assets/gallery/totens/totens-01.webp',
+      '/assets/gallery/frota/frota-05.webp',
+      '/assets/gallery/paineis/paineis-08.webp',
+      '/assets/gallery/producao/producao-01-poster.webp',
+    ],
     items: [
       {
         title: 'Painéis em ACM',
         description:
           'Aluminum Composite Material de alta resistência. Fachadas arquitetônicas com acabamento premium e durabilidade superior.',
+        image: '/assets/gallery/fachadas/fachadas-02.webp',
       },
       {
         title: 'Lona de Alta Performance',
         description:
           'Impressão digital em lona tensionada para fachadas, banners e coberturas de grande formato com proteção UV.',
+        image: '/assets/gallery/banners/banner-03.webp',
       },
       {
         title: 'Adesivação Veicular',
         description:
           'Envelopamento profissional com vinil automotivo de última geração. Proteção UV com fidelidade cromática absoluta.',
+        image: '/assets/gallery/frota/frota-01.webp',
       },
       {
         title: 'Acrílicos e Letras em Alto Relevo',
         description:
           'Corte a laser de precisão para letreiros iluminados e sinalização arquitetônica com presença noturna imponente.',
+        image: '/assets/gallery/totens/totens-02.webp',
       },
       {
         title: 'Estruturas Metálicas',
         description:
           'Chassi em aço galvanizado para suporte de painéis e fachadas. Engenharia estrutural certificada para grandes dimensões.',
+        image: '/assets/gallery/totens/totens-04.webp',
       },
       {
         title: 'Impressão Digital Grandes Formatos',
         description:
           'Impressão em alta resolução até 5 metros de largura. Cores vibrantes com garantia de durabilidade em ambiente externo.',
+        image: '/assets/gallery/producao/producao-01-poster.webp',
       },
     ],
   },

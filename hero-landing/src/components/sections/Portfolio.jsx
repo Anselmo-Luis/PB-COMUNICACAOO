@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
 import { useReveal } from '../../hooks/useReveal';
 
@@ -104,10 +105,11 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
       <button
         ref={closeRef}
         onClick={(e) => { e.stopPropagation(); onClose(); }}
-        className="absolute top-5 right-5 z-10 w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
+        className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all"
+        style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)' }}
         aria-label="Fechar"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} className="w-4 h-4">
           <path strokeLinecap="round" d="M18 6L6 18M6 6l12 12" />
         </svg>
       </button>
@@ -269,6 +271,27 @@ function GalleryMedia({ item, className }) {
   );
 }
 
+// ── Column count (mirrors the sm/lg/xl breakpoints below) ──
+function useColumnCount() {
+  const getCount = () => {
+    if (typeof window === 'undefined') return 1;
+    if (window.innerWidth >= 1280) return 4;
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  };
+
+  const [count, setCount] = useState(getCount);
+
+  useEffect(() => {
+    const onResize = () => setCount(getCount());
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  return count;
+}
+
 // ── Icons ─────────────────────────────────────────────────
 function IconGrid({ active }) {
   const o = active ? 1 : 0.38;
@@ -306,6 +329,16 @@ export default function Portfolio() {
   const filtered = activeFilter === 'Todos'
     ? GALLERY_ITEMS
     : GALLERY_ITEMS.filter(item => item.category === activeFilter);
+
+  // Manually bucketed columns (round-robin) instead of CSS multi-column —
+  // Chrome doesn't balance auto-height columns, so a handful of filtered
+  // items (or one tall outlier) can pile into column 1 and leave the rest empty.
+  const columnCount = useColumnCount();
+  const columns = useMemo(() => {
+    const cols = Array.from({ length: columnCount }, () => []);
+    filtered.forEach((item, i) => cols[i % columnCount].push({ item, i }));
+    return cols;
+  }, [filtered, columnCount]);
 
   // GSAP stagger when filter or view changes
   useEffect(() => {
@@ -433,44 +466,43 @@ export default function Portfolio() {
 
         {/* ── Grid mode ── */}
         {viewMode === 'grid' && (
-          <div
-            ref={gridRef}
-            style={{ columns: 'var(--gallery-cols)', columnGap: '0.75rem' }}
-            className="[--gallery-cols:1] sm:[--gallery-cols:2] lg:[--gallery-cols:3] xl:[--gallery-cols:4]"
-          >
-            {filtered.map((item, i) => (
-              <button
-                key={`g-${activeFilter}-${i}`}
-                type="button"
-                className="gallery-card break-inside-avoid mb-3 group relative overflow-hidden rounded-xl w-full border-0 bg-transparent p-0 text-left cursor-pointer"
-                style={{ display: 'inline-block' }}
-                onClick={() => openLightbox(i)}
-                aria-label={`Abrir ${item.alt}`}
-              >
-                <GalleryMedia
-                  item={item}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2"
-                  style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(3px)' }}
-                >
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center"
-                    style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.05)' }}
+          <div ref={gridRef} className="flex gap-3 items-start">
+            {columns.map((col, ci) => (
+              <div key={ci} className="flex-1 flex flex-col gap-3 min-w-0">
+                {col.map(({ item, i }) => (
+                  <button
+                    key={`g-${activeFilter}-${i}`}
+                    type="button"
+                    className="gallery-card group relative overflow-hidden rounded-xl w-full border-0 bg-transparent p-0 text-left cursor-pointer"
+                    onClick={() => openLightbox(i)}
+                    aria-label={`Abrir ${item.alt}`}
                   >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-white">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
-                  </div>
-                  <span
-                    className="text-[0.6rem] font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
-                    style={{ background: 'rgba(46,167,41,0.2)', border: '1px solid rgba(46,167,41,0.4)', color: 'var(--color-pb-accent)' }}
-                  >
-                    {item.category}
-                  </span>
-                </div>
-              </button>
+                    <GalleryMedia
+                      item={item}
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2"
+                      style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(3px)' }}
+                    >
+                      <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center"
+                        style={{ border: '1px solid rgba(255,255,255,0.25)', background: 'rgba(255,255,255,0.05)' }}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-white">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        </svg>
+                      </div>
+                      <span
+                        className="text-[0.6rem] font-semibold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                        style={{ background: 'rgba(46,167,41,0.2)', border: '1px solid rgba(46,167,41,0.4)', color: 'var(--color-pb-accent)' }}
+                      >
+                        {item.category}
+                      </span>
+                    </div>
+                  </button>
+                ))}
+              </div>
             ))}
           </div>
         )}
@@ -546,8 +578,9 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
+      {/* Lightbox — portaled to <body> so it isn't trapped under the
+          navbar by this section's z-10 stacking context */}
+      {lightboxIndex !== null && createPortal(
         <Lightbox
           items={filtered}
           index={lightboxIndex}
@@ -555,7 +588,8 @@ export default function Portfolio() {
           onPrev={prevImage}
           onNext={nextImage}
           onJump={jumpImage}
-        />
+        />,
+        document.body
       )}
     </section>
   );

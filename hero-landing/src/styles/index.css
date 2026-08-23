@@ -539,7 +539,7 @@ body {
   color: var(--color-pb-ink);
 }
 
-/* Logo glass card — light surface */
+/* Logo glass card — light surface (full color, no grayscale/fade) */
 .logo-glass-card-light {
   flex-shrink: 0;
   width: 6.5rem;
@@ -553,75 +553,16 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 1),
     0 4px 16px rgba(0, 0, 0, 0.07);
-  opacity: 0.72;
-  filter: grayscale(1) contrast(1.1);
   transform: scale(1);
-  animation: logoPulseLight calc(2.8s + var(--i, 0) * 0.3s) ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.18s);
-  transition: opacity 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+  transition: box-shadow 0.35s ease, transform 0.3s ease;
 }
 
 .logo-glass-card-light:hover {
-  animation-play-state: paused;
-  opacity: 1;
-  filter: grayscale(0);
   transform: translateY(-2px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 1),
     0 0 18px rgba(26, 122, 23, 0.1),
     0 10px 28px rgba(0, 0, 0, 0.1);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logo-glass-card-light {
-    will-change: opacity;
-  }
-}
-
-@keyframes logoPulseLight {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 0.72; }
-}
-
-/* Logo glass card — iPhone morphism */
-.logo-glass-card {
-  flex-shrink: 0;
-  width: 6.5rem;
-  height: 4.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 12px 30px rgba(0, 0, 0, 0.18);
-  opacity: 0.58;
-  filter: grayscale(1) contrast(1.05);
-  transform: scale(1);
-  /* will-change only when animations actually run — see prefers-reduced-motion:no-preference */
-  animation: logoPulse calc(2.8s + var(--i, 0) * 0.3s) ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 0.18s);
-  transition: opacity 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
-}
-
-.logo-glass-card:hover {
-  animation-play-state: paused;
-  opacity: 0.95;
-  filter: grayscale(0);
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 22px rgba(46, 167, 41, 0.14),
-    0 18px 36px rgba(0, 0, 0, 0.24);
-}
-
-/* GPU layer promotion only when animations are actually running */
-@media (prefers-reduced-motion: no-preference) {
-  .logo-glass-card {
-    will-change: opacity;
-  }
 }
 
 /* Custom scrollbar */
@@ -987,11 +928,6 @@ section[aria-label] > .reveal-section p {
     animation-duration: 60s;
   }
 
-  .logo-glass-card {
-    animation: none;
-    opacity: 0.5;
-  }
-
   /* shimmer mantido mesmo em reduced-motion — efeito lento/sutil, não causa risco vestibular */
 
   .service-card-accent-line,
@@ -1198,8 +1134,6 @@ section[aria-label] > .reveal-section p {
     background-position: 0 center;
   }
 
-  .logo-glass-card,
-  .logo-glass-card-light,
   .marquee-track {
     animation: none !important;
   }

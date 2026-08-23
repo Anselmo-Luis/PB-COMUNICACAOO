@@ -171,6 +171,7 @@ export const siteData = {
         num: '01',
         icon: 'document',
         title: 'Imersão Técnica e Briefing',
+        image: '/assets/gallery/paineis/paineis-02.webp',
         description:
           'Diagnóstico completo das necessidades do projeto. Análise de superfícies, ambientes, normas técnicas e alinhamento com o manual da marca do cliente.',
       },
@@ -178,6 +179,7 @@ export const siteData = {
         num: '02',
         icon: 'diamond',
         title: 'Produção Industrial Rigorosa',
+        image: '/assets/gallery/producao/producao-01-poster.webp',
         description:
           'Impressão de alta resolução, corte a laser e acabamento em ambiente controlado. Controle de qualidade em cada etapa para garantir fidelidade cromática absoluta.',
       },
@@ -185,6 +187,7 @@ export const siteData = {
         num: '03',
         icon: 'truck',
         title: 'Instalação Nacional Segura',
+        image: '/assets/gallery/frota/frota-01.webp',
         description:
           'Equipes especializadas para instalação em todo o território brasileiro. Logística coordenada com mínima interferência na operação do cliente.',
       },

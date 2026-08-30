@@ -44,7 +44,7 @@ const GALLERY_ITEMS = [
     category: 'Produção',
     alt: 'Máquina de impressão em produção',
   },
-].map((item, i) => ({ ...item, type: item.type || 'image', key: `${item.category}-${i}` }));
+].map((item) => ({ ...item, type: item.type || 'image' }));
 
 // ── Lightbox with thumbnail filmstrip ─────────────────────
 function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {

@@ -7,7 +7,6 @@
   /* Superfícies claras (Apple-style) */
   --color-pb-white: #ffffff;
   --color-pb-surface: #f5f5f7;
-  --color-pb-surface-mid: #e8e8ed;
 
   /* Texto em fundo claro */
   --color-pb-ink: #1d1d1f;
@@ -16,14 +15,11 @@
 
   /* Seções escuras */
   --color-pb-black: #000000;
-  --color-pb-dark: #1d1d1f;
-  --color-pb-gray: #2a2a2a;
 
   /* Acentos */
   --color-pb-accent: #2EA729;
   --color-pb-accent-on-light: #1a7a17;
   --color-pb-accent-blue: #0071e3;
-  --color-pb-accent-glow: rgba(46, 167, 41, 0.15);
 
   /* Compat legado */
   --color-pb-offwhite: #f5f5f7;
@@ -594,12 +590,6 @@ body {
 @keyframes marquee {
   0%   { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
-}
-
-/* Logo pulse — opacity only (pure compositor, no scale conflict with hover) */
-@keyframes logoPulse {
-  0%, 100% { opacity: 0.38; }
-  50%       { opacity: 0.58; }
 }
 
 /* Accent text shimmer — facho branco da esquerda para a direita */

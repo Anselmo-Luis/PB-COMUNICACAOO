@@ -3,7 +3,7 @@ const WHATSAPP_PHONE = '5511965698725';
 const DEFAULT_WHATSAPP_MESSAGE =
   'Olá, P&B Comunicação Visual! Cheguei aqui pelo site e gostaria de solicitar um orçamento de comunicação visual (adesivação de frota, fachadas, painéis, banners ou PDV). Podem me passar as informações?';
 
-export function buildWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
+function buildWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
   return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
 }
 

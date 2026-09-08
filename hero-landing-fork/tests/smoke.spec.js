@@ -1,0 +1,308 @@
+import { expect, test } from '@playwright/test';
+
+test.describe('site institucional P&B', () => {
+  test('apresenta a proposta e permite filtrar o portfólio', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('h1')).toContainText('24 anos.');
+    await expect(page.locator('h1')).toContainText('Causando impacto.');
+    await expect(page.getByText('Somos a P&B Comunicação Visual.')).toBeVisible();
+    await expect(page.locator('body')).not.toContainText(/CNPJ/i);
+
+    const portfolio = page.locator('#portfolio');
+    await expect(portfolio).toBeVisible();
+    await portfolio.scrollIntoViewIfNeeded();
+
+    const tabs = portfolio.getByRole('tab');
+    await expect(tabs).toHaveCount(5);
+    await expect(tabs.nth(0)).toContainText('Adesivação de veículos');
+    await expect(tabs.nth(1)).toContainText('Adesivação geral');
+    await expect(tabs.nth(2)).toContainText('Banner / Lona');
+    await expect(tabs.nth(3)).toContainText('PDVs e materiais diversos');
+    await expect(tabs.nth(4)).toContainText('Painéis');
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(42);
+
+    await tabs.nth(1).click();
+    await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(34);
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(22);
+
+    await tabs.nth(2).click();
+    await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
+    const bannerPanel = portfolio.getByRole('tabpanel');
+    await expect(bannerPanel.locator('.portfolio-mosaic-tile')).toHaveCount(10);
+    await expect(bannerPanel.locator('.portfolio-mosaic-group')).toHaveCount(10);
+
+    await tabs.nth(4).click();
+    await expect(tabs.nth(4)).toHaveAttribute('aria-selected', 'true');
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(9);
+    const panelsPanel = portfolio.getByRole('tabpanel');
+    await expect(panelsPanel.locator('.portfolio-mosaic-group')).toHaveCount(6);
+    await expect(panelsPanel).toBeVisible();
+  });
+
+  test('apresenta o showreel de vídeos com navegação e pausa', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const carousel = page.locator('.portfolio-video-carousel');
+    await carousel.scrollIntoViewIfNeeded();
+    await expect(carousel).toBeVisible();
+    await expect(carousel.locator('.portfolio-video-grid')).toHaveCount(0);
+    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(9);
+    await expect(carousel.locator('video')).toHaveCount(2);
+
+    const playback = await carousel.locator('video').first().evaluate((video) => ({
+      autoplay: video.autoplay,
+      muted: video.muted,
+      playsInline: video.playsInline,
+    }));
+    expect(playback).toEqual({ autoplay: true, muted: true, playsInline: true });
+
+    await carousel.getByRole('button', { name: 'Próximo vídeo' }).click();
+    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 09');
+    await expect(carousel.locator('.portfolio-video-carousel-dot.is-active')).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+
+    const playbackButton = carousel.getByRole('button', { name: 'Pausar showreel' });
+    await playbackButton.click();
+    await expect(carousel.getByRole('button', { name: 'Reproduzir showreel' })).toBeVisible();
+    await carousel.getByRole('button', { name: 'Reproduzir showreel' }).click();
+    await expect(carousel.getByRole('button', { name: 'Pausar showreel' })).toBeVisible();
+  });
+
+  test('respeita carregamento sob demanda e movimento reduzido no showreel', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const carousel = page.locator('.portfolio-video-carousel');
+    await expect(carousel.locator('img').first()).toHaveAttribute('loading', 'lazy');
+
+    await carousel.scrollIntoViewIfNeeded();
+    await expect(carousel.locator('img').first()).toHaveAttribute('loading', 'eager');
+    await expect(carousel.getByRole('button', { name: 'Reproduzir showreel' })).toBeVisible();
+
+    await carousel.hover();
+    await expect(carousel).toHaveCSS('transform', 'none');
+  });
+
+  test('mantém FAQ, orçamento e menu mobile operacionais', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const faq = page.locator('#faq');
+    await faq.scrollIntoViewIfNeeded();
+    const question = faq.getByRole('button').first();
+    await expect(question).toHaveAttribute('aria-expanded', 'false');
+    await question.click();
+    await expect(question).toHaveAttribute('aria-expanded', 'true');
+    await question.click();
+    await expect(question).toHaveAttribute('aria-expanded', 'false');
+
+    const form = page.locator('#contato form');
+    await form.scrollIntoViewIfNeeded();
+    await form.getByRole('button', { name: /Enviar pelo WhatsApp/i }).click();
+    await expect(form.getByRole('alert')).toContainText('Confira os campos destacados');
+
+    const budgetLink = page.locator('a').filter({ hasText: 'Solicite seu Orçamento' }).first();
+    await expect(budgetLink).toHaveAttribute('href', /whatsapp/i);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    const menuButton = page.getByRole('button', { name: 'Abrir menu' });
+    await menuButton.click();
+    await expect(page.getByRole('dialog', { name: 'Menu de navegação' })).toBeVisible();
+    await page.getByRole('dialog', { name: 'Menu de navegação' }).getByRole('link', { name: 'Portfólio' }).click();
+    await expect(page.getByRole('dialog', { name: 'Menu de navegação' })).toHaveCount(0);
+  });
+
+  test('reproduz o texto e as cores aprovadas no overlay do vídeo', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/?hero=a', { waitUntil: 'domcontentloaded' });
+
+    const hero = page.locator('.hero-section');
+    await expect(hero).toHaveClass(/hero-overlay/);
+    await expect(hero.locator('.hero-title')).toHaveText('24 anos.Causando impacto.');
+    await expect(hero.locator('.hero-intro')).toHaveText('Somos a P&B Comunicação Visual.');
+    await expect(hero.locator('.hero-description p')).toHaveCount(3);
+    await expect(hero.locator('.hero-description')).toContainText(
+      'Desde 2002, tornamos marcas mais visíveis, próximas e admiradas.',
+    );
+    await expect(hero.locator('.hero-description')).toContainText(
+      'Agilidade máxima e compromisso absoluto.',
+    );
+    await expect(hero.locator('.hero-badge')).toHaveCount(0);
+    await expect(hero.locator('.hero-proof')).toHaveCount(0);
+    await expect(hero.locator('.hero-actions')).toHaveCount(0);
+    await expect(hero.locator('.hero-brand-logo')).toBeVisible();
+    await expect(hero.locator('.hero-intro-mark-wave')).toHaveCount(1);
+
+    const presentation = await page.evaluate(() => {
+      const rootStyle = getComputedStyle(document.documentElement);
+      const copy = document.querySelector('.hero-copy').getBoundingClientRect();
+      const media = document.querySelector('.hero-media-frame').getBoundingClientRect();
+      const visual = document.querySelector('.hero-media-visual').getBoundingClientRect();
+      const video = document.querySelector('.hero-video');
+      const title = document.querySelector('.hero-title');
+      const accent = document.querySelector('.hero-title-accent');
+
+      return {
+        palette: {
+          green: rootStyle.getPropertyValue('--color-pb-accent').trim(),
+          blue: rootStyle.getPropertyValue('--color-pb-accent-blue').trim(),
+        },
+        titleFill: getComputedStyle(title).webkitTextFillColor || getComputedStyle(title).color,
+        accentFill: getComputedStyle(accent).webkitTextFillColor || getComputedStyle(accent).color,
+        copyBottom: copy.bottom,
+        mediaBottom: media.bottom,
+        mediaRight: media.right,
+        mediaLeft: media.left,
+        viewportWidth: document.documentElement.clientWidth,
+        mediaHeight: media.height,
+        visualHeight: visual.height,
+        videoFit: getComputedStyle(video).objectFit,
+        copyOverMedia: copy.left >= media.left - 2 && copy.right <= media.right + 2,
+      };
+    });
+
+    expect(presentation.palette).toEqual({ green: '#18aa2b', blue: '#00134e' });
+    expect(presentation.titleFill).toContain('55, 220, 85');
+    expect(presentation.accentFill).toContain('255, 255, 255');
+    expect(presentation.mediaBottom).toBeGreaterThanOrEqual(presentation.copyBottom - 2);
+    expect(Math.abs(presentation.mediaHeight - presentation.visualHeight)).toBeLessThan(3);
+    expect(presentation.mediaLeft).toBeLessThanOrEqual(2);
+    expect(Math.abs(presentation.mediaRight - presentation.viewportWidth)).toBeLessThan(3);
+    expect(presentation.videoFit).toBe('cover');
+    expect(presentation.copyOverMedia).toBe(true);
+  });
+
+  test('oferece três geometrias responsivas para a hero', async ({ page }) => {
+    test.slow();
+
+    const variants = [
+      { query: '', name: 'a' },
+      { query: '?hero=a', name: 'a' },
+      { query: '?hero=b', name: 'b' },
+      { query: '?hero=c', name: 'c' },
+      { query: '?hero=inválida', name: 'a' },
+    ];
+
+    await page.setViewportSize({ width: 1280, height: 900 });
+
+    for (const variant of variants) {
+      await page.goto(`/${variant.query}`, { waitUntil: 'domcontentloaded' });
+      await expect(page.locator('.hero-section')).toHaveAttribute('data-hero-variant', variant.name);
+    }
+
+    const geometry = async (query) => {
+      await page.goto(`/${query}`, { waitUntil: 'domcontentloaded' });
+      return page.evaluate(() => {
+        const shellElement = document.querySelector('.hero-shell');
+        const copyElement = document.querySelector('.hero-copy');
+        const mediaElement = document.querySelector('.hero-media-frame');
+        const visualElement = document.querySelector('.hero-media-visual');
+        const shell = shellElement.getBoundingClientRect();
+        const copy = copyElement.getBoundingClientRect();
+        const media = mediaElement.getBoundingClientRect();
+        const visual = visualElement.getBoundingClientRect();
+
+        const heroSection = document.querySelector('.hero-section');
+        const heroPadTop = parseFloat(getComputedStyle(heroSection).paddingTop);
+        const heroPadInline = parseFloat(getComputedStyle(heroSection).paddingLeft);
+        const logo = document.querySelector('.site-navbar img')?.getBoundingClientRect();
+
+        return {
+          shell: { x: shell.x, y: shell.y, width: shell.width },
+          copy: { x: copy.x, y: copy.y, width: copy.width, height: copy.height },
+          media: {
+            x: media.x,
+            y: media.y,
+            width: media.width,
+            height: media.height,
+            right: media.right,
+          },
+          viewportWidth: document.documentElement.clientWidth,
+          heroPadTop,
+          heroPadInline,
+          logoX: logo?.x ?? null,
+          layoutGap: media.x - copy.right,
+          copySpan: getComputedStyle(copyElement).gridColumnStart,
+          shellWidth: shell.width,
+          mediaSpan: getComputedStyle(mediaElement).gridColumnStart,
+          mediaRatio: visual.width / visual.height,
+          overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        };
+      });
+    };
+
+    const cinematic = await geometry('?hero=a');
+    expect(cinematic.copySpan).toBe('1');
+    expect(Math.abs(cinematic.shellWidth - cinematic.viewportWidth)).toBeLessThan(3);
+    expect(cinematic.media.width / cinematic.viewportWidth).toBeGreaterThan(0.98);
+    expect(cinematic.media.x).toBeLessThanOrEqual(2);
+    expect(cinematic.media.y).toBeLessThan(4);
+    expect(Math.abs(cinematic.media.right - cinematic.viewportWidth)).toBeLessThan(3);
+    expect(cinematic.media.height).toBeGreaterThan(420);
+    expect(cinematic.copy.y + cinematic.copy.height).toBeLessThanOrEqual(cinematic.media.y + cinematic.media.height + 2);
+    expect(cinematic.overflow).toBe(0);
+
+    const editorial = await geometry('?hero=b');
+    expect(editorial.copySpan).toBe('span 5');
+    expect(editorial.mediaSpan).toBe('span 7');
+    expect(
+      Math.abs(
+        editorial.media.y + editorial.media.height / 2
+        - (editorial.copy.y + editorial.copy.height / 2),
+      ),
+    ).toBeLessThan(3);
+    expect(Math.abs(editorial.mediaRatio - 16 / 9)).toBeLessThan(0.01);
+    expect(editorial.overflow).toBe(0);
+
+    const gallery = await geometry('?hero=c');
+    expect(Math.abs(gallery.media.width - gallery.shell.width)).toBeLessThan(3);
+    expect(gallery.media.y).toBeGreaterThan(gallery.copy.y + gallery.copy.height);
+    expect(Math.abs(gallery.mediaRatio - 16 / 9)).toBeLessThan(0.01);
+    expect(gallery.overflow).toBe(0);
+
+    for (const width of [768, 1099]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const name of ['b', 'c']) {
+        const stacked = await geometry(`?hero=${name}`);
+        expect(stacked.media.y).toBeGreaterThan(stacked.copy.y + stacked.copy.height);
+        expect(Math.abs(stacked.media.width - stacked.shell.width)).toBeLessThan(3);
+        expect(stacked.overflow).toBe(0);
+      }
+
+      const overlayMobile = await geometry('?hero=a');
+      expect(overlayMobile.media.width / overlayMobile.viewportWidth).toBeGreaterThan(0.98);
+      expect(overlayMobile.overflow).toBe(0);
+    }
+
+    await page.setViewportSize({ width: 1100, height: 900 });
+    const splitAtBreakpoint = await geometry('?hero=a');
+    expect(splitAtBreakpoint.copySpan).toBe('1');
+    expect(splitAtBreakpoint.media.width / splitAtBreakpoint.viewportWidth).toBeGreaterThan(0.98);
+    expect(Math.abs(splitAtBreakpoint.media.right - splitAtBreakpoint.viewportWidth)).toBeLessThan(3);
+    expect(splitAtBreakpoint.media.height).toBeGreaterThan(420);
+
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    for (const name of ['a', 'b', 'c']) {
+      const desktop = await geometry(`?hero=${name}`);
+      expect(desktop.overflow).toBe(0);
+    }
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    const wide = await geometry('?hero=a');
+    expect(wide.media.width / wide.viewportWidth).toBeGreaterThan(0.98);
+    expect(wide.media.x).toBeLessThanOrEqual(2);
+    expect(Math.abs(wide.media.right - wide.viewportWidth)).toBeLessThan(3);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const name of ['a', 'b', 'c']) {
+      const mobile = await geometry(`?hero=${name}`);
+      expect(mobile.media.y).toBeGreaterThan(mobile.copy.y + mobile.copy.height);
+      expect(Math.abs(mobile.media.width - mobile.shell.width)).toBeLessThan(3);
+      expect(mobile.overflow).toBe(0);
+    }
+  });
+});

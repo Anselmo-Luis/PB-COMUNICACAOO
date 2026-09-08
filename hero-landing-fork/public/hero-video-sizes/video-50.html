@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero vídeo 50% · P&B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./shared.css" />
+    <style>:root { --hero-video: 50%; }</style>
+  </head>
+  <body>
+    <header class="variant-bar">
+      <strong>Hero · vídeo 50%</strong>
+      <nav aria-label="Variantes de largura do vídeo">
+      <a href="video-50.html" class="is-active">50% vídeo</a>
+      <a href="video-60.html">60% vídeo</a>
+      <a href="video-70.html">70% vídeo</a>
+      <a href="video-80.html">80% vídeo</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Hero">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          24 anos.
+          <span>Causando impacto.</span>
+        </h1>
+        <p class="hero-intro">
+          <span class="mark">Somos</span>
+          a P&B Comunicação Visual.
+        </p>
+        <div class="hero-description">
+          <p>Desde 2002, tornamos marcas mais visíveis, próximas e admiradas.</p>
+          <p>Entregamos comunicação visual completa: impressão, acabamento e instalação com padrão.</p>
+          <p>Agilidade máxima e compromisso absoluto.</p>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <img
+          src="/assets/hero/hero-van-decal-poster.jpg"
+          srcset="/assets/hero/hero-van-decal-poster.jpg"
+          sizes="50vw"
+          alt=""
+          width="1920"
+          height="1080"
+          decoding="async"
+          draggable="false"
+        />
+        <video
+          id="hero-video"
+          muted
+          loop
+          playsinline
+          autoplay
+          preload="metadata"
+          poster="/assets/hero/hero-van-decal-poster.jpg"
+          width="1920"
+          height="1080"
+        >
+          <source src="/assets/hero/hero-van-decal.mp4" type="video/mp4" />
+        </video>
+        <div class="meta">VÍDEO · 50% viewport</div>
+      </div>
+    </section>
+
+    <script>
+      const video = document.getElementById('hero-video');
+      const markReady = () => video.classList.add('is-ready');
+      video.addEventListener('playing', markReady);
+      video.addEventListener('canplay', () => {
+        video.play().then(markReady).catch(() => {});
+      });
+    </script>
+  </body>
+</html>

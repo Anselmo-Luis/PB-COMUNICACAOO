@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espaçamento de sections · variantes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --g: #18aa2b;
+      --b: #00134e;
+      --ink: #1d1d1f;
+      --muted: #5f6368;
+      --surface: #f5f5f7;
+      --white: #fff;
+      --font-d: "Space Grotesk", system-ui, sans-serif;
+      --font-b: "Plus Jakarta Sans", system-ui, sans-serif;
+      --sec-y: 6rem;
+      --clients-y: 4rem;
+      --gap-inner: 2rem;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-b);
+      color: var(--ink);
+      background: #0f1422;
+    }
+
+    .bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      background: rgba(8, 12, 24, 0.94);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 0.76rem;
+    }
+    .bar strong { margin-right: 0.4rem; }
+    .bar a {
+      padding: 0.28rem 0.55rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .bar a.is-active {
+      background: var(--g);
+      border-color: var(--g);
+      color: #fff;
+    }
+
+    .stage { background: var(--white); }
+
+    .eyebrow {
+      margin: 0 0 0.55rem;
+      color: var(--g);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      max-width: 16ch;
+      font-family: var(--font-d);
+      font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      color: var(--b);
+    }
+    .lead {
+      margin: 0.7rem 0 0;
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    section.block {
+      padding-block: var(--sec-y);
+      padding-inline: 1.25rem;
+    }
+    section.block.alt { background: var(--surface); }
+    section.block.clients {
+      padding-block: var(--clients-y);
+      border-block: 1px solid rgba(0, 0, 0, 0.06);
+      background: var(--surface);
+    }
+
+    .wrap {
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .clients-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 2rem;
+      align-items: center;
+      margin-top: var(--gap-inner);
+      opacity: 0.72;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: var(--gap-inner);
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr 1.05fr; gap: 2.5rem; }
+    }
+
+    .cards {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .card {
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(0, 19, 78, 0.08);
+      border-radius: 1rem;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--b);
+      font-size: 0.95rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .steps { display: grid; gap: 0; }
+    .step {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .step:last-child { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+    .step b {
+      color: var(--g);
+      font-family: var(--font-d);
+      font-size: 0.9rem;
+    }
+    .step h3 {
+      margin: 0 0 0.2rem;
+      font-size: 0.98rem;
+      color: var(--b);
+    }
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .mat-row {
+      display: grid;
+      gap: 0.85rem;
+    }
+    .mat {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 0.85rem;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .thumb {
+      width: 4.5rem;
+      height: 3.2rem;
+      border-radius: 0.55rem;
+      background: linear-gradient(135deg, #dfe7ef, #b8c6d4);
+    }
+    .mat h3 {
+      margin: 0 0 0.15rem;
+      font-size: 0.95rem;
+      color: var(--b);
+    }
+    .mat p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .measure {
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.65rem 1rem;
+      background: rgba(0, 19, 78, 0.92);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .measure span { opacity: 0.8; font-weight: 500; }
+
+    /* Densities */
+    body.v1 { --sec-y: 8rem; --clients-y: 4rem; --gap-inner: 2.2rem; }      /* atual (grosso) */
+    body.v2 { --sec-y: 5rem; --clients-y: 2.75rem; --gap-inner: 1.6rem; }   /* -35% */
+    body.v3 { --sec-y: 3.5rem; --clients-y: 2rem; --gap-inner: 1.25rem; }   /* compacto */
+    body.v4 { --sec-y: 2.5rem; --clients-y: 1.5rem; --gap-inner: 1rem; }    /* minimal */
+    body.v5 { --sec-y: 2rem; --clients-y: 1.25rem; --gap-inner: 0.85rem; }  /* tight */
+    body.v6 { --sec-y: 1.5rem; --clients-y: 1rem; --gap-inner: 0.75rem; }   /* ultra */
+    body.v7 { --sec-y: 3rem; --clients-y: 1.75rem; --gap-inner: 1.1rem; }   /* editorial */
+    body.v8 {
+      --sec-y: 2.75rem;
+      --clients-y: 1.35rem;
+      --gap-inner: 1rem;
+    }
+    body.v8 section.block.clients {
+      border-block: 0;
+      background: transparent;
+      padding-block: var(--clients-y);
+    }
+    body.v8 .clients-row { margin-top: 0.85rem; }
+  </style>
+</head>
+<body class="v1">
+  <header class="bar">
+    <strong id="label">S1 · Atual (grosso)</strong>
+    <a href="#v1" data-v="v1" class="is-active">S1</a>
+    <a href="#v2" data-v="v2">S2</a>
+    <a href="#v3" data-v="v3">S3</a>
+    <a href="#v4" data-v="v4">S4</a>
+    <a href="#v5" data-v="v5">S5</a>
+    <a href="#v6" data-v="v6">S6</a>
+    <a href="#v7" data-v="v7">S7</a>
+    <a href="#v8" data-v="v8">S8</a>
+  </header>
+
+  <div class="stage" id="stage">
+    <section class="block clients" aria-label="Clientes">
+      <div class="wrap">
+        <p class="eyebrow">Clientes</p>
+        <h2>Clientes que confiam no nosso trabalho.</h2>
+        <div class="clients-row">
+          <span>JBS</span><span>Swift</span><span>Friboi</span><span>Vigor</span><span>Mapfre</span><span>Honda</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-label="Beneficios">
+      <div class="wrap grid-2">
+        <div>
+          <p class="eyebrow">Por que a P&amp;B</p>
+          <h2>Por que empresas escolhem a P&amp;B</h2>
+          <p class="lead">Experiência, escala e padrão de entrega — sem enrolação visual.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><strong>24 anos</strong><p>Histórico com grandes marcas e operações complexas.</p></article>
+          <article class="card"><strong>Brasil inteiro</strong><p>Cobertura nacional com logística e instalação.</p></article>
+          <article class="card"><strong>Padrão técnico</strong><p>Do briefing à instalação com controle de qualidade.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt" aria-label="Processo">
+      <div class="wrap grid-2">
+        <div>
+          <p class="eyebrow">Nosso processo</p>
+          <h2>Do Briefing à Instalação</h2>
+          <p class="lead">Cada etapa com clareza, cuidado e padrão de entrega.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><b>01</b><div><h3>Analisamos seu projeto</h3><p>Levantamento técnico completo.</p></div></div>
+          <div class="step"><b>02</b><div><h3>Desenvolvemos a arte</h3><p>Criação alinhada à marca.</p></div></div>
+          <div class="step"><b>03</b><div><h3>Produzimos com precisão</h3><p>Materiais e acabamento controlados.</p></div></div>
+          <div class="step"><b>04</b><div><h3>Instalamos no prazo</h3><p>Equipe própria e acompanhamento.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-label="Materiais">
+      <div class="wrap grid-2">
+        <div>
+          <p class="eyebrow">Materiais</p>
+          <h2>Materiais que dão forma à sua marca</h2>
+          <p class="lead">Painéis, lonas, adesivos e soluções sob medida.</p>
+        </div>
+        <div class="mat-row">
+          <div class="mat"><div class="thumb"></div><div><h3>Painéis com e sem Estrutura</h3><p>Interno · Externo</p></div></div>
+          <div class="mat"><div class="thumb"></div><div><h3>Lona</h3><p>Fachadas · Eventos</p></div></div>
+          <div class="mat"><div class="thumb"></div><div><h3>Adesivação de veículos</h3><p>Frota · Total wrap</p></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="measure" id="measure">
+    <div><span>Densidade:</span> <strong id="m-name">S1 Atual</strong></div>
+    <div><span>Section:</span> <strong id="m-sec">py 8rem / 128px</strong></div>
+    <div><span>Clientes:</span> <strong id="m-cli">py 4rem / 64px</strong></div>
+  </div>
+
+  <script>
+    const meta = {
+      v1: { name: "S1 · Atual (grosso)", label: "S1 Atual", sec: "py 8rem / 128px", cli: "py 4rem / 64px" },
+      v2: { name: "S2 · -35%", label: "S2 -35%", sec: "py 5rem / 80px", cli: "py 2.75rem / 44px" },
+      v3: { name: "S3 · Compacto", label: "S3 Compacto", sec: "py 3.5rem / 56px", cli: "py 2rem / 32px" },
+      v4: { name: "S4 · Minimal", label: "S4 Minimal", sec: "py 2.5rem / 40px", cli: "py 1.5rem / 24px" },
+      v5: { name: "S5 · Tight", label: "S5 Tight", sec: "py 2rem / 32px", cli: "py 1.25rem / 20px" },
+      v6: { name: "S6 · Ultra", label: "S6 Ultra", sec: "py 1.5rem / 24px", cli: "py 1rem / 16px" },
+      v7: { name: "S7 · Editorial", label: "S7 Editorial", sec: "py 3rem / 48px", cli: "py 1.75rem / 28px" },
+      v8: { name: "S8 · Minimal + clientes flat", label: "S8 Flat clients", sec: "py 2.75rem / 44px", cli: "py 1.35rem / sem borda" },
+    };
+
+    const body = document.body;
+    const label = document.getElementById("label");
+    const links = [...document.querySelectorAll(".bar a[data-v]")];
+
+    function apply(v) {
+      body.className = v;
+      const m = meta[v];
+      label.textContent = m.name;
+      document.getElementById("m-name").textContent = m.label;
+      document.getElementById("m-sec").textContent = m.sec;
+      document.getElementById("m-cli").textContent = m.cli;
+      links.forEach((a) => a.classList.toggle("is-active", a.dataset.v === v));
+      history.replaceState(null, "", "#" + v);
+    }
+
+    links.forEach((a) => a.addEventListener("click", (e) => {
+      e.preventDefault();
+      apply(a.dataset.v);
+    }));
+
+    const fromHash = (location.hash || "#v1").slice(1);
+    apply(meta[fromHash] ? fromHash : "v1");
+  </script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+﻿:root {
+  --g: #18aa2b;
+  --b: #00134e;
+  --ink: #1a2233;
+  --muted: #5a6478;
+  --glass: rgba(255, 255, 255, 0.28);
+  --glass-strong: rgba(255, 255, 255, 0.42);
+  --stroke: rgba(255, 255, 255, 0.42);
+  --stroke-soft: rgba(255, 255, 255, 0.22);
+  --shadow-soft:
+    0 10px 36px rgba(0, 12, 40, 0.14),
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.55) inset;
+  --shadow-float:
+    0 16px 48px rgba(0, 12, 40, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  --font-d: "Space Grotesk", system-ui, sans-serif;
+  --font-b: "Plus Jakarta Sans", system-ui, sans-serif;
+  --blur: blur(22px) saturate(1.5);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-b);
+  background: #0f1422;
+  color: #fff;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: rgba(8, 12, 24, 0.92);
+  backdrop-filter: blur(10px);
+  font-size: 0.76rem;
+}
+
+.bar a {
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bar a.is-active {
+  background: var(--g);
+  border-color: var(--g);
+  color: #fff;
+}
+
+.wrap { position: relative; }
+
+.hero-fake {
+  min-height: 78vh;
+  background:
+    linear-gradient(180deg, rgba(8, 14, 28, 0.18), rgba(8, 14, 28, 0.55)),
+    center / cover no-repeat url("/assets/hero/hero-van-decal-poster.jpg");
+  display: grid;
+  align-items: end;
+  padding: 2rem;
+}
+
+.hero-fake p {
+  margin: 0;
+  max-width: 20rem;
+  font-family: var(--font-d);
+  font-size: 1.65rem;
+  font-weight: 700;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.meta {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+nav.demo a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.logo {
+  display: block;
+  height: auto;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 6px 18px rgba(0, 12, 40, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  color: var(--ink);
+}
+
+.chip:hover {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: var(--b);
+  transform: translateY(-1px);
+}
+
+.chip.is-key {
+  background: rgba(24, 170, 43, 0.18);
+  border-color: rgba(24, 170, 43, 0.42);
+  color: #0d6e1c;
+}
+
+.chip.is-key:hover {
+  background: rgba(24, 170, 43, 0.28);
+}
+
+/* Chips flutuando direto sobre a hero */
+.chip.on-hero {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.chip.on-hero:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.chip.on-hero.is-key {
+  background: rgba(24, 170, 43, 0.32);
+  border-color: rgba(140, 235, 160, 0.55);
+  color: #f2fff5;
+}
+
+.glass-shell {
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ─── 1 Glass capsule ─── */
+.n1 {
+  padding: 0.7rem 1rem 0;
+  background: transparent;
+}
+.n1 .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.45rem 0.55rem 0.45rem 0.75rem;
+  border-radius: 999px;
+}
+.n1 .logo { height: 38px; }
+.n1 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+/* ─── 2 Soft frosted bar + chips ─── */
+.n2 {
+  padding: 0.55rem 1.1rem;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 12, 40, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.n2 .logo { height: 40px; }
+.n2 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+/* ─── 3 Scattered floating pills ─── */
+.n3 {
+  padding: 0.85rem 1.15rem 0;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.n3 .brand {
+  padding: 0.35rem 0.55rem;
+  border-radius: 1.1rem;
+}
+.n3 .logo { height: 40px; }
+.n3 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.7rem;
+  max-width: 34rem;
+  justify-content: flex-end;
+  padding-top: 0.15rem;
+}
+.n3 .links a:nth-child(2) { transform: translateY(6px); }
+.n3 .links a:nth-child(4) { transform: translateY(-4px); }
+.n3 .links a:nth-child(5) { transform: translateY(8px); }
+
+/* ─── 4 Dual glass islands ─── */
+.n4 {
+  padding: 0.75rem 1.1rem 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+.n4 .brand,
+.n4 .links {
+  border-radius: 999px;
+}
+.n4 .brand {
+  padding: 0.35rem 0.7rem;
+}
+.n4 .logo { height: 38px; }
+.n4 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  padding: 0.3rem;
+}
+.n4 .links a {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: var(--muted);
+}
+.n4 .links a:hover {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--b);
+}
+
+/* ─── 5 Soft contour ring ─── */
+.n5 {
+  padding: 0.7rem 1rem 0;
+  background: transparent;
+}
+.n5 .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0.5rem 0.65rem 0.5rem 0.8rem;
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 0 0 6px rgba(255, 255, 255, 0.12),
+    0 12px 36px rgba(0, 12, 40, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+.n5 .logo { height: 38px; }
+.n5 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.n5 .links a {
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid transparent;
+  color: var(--muted);
+}
+.n5 .links a:hover {
+  border-color: rgba(24, 170, 43, 0.28);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--b);
+}
+
+/* ─── 6 Liquid glass chips ─── */
+.n6 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 1.15rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 12, 40, 0.08);
+}
+.n6 .logo { height: 36px; }
+.n6 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.n6 .links a {
+  padding: 0.38rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 19, 78, 0.08);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  color: var(--ink);
+}
+.n6 .links a:hover {
+  border-color: rgba(24, 170, 43, 0.4);
+  background: rgba(24, 170, 43, 0.12);
+  color: #0d6e1c;
+}
+
+/* ─── 7 Split glass docks ─── */
+.n7 {
+  padding: 0.8rem 1.15rem 0;
+  background: transparent;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+.n7 .brand,
+.n7 .links,
+.n7 .aside {
+  border-radius: 999px;
+}
+.n7 .brand { padding: 0.35rem 0.7rem; }
+.n7 .logo { height: 38px; }
+.n7 .links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.28rem;
+}
+.n7 .links a {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: var(--muted);
+}
+.n7 .links a:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--b);
+}
+.n7 .aside {
+  padding: 0.28rem;
+}
+.n7 .aside a {
+  display: inline-flex;
+  padding: 0.42rem 1rem;
+  border-radius: 999px;
+  background: rgba(24, 170, 43, 0.16);
+  border: 1px solid rgba(24, 170, 43, 0.32);
+  color: #0d6e1c;
+  font-weight: 700;
+}
+.n7 .aside a:hover {
+  background: rgba(24, 170, 43, 0.24);
+}
+
+/* ─── 8 Soft navy contour ─── */
+.n8 {
+  padding: 0.7rem 1rem 0;
+  background: transparent;
+}
+.n8 .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.45rem 0.55rem 0.45rem 0.75rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid rgba(0, 35, 124, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+    0 10px 32px rgba(0, 19, 78, 0.1);
+}
+.n8 .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.n8 .logo { height: 36px; }
+.n8 .word {
+  font-family: var(--font-d);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--b);
+  letter-spacing: -0.03em;
+}
+.n8 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.n8 .links a {
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(0, 35, 124, 0.08);
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--muted);
+}
+.n8 .links a:hover {
+  border-color: rgba(0, 35, 124, 0.22);
+  color: var(--b);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ─── 9 Centered glass capsule ─── */
+.n9 {
+  padding: 0.85rem 1rem 0;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  gap: 0.55rem;
+}
+.n9 .brand {
+  padding: 0.3rem 0.65rem;
+  border-radius: 1rem;
+}
+.n9 .logo { height: 40px; }
+.n9 .links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  max-width: 40rem;
+}
+.n9 .links a {
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--ink);
+}
+.n9 .links a:hover {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(24, 170, 43, 0.35);
+}
+
+/* ─── 10 Premium glass dock ─── */
+.n10 {
+  padding: 0.75rem 1.1rem 0;
+  background: transparent;
+}
+.n10 .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 0.4rem 0.45rem 0.4rem 0.7rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.38));
+  backdrop-filter: blur(22px) saturate(1.45);
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: var(--shadow-float);
+}
+.n10 .logo { height: 40px; }
+.n10 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+.n10 .links a {
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
+  color: var(--ink);
+}
+.n10 .links a:hover {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(24, 170, 43, 0.4);
+  transform: translateY(-1px);
+}
+.n10 .links a.is-key {
+  background: rgba(24, 170, 43, 0.16);
+  border-color: rgba(24, 170, 43, 0.38);
+  color: #0d6e1c;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .n3 .links a:nth-child(n) { transform: none; }
+  .n7 {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+  .n7 .links { justify-content: flex-start; }
+  .n8 .word { display: none; }
+}

@@ -1,0 +1,81 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero · variantes de largura do vídeo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --pb-blue: #00134e;
+        --pb-accent: #18aa2b;
+        --font-display: 'Space Grotesk', system-ui, sans-serif;
+        --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        padding: 2.5rem 1.5rem 3rem;
+        background:
+          radial-gradient(ellipse 80% 50% at 10% 0%, rgba(24,170,43,.08), transparent 55%),
+          radial-gradient(ellipse 70% 45% at 90% 10%, rgba(0,19,78,.06), transparent 50%),
+          #f5f5f7;
+        color: #1d1d1f;
+        font-family: var(--font-body);
+      }
+      main { max-width: 56rem; margin: 0 auto; }
+      h1 {
+        margin: 0 0 0.5rem;
+        color: var(--pb-blue);
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        letter-spacing: -0.04em;
+      }
+      .lead { margin: 0 0 1.75rem; color: #5f6368; line-height: 1.6; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        display: grid;
+        gap: 0.35rem;
+        padding: 1.25rem 1.15rem;
+        border: 1px solid rgba(0,19,78,.1);
+        border-radius: 1rem;
+        background: #fff;
+        color: inherit;
+        text-decoration: none;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0,19,78,.08);
+      }
+      .card strong {
+        color: var(--pb-accent);
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+      }
+      .card span { color: var(--pb-blue); font-weight: 600; }
+      .card em { color: #5f6368; font-style: normal; font-size: 0.9rem; }
+      .note { margin-top: 1.5rem; color: #5f6368; font-size: 0.92rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Variantes de largura do vídeo</h1>
+      <p class="lead">Hero sem CTAs. Escolha uma proporção vídeo / texto na viewport.</p>
+      <div class="grid">
+        <a class="card" href="video-50.html"><strong>50%</strong><span>Vídeo · 50% da viewport</span><em>Texto · 50%</em></a>
+        <a class="card" href="video-60.html"><strong>60%</strong><span>Vídeo · 60% da viewport</span><em>Texto · 40%</em></a>
+        <a class="card" href="video-70.html"><strong>70%</strong><span>Vídeo · 70% da viewport</span><em>Texto · 30%</em></a>
+        <a class="card" href="video-80.html"><strong>80%</strong><span>Vídeo · 80% da viewport</span><em>Texto · 20%</em></a>
+      </div>
+      <p class="note">Sem botões “Solicitar orçamento” e “Ver portfólio”.</p>
+    </main>
+  </body>
+</html>

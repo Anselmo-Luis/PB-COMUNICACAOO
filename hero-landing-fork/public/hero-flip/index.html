@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero · texto legível (sem espelhar letras)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font-d: "Space Grotesk", system-ui, sans-serif;
+      --font-b: "Plus Jakarta Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-b);
+      background: #0f1422;
+      color: #fff;
+    }
+    .bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      background: rgba(8, 12, 24, 0.94);
+      backdrop-filter: blur(10px);
+      font-size: 0.76rem;
+    }
+    .bar a {
+      padding: 0.28rem 0.55rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .bar a.is-active {
+      background: #18aa2b;
+      border-color: #18aa2b;
+      color: #fff;
+    }
+    .note {
+      width: 100%;
+      margin: 0.35rem 0 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.72rem;
+      line-height: 1.4;
+    }
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      background: #101522;
+    }
+    .media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transform: none; /* nunca espelha — letras corretas */
+    }
+    .scrim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 100svh;
+      max-width: min(36rem, 78vw);
+      padding: 5.5rem 1.5rem 2.5rem;
+    }
+    .title {
+      margin: 0;
+      font-family: var(--font-d);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 0.98;
+      font-weight: 700;
+    }
+    .title .g { color: rgba(55, 220, 85, 0.92); }
+    .title .w { color: rgba(255, 255, 255, 0.94); }
+    .intro {
+      margin: 1rem 0 0;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .desc {
+      margin: 0.85rem 0 0;
+      max-width: 28rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+    .meta {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 3;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* H1 atual */
+    body.v1 .media video { object-position: center center; }
+    body.v1 .scrim {
+      background:
+        linear-gradient(90deg, rgba(8, 14, 28, 0.55) 0%, rgba(8, 14, 28, 0.22) 40%, transparent 70%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.18) 0%, transparent 30%, rgba(8, 14, 28, 0.5) 100%);
+    }
+
+    /* H2 empurra a van p/ direita — mais área limpa atrás do texto */
+    body.v2 .media video {
+      width: 122%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 78% center;
+      margin-left: -4%;
+    }
+    body.v2 .scrim {
+      background:
+        linear-gradient(90deg, rgba(8, 14, 28, 0.7) 0%, rgba(8, 14, 28, 0.35) 36%, transparent 68%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.2) 0%, transparent 32%, rgba(8, 14, 28, 0.55) 100%);
+    }
+
+    /* H3 shift forte + scrim */
+    body.v3 .media video {
+      width: 130%;
+      object-position: 88% center;
+      margin-left: -8%;
+    }
+    body.v3 .scrim {
+      background:
+        linear-gradient(90deg, rgba(8, 14, 28, 0.82) 0%, rgba(8, 14, 28, 0.48) 32%, rgba(8, 14, 28, 0.12) 58%, transparent 78%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.22) 0%, transparent 30%, rgba(8, 14, 28, 0.58) 100%);
+    }
+
+    /* H4 vinheta só no bloco de texto */
+    body.v4 .media video { object-position: 70% center; width: 118%; margin-left: -3%; }
+    body.v4 .scrim {
+      background:
+        radial-gradient(ellipse 48% 75% at 12% 72%, rgba(6, 10, 22, 0.78), transparent 72%),
+        linear-gradient(90deg, rgba(8, 14, 28, 0.72) 0%, rgba(8, 14, 28, 0.28) 40%, transparent 65%),
+        linear-gradient(180deg, transparent 45%, rgba(8, 14, 28, 0.55) 100%);
+    }
+
+    /* H5 painel escuro atrás do copy (máxima legibilidade) */
+    body.v5 .media video { object-position: 75% center; width: 120%; margin-left: -5%; }
+    body.v5 .scrim {
+      background:
+        linear-gradient(90deg, rgba(8, 12, 22, 0.88) 0%, rgba(8, 12, 22, 0.62) 28%, rgba(8, 12, 22, 0.2) 48%, transparent 70%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.2) 0%, transparent 35%, rgba(8, 14, 28, 0.5) 100%);
+    }
+
+    /* H6 copy um pouco mais baixo + shift */
+    body.v6 .media video {
+      width: 125%;
+      object-position: 82% 42%;
+      margin-left: -6%;
+    }
+    body.v6 .scrim {
+      background:
+        linear-gradient(90deg, rgba(8, 14, 28, 0.75) 0%, rgba(8, 14, 28, 0.4) 34%, transparent 66%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.15) 0%, transparent 40%, rgba(8, 14, 28, 0.62) 100%);
+    }
+    body.v6 .copy {
+      padding-bottom: 3.2rem;
+      max-width: min(34rem, 72vw);
+    }
+  </style>
+</head>
+<body class="v2">
+  <header class="bar">
+    <strong id="label">H2 · Shift direita</strong>
+    <a href="#v1" data-v="v1">H1</a>
+    <a href="#v2" data-v="v2" class="is-active">H2</a>
+    <a href="#v3" data-v="v3">H3</a>
+    <a href="#v4" data-v="v4">H4</a>
+    <a href="#v5" data-v="v5">H5</a>
+    <a href="#v6" data-v="v6">H6</a>
+    <p class="note">Sem espelho: as letras da van ficam corretas. Para a van “virar de lado” de verdade (frente à esquerda) com arte legível, precisa de outro take/export do vídeo — CSS não consegue só inverter a cena sem espelhar a marca.</p>
+  </header>
+
+  <section class="hero" aria-label="Hero">
+    <div class="media" aria-hidden="true">
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="/assets/hero/hero-van-decal-poster.jpg" width="1920" height="1080">
+        <source src="/assets/hero/hero-van-decal.mp4" type="video/mp4" />
+      </video>
+      <div class="scrim"></div>
+    </div>
+    <div class="copy">
+      <h1 class="title">
+        <span class="g">24 anos.</span><br />
+        <span class="w">Causando impacto.</span>
+      </h1>
+      <p class="intro">Somos a P&amp;B Comunicação Visual.</p>
+      <div class="desc">
+        <p>Desde 2002, tornamos marcas mais visíveis, próximas e admiradas. Entregamos comunicação visual completa: impressão, acabamento e instalação com padrão.</p>
+      </div>
+    </div>
+    <div class="meta" id="meta">HERO · H2 · Shift (letras ok)</div>
+  </section>
+
+  <script>
+    const metaMap = {
+      v1: { label: "H1 · Atual", meta: "HERO · H1 · Original" },
+      v2: { label: "H2 · Shift direita", meta: "HERO · H2 · object-position 78%" },
+      v3: { label: "H3 · Shift forte + scrim", meta: "HERO · H3 · 88% + scrim" },
+      v4: { label: "H4 · Vinheta no texto", meta: "HERO · H4 · vignette" },
+      v5: { label: "H5 · Painel escuro", meta: "HERO · H5 · painel esquerda" },
+      v6: { label: "H6 · Shift + copy baixo", meta: "HERO · H6 · framing" },
+    };
+    const body = document.body;
+    const label = document.getElementById("label");
+    const meta = document.getElementById("meta");
+    const links = [...document.querySelectorAll(".bar a[data-v]")];
+    const video = document.getElementById("heroVideo");
+
+    function apply(v) {
+      body.className = v;
+      const m = metaMap[v];
+      label.textContent = m.label;
+      meta.textContent = m.meta;
+      links.forEach((a) => a.classList.toggle("is-active", a.dataset.v === v));
+      history.replaceState(null, "", "#" + v);
+      video.play?.().catch(() => {});
+    }
+
+    links.forEach((a) => a.addEventListener("click", (e) => {
+      e.preventDefault();
+      apply(a.dataset.v);
+    }));
+
+    const fromHash = (location.hash || "#v2").slice(1);
+    apply(metaMap[fromHash] ? fromHash : "v2");
+  </script>
+</body>
+</html>

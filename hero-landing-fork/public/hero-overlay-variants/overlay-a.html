@@ -1,0 +1,70 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A · Scrim esquerdo · Hero overlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./shared.css" />
+  </head>
+  <body>
+    <header class="variant-bar">
+      <strong>A · Scrim esquerdo</strong>
+      <nav aria-label="Variantes de overlay">
+      <a href="overlay-a.html" class="is-active">Scrim</a>
+      <a href="overlay-b.html">Painel</a>
+      <a href="overlay-c.html">Base</a>
+      <a href="overlay-d.html">Vinheta</a>
+      </nav>
+    </header>
+
+    <section class="hero overlay-a" aria-label="Hero">
+      <div class="hero-media" aria-hidden="true">
+        <img
+          src="/assets/hero/hero-van-decal-poster.jpg"
+          srcset="/assets/hero/hero-van-decal-poster.jpg"
+          sizes="100vw"
+          alt=""
+          width="1920"
+          height="1080"
+          decoding="async"
+          draggable="false"
+        />
+        <video
+          id="hero-video"
+          muted
+          loop
+          playsinline
+          autoplay
+          preload="metadata"
+          poster="/assets/hero/hero-van-decal-poster.jpg"
+          width="1920"
+          height="1080"
+        >
+          <source src="/assets/hero/hero-van-decal.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          24 anos.
+          <span>Causando impacto.</span>
+        </h1>
+        <p class="hero-intro">
+          <span class="mark">Somos</span>
+          a P&B Comunicação Visual.
+        </p>
+        <div class="hero-description">
+          <p>Desde 2002, tornamos marcas mais visíveis, próximas e admiradas.</p>
+          <p>Comunicação visual completa: impressão, acabamento e instalação com padrão.</p>
+          <p>Agilidade máxima e compromisso absoluto.</p>
+        </div>
+      </div>
+      <div class="meta">OVERLAY · SCRIM</div>
+    </section>
+
+    <script src="./shared.js"></script>
+  </body>
+</html>

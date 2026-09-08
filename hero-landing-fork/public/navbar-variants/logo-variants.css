@@ -1,0 +1,215 @@
+:root {
+  --g: #18aa2b;
+  --b: #00134e;
+  --ink: #1a2233;
+  --muted: #5a6478;
+  --blur: blur(22px) saturate(1.5);
+  --font-d: "Space Grotesk", system-ui, sans-serif;
+  --font-b: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-b);
+  background: #0f1422;
+  color: #fff;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: rgba(8, 12, 24, 0.92);
+  backdrop-filter: blur(10px);
+  font-size: 0.76rem;
+}
+
+.bar a {
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bar a.is-active {
+  background: var(--g);
+  border-color: var(--g);
+  color: #fff;
+}
+
+.wrap { position: relative; }
+
+.hero-fake {
+  min-height: 78vh;
+  background:
+    linear-gradient(180deg, rgba(8, 14, 28, 0.18), rgba(8, 14, 28, 0.55)),
+    center / cover no-repeat url("/assets/hero/hero-van-decal-poster.jpg");
+  display: grid;
+  align-items: end;
+  padding: 2rem;
+}
+
+.hero-fake p {
+  margin: 0;
+  max-width: 20rem;
+  font-family: var(--font-d);
+  font-size: 1.65rem;
+  font-weight: 700;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.meta {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Base = navbar 6 Liquid chips */
+.n6 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 1.15rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 12, 40, 0.08);
+}
+
+.n6 .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.n6 .links a {
+  text-decoration: none;
+  padding: 0.38rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 19, 78, 0.08);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.n6 .links a:hover {
+  border-color: rgba(24, 170, 43, 0.4);
+  background: rgba(24, 170, 43, 0.12);
+  color: #0d6e1c;
+  transform: translateY(-1px);
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.word {
+  font-family: var(--font-d);
+  font-weight: 700;
+  color: var(--b);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.word small {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--font-b);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* L1 atual / compacta */
+.l1 .logo { height: 36px; }
+
+/* L2 equilibrada */
+.l2 { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+.l2 .logo { height: 48px; }
+
+/* L3 preenchida (recomendada) */
+.l3 { padding-top: 0.55rem; padding-bottom: 0.55rem; }
+.l3 .logo { height: 56px; }
+
+/* L4 forte */
+.l4 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.l4 .logo { height: 64px; }
+
+/* L5 crop zoom — corta margem do PNG */
+.l5 { padding-top: 0.45rem; padding-bottom: 0.45rem; }
+.l5 .logo-frame {
+  width: 78px;
+  height: 52px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.l5 .logo {
+  height: 72px;
+  max-width: none;
+  transform: scale(1.18);
+}
+
+/* L6 badge de vidro */
+.l6 { padding-top: 0.45rem; padding-bottom: 0.45rem; }
+.l6 .logo-badge {
+  display: grid;
+  place-items: center;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 22px rgba(0, 12, 40, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.75) inset;
+  backdrop-filter: blur(12px);
+}
+.l6 .logo { height: 48px; }
+
+/* L7 logo + wordmark */
+.l7 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.l7 .logo { height: 48px; }
+.l7 .word { font-size: 1rem; }
+
+/* L8 max fill com sombra suave */
+.l8 { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+.l8 .logo {
+  height: 60px;
+  filter: drop-shadow(0 4px 12px rgba(0, 19, 78, 0.18));
+}
+
+@media (max-width: 760px) {
+  .l7 .word { display: none; }
+  .n6 .links a { padding: 0.32rem 0.7rem; font-size: 0.78rem; }
+}

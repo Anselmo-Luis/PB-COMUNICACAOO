@@ -45,3 +45,4 @@ toolchain-http.out.log
 # Raw source material not yet curated into the site's asset pipeline
 /assets/assetsNEWS/
 /assets/imgs/logo.jpeg
+.vercel

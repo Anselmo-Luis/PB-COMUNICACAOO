@@ -1,0 +1,189 @@
+import { useEffect, useState } from 'react';
+import { Car, Flag, PaintRoller, Store } from 'lucide-react';
+import { useReveal } from '../../hooks/useReveal';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import { siteData } from '../../data/siteData';
+
+const SERVICE_ICONS = {
+  vehicle: <Car size={26} strokeWidth={1.5} aria-hidden="true" />,
+  general: <PaintRoller size={26} strokeWidth={1.5} aria-hidden="true" />,
+  banner: <Flag size={26} strokeWidth={1.5} aria-hidden="true" />,
+  pdv: <Store size={26} strokeWidth={1.5} aria-hidden="true" />,
+};
+
+const DEFAULT_SERVICE_ICON = SERVICE_ICONS.general;
+
+function ServiceNavTabs({ items, activeIndex, onTabClick }) {
+  return (
+    <div className="mb-12 flex flex-wrap items-center justify-center gap-2" aria-label="Categorias de serviços">
+      {items.map((item, index) => (
+        <button
+          key={item.category}
+          type="button"
+          onClick={() => onTabClick(index)}
+          className={`service-nav-tab-light${activeIndex === index ? ' active' : ''}`}
+          aria-pressed={activeIndex === index}
+        >
+          {item.category}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ServiceCard({ service, index, ctaText }) {
+  const revealRef = useReveal();
+  const [slide, setSlide] = useState(0);
+  const isReducedMotion = usePrefersReducedMotion();
+  const num = String(index + 1).padStart(2, '0');
+  const gallery = service.gallery?.length ? service.gallery : [service.image];
+
+  useEffect(() => {
+    if (isReducedMotion || gallery.length < 2) return undefined;
+
+    const interval = window.setInterval(() => {
+      setSlide((current) => (current + 1) % gallery.length);
+    }, 4200);
+
+    return () => window.clearInterval(interval);
+  }, [gallery.length, isReducedMotion]);
+
+  const goToPortfolio = (event) => {
+    event.preventDefault();
+    window.dispatchEvent(new CustomEvent('pb:filter-portfolio', { detail: service.category }));
+    requestAnimationFrame(() => {
+      document.getElementById('portfolio')?.scrollIntoView({
+        behavior: isReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
+  };
+
+  return (
+    <div
+      id={`service-card-${index}`}
+      ref={revealRef}
+      className="reveal-section"
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      <a
+        href="#portfolio"
+        onClick={goToPortfolio}
+        className="service-card group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-500 md:flex-row"
+        aria-label={`Ver portfólio: ${service.title}`}
+      >
+        <span className="service-card-accent-line" aria-hidden="true" />
+        <span aria-hidden="true" className="service-card-number">
+          {num}
+        </span>
+
+        <div className="service-card-media relative flex-shrink-0 overflow-hidden md:w-[55%]">
+          {gallery.map((url, galleryIndex) => (
+            <img
+              key={url}
+              src={url}
+              alt={galleryIndex === slide ? service.title : ''}
+              aria-hidden={galleryIndex === slide ? undefined : 'true'}
+              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
+              style={{
+                zIndex: galleryIndex === slide ? 2 : 1,
+                opacity: galleryIndex === slide ? 1 : 0,
+              }}
+              loading={galleryIndex === 0 ? 'eager' : 'lazy'}
+            />
+          ))}
+          <div className="service-media-overlay" aria-hidden="true" />
+
+          {gallery.length > 1 && (
+            <div className="service-slide-indicators" aria-hidden="true">
+              {gallery.map((url, galleryIndex) => (
+                <span
+                  key={url}
+                  className={galleryIndex === slide ? 'is-active' : ''}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="service-card-content relative flex flex-col justify-between gap-5 p-8 md:w-[45%] md:p-10">
+          <div className="flex items-center gap-3">
+            <div className="service-icon" aria-hidden="true">
+              {SERVICE_ICONS[service.icon] ?? DEFAULT_SERVICE_ICON}
+            </div>
+            <span className="category-badge-light">{service.category}</span>
+          </div>
+
+          <div>
+            <span className="service-card-index">{num}</span>
+            <h3 className="mt-3 font-[var(--font-display)] text-xl font-bold leading-tight text-[var(--color-pb-ink)] sm:text-2xl lg:text-[1.6rem]">
+              {service.title}
+            </h3>
+          </div>
+
+          <p className="text-sm leading-relaxed text-[var(--color-pb-muted)] sm:text-base">
+            {service.description}
+          </p>
+
+          {service.specs?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {service.specs.map((spec) => (
+                <span key={spec} className="spec-tag-light">{spec}</span>
+              ))}
+            </div>
+          )}
+
+          <div className="flex items-start gap-2.5">
+            <span aria-hidden="true" className="service-metric-dot" />
+            <span className="text-xs font-medium uppercase leading-snug tracking-wider text-[var(--color-pb-ink-2)]">
+              {service.metric}
+            </span>
+          </div>
+
+          <div className="service-card-cta" aria-hidden="true">
+            {ctaText}
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  );
+}
+
+export default function Services() {
+  const headerRevealRef = useReveal();
+  const { services } = siteData;
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    document.getElementById(`service-card-${index}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  return (
+    <section id="servicos" className="services-section relative z-10 bg-[var(--color-pb-white)] py-6">
+      <div className="mx-auto max-w-6xl px-6">
+        <div ref={headerRevealRef} className="reveal-section mb-10 text-center">
+          <span className="section-kicker-light">{services.label}</span>
+          <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
+            {services.headline.before}{' '}
+            <span className="text-[var(--color-pb-accent-blue)]">{services.headline.accent}</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-[var(--color-pb-ink-2)]">
+            {services.subheadline}
+          </p>
+        </div>
+
+        <ServiceNavTabs items={services.items} activeIndex={activeTab} onTabClick={handleTabClick} />
+
+        <div className="flex flex-col gap-5">
+          {services.items.map((service, index) => (
+            <ServiceCard key={service.category} service={service} index={index} ctaText={services.ctaText} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

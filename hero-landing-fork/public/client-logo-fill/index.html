@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonda + Adias · variantes de card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --surface: #f5f5f7;
+      --ink: #1d1d1f;
+      --muted: #5f6368;
+      --g: #18aa2b;
+      --font-d: "Space Grotesk", system-ui, sans-serif;
+      --font-b: "Plus Jakarta Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      padding: 1.5rem 1.2rem 3rem;
+      font-family: var(--font-b);
+      background: linear-gradient(165deg, #0f1422, #1a2740 50%, #122018);
+      color: #fff;
+    }
+    main { max-width: 58rem; margin: 0 auto; }
+    h1 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-d);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+    .lead {
+      margin: 0 0 1.4rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      max-width: 40rem;
+    }
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+    .variant {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 1.25rem;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    .variant header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .variant header strong {
+      color: #3dd24f;
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+    }
+    .variant header span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.86rem;
+    }
+    .stage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      justify-content: center;
+      padding: 1.35rem 1rem;
+      background: var(--surface);
+    }
+
+    /* base card size like site */
+    .card {
+      flex: 0 0 10rem;
+      width: 10rem;
+      height: 4.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(29, 29, 31, 0.09);
+      background: #fff;
+    }
+    .card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-position: center;
+    }
+
+    /* V1 — atual (contain + scale 0.94) */
+    .v1 .card {
+      border-radius: 1rem;
+      padding: 0;
+    }
+    .v1 .card img {
+      object-fit: contain;
+      border-radius: inherit;
+      transform: scale(0.94);
+    }
+
+    /* V2 — imagem fill com radius forte (cover suave) */
+    .v2 .card {
+      border-radius: 1rem;
+      padding: 0;
+    }
+    .v2 .card img {
+      object-fit: cover;
+      border-radius: inherit;
+      transform: scale(0.9);
+      transform-origin: center;
+    }
+
+    /* V3 — contain + padding interno, radius no card */
+    .v3 .card {
+      border-radius: 1.15rem;
+      padding: 0.45rem 0.55rem;
+    }
+    .v3 .card img {
+      object-fit: contain;
+      border-radius: 0.7rem;
+      transform: none;
+    }
+
+    /* V4 — placa da logo com radius próprio (inset) */
+    .v4 .card {
+      border-radius: 1.15rem;
+      padding: 0.28rem;
+      background: #fff;
+    }
+    .v4 .card img {
+      object-fit: cover;
+      border-radius: 0.9rem;
+      transform: none;
+    }
+
+    /* V5 — pill suave, contain sem zoom */
+    .v5 .card {
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+    }
+    .v5 .card img {
+      object-fit: contain;
+      border-radius: 999px;
+      transform: none;
+    }
+
+    /* V6 — bleed total cover + radius card (letras um pouco apertadas) */
+    .v6 .card {
+      border-radius: 1rem;
+      padding: 0;
+    }
+    .v6 .card img {
+      object-fit: cover;
+      border-radius: inherit;
+      transform: none;
+    }
+
+    /* V7 — cover com “safe zoom” 0.82 */
+    .v7 .card {
+      border-radius: 1rem;
+      padding: 0;
+      background: #fff;
+    }
+    .v7 .card img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      transform: scale(0.82);
+      transform-origin: center;
+    }
+
+    /* V8 — mask arredondada (clip-path) */
+    .v8 .card {
+      border-radius: 1.1rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: 0 0 0 1px rgba(29, 29, 31, 0.1);
+    }
+    .v8 .card img {
+      object-fit: cover;
+      border-radius: 1.1rem;
+      transform: scale(0.92);
+    }
+
+    .hint {
+      margin-top: 1.25rem;
+      padding: 0.9rem 1rem;
+      border-radius: 0.9rem;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Sonda + Adias · 8 variantes</h1>
+    <p class="lead">Só essas duas logos. Compare bordas arredondadas, preenchimento e se as letras cortam. Me diga o número (V1–V8).</p>
+
+    <div class="grid">
+      <article class="variant v1">
+        <header><strong>V1</strong><span>Atual · contain + scale 0.94</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v2">
+        <header><strong>V2</strong><span>Cover + scale 0.90 · radius no card</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v3">
+        <header><strong>V3</strong><span>Contain + padding · radius na imagem</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v4">
+        <header><strong>V4</strong><span>Inset · cover + radius forte na placa</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v5">
+        <header><strong>V5</strong><span>Pill · contain sem zoom</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v6">
+        <header><strong>V6</strong><span>Bleed total cover (pode cortar um pouco)</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v7">
+        <header><strong>V7</strong><span>Cover + scale 0.82 · mais folga nas letras</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+
+      <article class="variant v8">
+        <header><strong>V8</strong><span>Placa arredondada isolada · scale 0.92</span></header>
+        <div class="stage">
+          <div class="card"><img src="/assets/clients/sonda.jpg" alt="Sonda" /></div>
+          <div class="card"><img src="/assets/clients/adias.jpg" alt="Adias" /></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="hint">Dica: o ideal para o cliente costuma ser <strong>V3</strong> (seguro, letras intactas) ou <strong>V4 / V7</strong> (parece “preenchido” com borda redonda e sem cortar tanto).</p>
+  </main>
+</body>
+</html>

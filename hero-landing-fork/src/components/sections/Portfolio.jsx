@@ -221,6 +221,8 @@ export default function Portfolio() {
   };
 
   const lightboxItemCount = photoTiles.length;
+  const isVideoOnly = Boolean(activeCategoryMeta?.videoOnly);
+  const hasProductionVideos = portfolio.videos.length > 0;
   const openLightbox = (index) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
   const prevImage = () => {
@@ -232,6 +234,19 @@ export default function Portfolio() {
     ));
   };
   const jumpImage = (index) => setLightboxIndex(index);
+
+  const productionBlock = hasProductionVideos ? (
+    <div className="portfolio-production">
+      <div className="portfolio-production-header">
+        <div>
+          <span className="section-kicker-light">Bastidores</span>
+          <h2>Produção</h2>
+        </div>
+        <p>Vídeos de instalação, frota e produção interna.</p>
+      </div>
+      <PortfolioVideoCarousel videos={portfolio.videos} />
+    </div>
+  ) : null;
 
   return (
     <section
@@ -247,7 +262,7 @@ export default function Portfolio() {
             <p>{portfolio.subheadline}</p>
           </div>
           <div className="portfolio-project-count" aria-live="polite">
-            {activeCategoryMeta?.videoOnly ? (
+            {isVideoOnly ? (
               <>
                 <strong>{videoCount}</strong>
                 <span>{videoCount === 1 ? 'vídeo' : 'vídeos'}</span>
@@ -296,34 +311,31 @@ export default function Portfolio() {
 
         <div
           id={`portfolio-panel-${activeCategory}`}
-          className={filteredProjects.length ? 'portfolio-mosaic-columns' : 'portfolio-mosaic-columns is-empty'}
+          className={
+            isVideoOnly
+              ? 'portfolio-tabpanel-videos'
+              : filteredProjects.length
+                ? 'portfolio-mosaic-columns'
+                : 'portfolio-mosaic-columns is-empty'
+          }
           role="tabpanel"
           aria-labelledby={`portfolio-tab-${activeCategory}`}
           aria-busy={isPending}
         >
-          {filteredProjects.map((project, projectIndex) => (
-            <ProjectMosaic
-              key={project.id}
-              project={project}
-              categoryLabel={activeCategoryLabel}
-              startIndex={projectStartIndices[projectIndex]}
-              onOpenLightbox={openLightbox}
-            />
-          ))}
+          {isVideoOnly
+            ? productionBlock
+            : filteredProjects.map((project, projectIndex) => (
+              <ProjectMosaic
+                key={project.id}
+                project={project}
+                categoryLabel={activeCategoryLabel}
+                startIndex={projectStartIndices[projectIndex]}
+                onOpenLightbox={openLightbox}
+              />
+            ))}
         </div>
 
-        {portfolio.videos.length > 0 && (
-          <div className="portfolio-production">
-            <div className="portfolio-production-header">
-              <div>
-                <span className="section-kicker-light">Bastidores</span>
-                <h2>Produção</h2>
-              </div>
-              <p>Vídeos de instalação, frota e produção interna.</p>
-            </div>
-            <PortfolioVideoCarousel videos={portfolio.videos} />
-          </div>
-        )}
+        {!isVideoOnly && productionBlock}
       </div>
 
       {lightboxIndex !== null && lightboxIndex < lightboxItemCount && createPortal(

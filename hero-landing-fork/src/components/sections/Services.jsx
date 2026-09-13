@@ -31,12 +31,20 @@ function ServiceNavTabs({ items, activeIndex, onTabClick }) {
   );
 }
 
+function normalizeGalleryEntry(entry) {
+  if (typeof entry === 'string') return { src: entry };
+  if (entry && typeof entry.src === 'string') return entry;
+  return { src: '' };
+}
+
 function ServiceCard({ service, index, ctaText }) {
   const revealRef = useReveal();
   const [slide, setSlide] = useState(0);
   const isReducedMotion = usePrefersReducedMotion();
   const num = String(index + 1).padStart(2, '0');
-  const gallery = service.gallery?.length ? service.gallery : [service.image];
+  const gallery = (service.gallery?.length ? service.gallery : [service.image]).map(
+    normalizeGalleryEntry,
+  );
 
   useEffect(() => {
     if (isReducedMotion || gallery.length < 2) return undefined;
@@ -78,16 +86,17 @@ function ServiceCard({ service, index, ctaText }) {
         </span>
 
         <div className="service-card-media relative flex-shrink-0 overflow-hidden md:w-[55%]">
-          {gallery.map((url, galleryIndex) => (
+          {gallery.map((item, galleryIndex) => (
             <img
-              key={url}
-              src={url}
+              key={item.src}
+              src={item.src}
               alt={galleryIndex === slide ? service.title : ''}
               aria-hidden={galleryIndex === slide ? undefined : 'true'}
               className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
               style={{
                 zIndex: galleryIndex === slide ? 2 : 1,
                 opacity: galleryIndex === slide ? 1 : 0,
+                objectPosition: item.objectPosition,
               }}
               loading={galleryIndex === 0 ? 'eager' : 'lazy'}
             />
@@ -96,9 +105,9 @@ function ServiceCard({ service, index, ctaText }) {
 
           {gallery.length > 1 && (
             <div className="service-slide-indicators" aria-hidden="true">
-              {gallery.map((url, galleryIndex) => (
+              {gallery.map((item, galleryIndex) => (
                 <span
-                  key={url}
+                  key={item.src}
                   className={galleryIndex === slide ? 'is-active' : ''}
                 />
               ))}

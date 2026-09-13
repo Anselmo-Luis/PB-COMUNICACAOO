@@ -68,9 +68,7 @@ function VideoSlide({
           playsInline
           preload={isPlayable && isInView && shouldPlay ? 'auto' : 'metadata'}
           poster={video.poster}
-          onLoadedData={() => setIsReady(true)}
-          onCanPlay={() => setIsReady(true)}
-          onPlay={() => setIsReady(true)}
+          onPlaying={() => setIsReady(true)}
           onError={() => {
             setHasError(true);
             setIsReady(false);

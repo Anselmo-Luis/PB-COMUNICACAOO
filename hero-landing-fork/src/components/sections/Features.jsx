@@ -85,9 +85,7 @@ function MaterialsVideo({ video }) {
             width={video.width}
             height={video.height}
             tabIndex={-1}
-            onLoadedData={() => setIsReady(true)}
-            onCanPlay={() => setIsReady(true)}
-            onPlay={() => setIsReady(true)}
+            onPlaying={() => setIsReady(true)}
             onError={() => {
               setHasError(true);
               setIsReady(false);
@@ -160,6 +158,7 @@ export default function Features() {
                     width={600}
                     height={600}
                     loading="lazy"
+                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                   />
                 </div>
                 <div className="min-w-0">

@@ -246,8 +246,9 @@ export const siteData = {
           'Faixa de gôndola',
           'Manta magnética',
         ],
-        image: '/assets/materials/pdv.webp',
-        alt: 'Material de comunicação em ponto de venda',
+        image: '/assets/materials/pdv-montana.webp',
+        alt: 'Painel PDV Marfrig Montana',
+        objectPosition: 'center 32%',
       },
       {
         title: 'Adesivação em geral',
@@ -282,13 +283,13 @@ export const siteData = {
       {
         title: 'Adesivação de Veículos',
         description: 'Adesivação de carros, vans e frotas com aplicação precisa, acabamento limpo e identidade alinhada à sua marca.',
-        image: '/assets/gallery/veiculos/veiculo-06.webp',
+        image: '/assets/gallery/veiculos/veiculo-22.webp',
         gallery: [
-          '/assets/gallery/veiculos/veiculo-02.webp',
           '/assets/gallery/veiculos/veiculo-22.webp',
-          '/assets/gallery/veiculos/veiculo-06.webp',
           '/assets/gallery/frota/frota-02.webp',
+          { src: '/assets/gallery/veiculos/veiculo-20.webp', objectPosition: 'center 55%' },
           '/assets/gallery/frota/frota-10.webp',
+          '/assets/gallery/veiculos/veiculo-06.webp',
         ],
         category: 'Adesivação de veículos',
         metric: 'Sua marca em movimento todos os dias',
@@ -303,11 +304,9 @@ export const siteData = {
           '/assets/gallery/fachadas/swift-klabin-01.webp',
           '/assets/gallery/paineis/paineis-02.webp',
           '/assets/gallery/paineis/painel-02.webp',
-          '/assets/gallery/paineis/painel-03.webp',
+          { src: '/assets/gallery/paineis/painel-03.webp', objectPosition: 'center 18%' },
           '/assets/gallery/paineis/paineis-18.webp',
           '/assets/gallery/banners/banners-05.webp',
-          '/assets/gallery/banners/banners-06.webp',
-          '/assets/gallery/totens/totens-02.webp',
           '/assets/gallery/fachadas/fachadas-06.webp',
         ],
         category: 'Adesivação geral',
@@ -317,13 +316,13 @@ export const siteData = {
       {
         title: 'Banner / Lona',
         description: 'Impressão de grande formato para campanhas, fachadas, eventos e comunicações que precisam aparecer.',
-        image: '/assets/gallery/banners/banner-02.webp',
+        image: '/assets/gallery/banners/banner-01.webp',
         gallery: [
-          '/assets/gallery/banners/banner-01.webp',
-          '/assets/gallery/banners/banner-03.webp',
-          '/assets/gallery/banners/banner-06.webp',
-          '/assets/gallery/banners/banner-07.webp',
-          '/assets/gallery/banners/banner-10.webp',
+          { src: '/assets/gallery/banners/banner-01.webp', objectPosition: 'center 28%' },
+          { src: '/assets/gallery/banners/banner-03.webp', objectPosition: 'center top' },
+          { src: '/assets/gallery/banners/banner-06.webp', objectPosition: 'center 32%' },
+          { src: '/assets/gallery/banners/banner-07.webp', objectPosition: 'center 28%' },
+          { src: '/assets/gallery/banners/banner-10.webp', objectPosition: 'center 22%' },
         ],
         specs: ['Bastão de madeira', 'Alumínio', 'Ilhós', 'Pedestais', 'Roll-up'],
         category: 'Banner / Lona',
@@ -335,10 +334,9 @@ export const siteData = {
         description: 'Materiais para destacar produtos, orientar jornadas e deixar a experiência da marca mais presente no ponto de venda.',
         image: '/assets/gallery/paineis/painel-13.webp',
         gallery: [
-          '/assets/gallery/paineis/paineis-05.webp',
+          '/assets/gallery/paineis/painel-13.webp',
           '/assets/gallery/paineis/paineis-07.webp',
           '/assets/gallery/paineis/paineis-10.webp',
-          '/assets/gallery/paineis/painel-13.webp',
           '/assets/gallery/fachadas/fachadas-05.webp',
           '/assets/gallery/paineis/paineis-03.webp',
           '/assets/gallery/paineis/painel-11.webp',
@@ -365,8 +363,8 @@ export const siteData = {
       { id: 'producao', label: 'Produção', videoOnly: true },
     ],
     projects: [
-      project('vehicle-lana-cozinha', 'vehicles', 'Lá na Cozinha', [
-        galleryImage('veiculos', 'veiculo-01', 'Veículo Lá na Cozinha personalizado com aplicação gráfica'),
+      project('vehicle-seara-truck', 'vehicles', 'Seara', [
+        galleryImage('veiculos', 'veiculo-22', 'Caminhão Seara adesivado'),
       ]),
       project('vehicle-louv-clean', 'vehicles', 'Louv Clean', [
         galleryImage('veiculos', 'veiculo-02', 'Veículo Louv Clean personalizado com aplicação gráfica'),
@@ -376,6 +374,11 @@ export const siteData = {
       ]),
       project('vehicle-cef-distribuidora', 'vehicles', 'C&F Distribuidora', [
         galleryImage('veiculos', 'veiculo-04', 'Caminhão C&F Distribuidora com adesivação de alta performance'),
+      ]),
+      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
+        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
+        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
+        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
       ]),
       project('vehicle-cartao-todos', 'vehicles', 'Cartão de TODOS / Rio de Prêmios', [
         galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
@@ -398,6 +401,16 @@ export const siteData = {
       project('vehicle-attos-rh', 'vehicles', 'Attos RH', [
         galleryImage('veiculos', 'veiculo-10', 'Veículo Attos RH personalizado com identidade visual'),
       ]),
+      project('vehicle-sabesp', 'vehicles', 'Sabesp', [
+        galleryImage('veiculos', 'veiculo-18', 'Van Sabesp adesivada em vista lateral'),
+        galleryImage('veiculos', 'veiculo-21', 'Van Sabesp adesivada em outro ângulo'),
+        galleryImage('veiculos', 'veiculo-19', 'Van Sabesp adesivada em vista traseira'),
+      ]),
+      project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
+        galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
+        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal'),
+        galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
+      ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [
         galleryImage('veiculos', 'veiculo-05', 'Carro Roadstar com comunicação visual aplicada'),
       ]),
@@ -405,21 +418,8 @@ export const siteData = {
         galleryImage('veiculos', 'veiculo-15', 'Veículo Vigor adesivado'),
         galleryImage('frota', 'frota-05', 'Veículo Vigor de frota em campo'),
       ]),
-      project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
-        galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
-        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal'),
-        galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
-      ]),
       project('vehicle-jbs', 'vehicles', 'JBS', [
         galleryImage('frota', 'frota-03', 'Caminhão JBS adesivado'),
-      ]),
-      project('vehicle-seara-truck', 'vehicles', 'Seara', [
-        galleryImage('veiculos', 'veiculo-22', 'Caminhão Seara adesivado'),
-      ]),
-      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
-        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
-        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
-        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
       ]),
       project('vehicle-seara', 'vehicles', 'Seara', [
         galleryImage('frota', 'frota-08', 'Veículo Seara adesivado'),
@@ -428,11 +428,6 @@ export const siteData = {
       project('vehicle-torra', 'vehicles', 'Torra', [
         galleryImage('veiculos', 'veiculo-13', 'Veículo Torra adesivado'),
         galleryImage('frota', 'frota-11', 'Veículo Torra de frota em campo'),
-      ]),
-      project('vehicle-sabesp', 'vehicles', 'Sabesp', [
-        galleryImage('veiculos', 'veiculo-18', 'Van Sabesp adesivada em vista lateral'),
-        galleryImage('veiculos', 'veiculo-21', 'Van Sabesp adesivada em outro ângulo'),
-        galleryImage('veiculos', 'veiculo-19', 'Van Sabesp adesivada em vista traseira'),
       ]),
       project('vehicle-uol', 'vehicles', 'UOL', [
         galleryImage('frota', 'frota-09', 'Veículo UOL adesivado'),
@@ -542,6 +537,9 @@ export const siteData = {
       project('general-bis', 'general', 'BIS', [
         galleryImage('paineis', 'paineis-19', 'Adesivação de piso BIS em corredor de supermercado'),
       ]),
+      project('general-hinode', 'general', 'Hinode', [
+        galleryImage('paineis', 'paineis-05', 'Adesivação Hinode em ambiente interno'),
+      ]),
       project('general-jbs-65-anos', 'general', 'JBS', [
         galleryImage('paineis', 'painel-10', 'Painel JBS 65 anos'),
       ]),
@@ -598,12 +596,13 @@ export const siteData = {
       project('pdv-samsung', 'pdv', 'Samsung', [
         galleryImage('paineis', 'painel-13', 'Material Samsung em ponto de venda'),
       ]),
-      project('pdv-hinode', 'pdv', 'Hinode', [
-        galleryImage('paineis', 'paineis-05', 'Material Hinode em ponto de venda'),
+      project('pdv-hinode-aplicacao', 'pdv', 'Hinode', [
         galleryImage('paineis', 'paineis-10', 'Aplicação Hinode em ponto de venda'),
       ]),
       project('pdv-materials', 'pdv', 'Materiais diversos', [
         galleryImage('paineis', 'paineis-03', 'Mural corporativo em ponto de venda'),
+      ]),
+      project('pdv-cenografia', 'pdv', 'Materiais diversos', [
         galleryImage('banners', 'banners-01', 'Cenografia promocional em ponto de venda'),
       ]),
       project('pdv-vb-salao-beleza', 'pdv', 'VB Salão de Beleza', [

@@ -19,26 +19,46 @@ test.describe('site institucional P&B', () => {
     await expect(tabs.nth(1)).toContainText('Adesivação geral');
     await expect(tabs.nth(2)).toContainText('Banner / Lona');
     await expect(tabs.nth(3)).toContainText('PDVs e materiais diversos');
-    await expect(tabs.nth(4)).toContainText('Painéis');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(42);
+    await expect(tabs.nth(4)).toContainText('Produção');
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(38);
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(23);
 
     await tabs.nth(1).click();
     await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(34);
-    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(22);
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(33);
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(31);
 
     await tabs.nth(2).click();
     await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
     const bannerPanel = portfolio.getByRole('tabpanel');
-    await expect(bannerPanel.locator('.portfolio-mosaic-tile')).toHaveCount(10);
-    await expect(bannerPanel.locator('.portfolio-mosaic-group')).toHaveCount(10);
+    await expect(bannerPanel.locator('.portfolio-mosaic-tile')).toHaveCount(14);
+    await expect(bannerPanel.locator('.portfolio-mosaic-group')).toHaveCount(14);
 
-    await tabs.nth(4).click();
-    await expect(tabs.nth(4)).toHaveAttribute('aria-selected', 'true');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(9);
-    const panelsPanel = portfolio.getByRole('tabpanel');
-    await expect(panelsPanel.locator('.portfolio-mosaic-group')).toHaveCount(6);
-    await expect(panelsPanel).toBeVisible();
+    await tabs.nth(3).click();
+    await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
+    const pdvPanel = portfolio.getByRole('tabpanel');
+    await expect(pdvPanel.locator('.portfolio-mosaic-tile')).toHaveCount(9);
+    await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(7);
+  });
+
+  test('a aba Produção anuncia vídeos em vez de fotos e não abre mosaico vazio', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const portfolio = page.locator('#portfolio');
+    await portfolio.scrollIntoViewIfNeeded();
+
+    const producaoTab = portfolio.getByRole('tab').nth(4);
+    await expect(producaoTab).toContainText('7 vídeos');
+    await producaoTab.click();
+    await expect(producaoTab).toHaveAttribute('aria-selected', 'true');
+
+    const count = portfolio.locator('.portfolio-project-count');
+    await expect(count).toContainText('vídeos');
+    await expect(count).toContainText('em Produção');
+    await expect(count).not.toContainText('fotos');
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(0);
+    await expect(portfolio.getByRole('tabpanel')).toHaveClass(/is-empty/);
+    await expect(portfolio.locator('.portfolio-production')).toBeVisible();
   });
 
   test('apresenta o showreel de vídeos com navegação e pausa', async ({ page }) => {
@@ -48,7 +68,7 @@ test.describe('site institucional P&B', () => {
     await carousel.scrollIntoViewIfNeeded();
     await expect(carousel).toBeVisible();
     await expect(carousel.locator('.portfolio-video-grid')).toHaveCount(0);
-    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(9);
+    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(7);
     await expect(carousel.locator('video')).toHaveCount(2);
 
     const playback = await carousel.locator('video').first().evaluate((video) => ({
@@ -59,7 +79,7 @@ test.describe('site institucional P&B', () => {
     expect(playback).toEqual({ autoplay: true, muted: true, playsInline: true });
 
     await carousel.getByRole('button', { name: 'Próximo vídeo' }).click();
-    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 09');
+    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 07');
     await expect(carousel.locator('.portfolio-video-carousel-dot.is-active')).toHaveAttribute(
       'aria-pressed',
       'true',

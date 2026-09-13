@@ -60,13 +60,12 @@ export default function ProjectMosaic({ project, categoryLabel, startIndex, onOp
     );
   } else {
     const [hero, ...rest] = images;
-    const isWide = images.length >= 5;
-    // Keep leftover photos in one row when possible so a tall orphan
-    // (e.g. Friboi frota-14) does not drop below the neighboring column.
-    const rowSize = isWide || rest.length === 3 ? 3 : 2;
+    // Keep the leftover photos on a single row so a tall orphan does not
+    // drop below the neighboring column.
+    const rowSize = images.length >= 5 || rest.length === 3 ? 3 : 2;
 
     content = (
-      <div className={isWide || rest.length === 3 ? 'portfolio-mosaic-cluster is-wide' : 'portfolio-mosaic-cluster'}>
+      <div className="portfolio-mosaic-cluster">
         <MosaicTile
           image={hero}
           imageIndex={0}

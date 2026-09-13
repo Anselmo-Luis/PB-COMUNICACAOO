@@ -160,9 +160,11 @@ export default function Portfolio() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [isPending, startTransition] = useTransition();
 
-  const activeCategoryLabel = portfolio.categories.find(
+  const activeCategoryMeta = portfolio.categories.find(
     (category) => category.id === activeCategory,
-  )?.label;
+  );
+  const activeCategoryLabel = activeCategoryMeta?.label;
+  const videoCount = portfolio.videos.length;
 
   const categoryStats = useMemo(() => {
     const stats = new Map();
@@ -245,11 +247,20 @@ export default function Portfolio() {
             <p>{portfolio.subheadline}</p>
           </div>
           <div className="portfolio-project-count" aria-live="polite">
-            <strong>{filteredProjects.length}</strong>
-            <span>{filteredProjects.length === 1 ? 'projeto' : 'projetos'}</span>
-            <span className="portfolio-project-count-divider" aria-hidden="true">·</span>
-            <strong>{categoryImages}</strong>
-            <span>{categoryImages === 1 ? 'foto' : 'fotos'}</span>
+            {activeCategoryMeta?.videoOnly ? (
+              <>
+                <strong>{videoCount}</strong>
+                <span>{videoCount === 1 ? 'vídeo' : 'vídeos'}</span>
+              </>
+            ) : (
+              <>
+                <strong>{filteredProjects.length}</strong>
+                <span>{filteredProjects.length === 1 ? 'projeto' : 'projetos'}</span>
+                <span className="portfolio-project-count-divider" aria-hidden="true">·</span>
+                <strong>{categoryImages}</strong>
+                <span>{categoryImages === 1 ? 'foto' : 'fotos'}</span>
+              </>
+            )}
             <span className="portfolio-project-count-note">
               em {activeCategoryLabel}
             </span>
@@ -274,7 +285,9 @@ export default function Portfolio() {
               >
                 <span className="portfolio-tab-label">{category.label}</span>
                 <span className="portfolio-tab-meta">
-                  {projectCount} · {imageCount} fotos
+                  {category.videoOnly
+                    ? `${videoCount} vídeos`
+                    : `${projectCount} · ${imageCount} fotos`}
                 </span>
               </button>
             );
@@ -283,7 +296,7 @@ export default function Portfolio() {
 
         <div
           id={`portfolio-panel-${activeCategory}`}
-          className="portfolio-mosaic-columns"
+          className={filteredProjects.length ? 'portfolio-mosaic-columns' : 'portfolio-mosaic-columns is-empty'}
           role="tabpanel"
           aria-labelledby={`portfolio-tab-${activeCategory}`}
           aria-busy={isPending}

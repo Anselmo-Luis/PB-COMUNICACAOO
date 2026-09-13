@@ -1,103 +1,124 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReveal } from '../../hooks/useReveal';
+import { getPrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { siteData } from '../../data/siteData';
 
-function MaterialsCategoryCarousel({ items }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function MaterialsVideo({ video }) {
+  const figureRef = useRef(null);
+  const mediaRef = useRef(null);
+  const [isInView, setIsInView] = useState(() => typeof IntersectionObserver === 'undefined');
+  const [isReady, setIsReady] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isPlaybackEnabled, setIsPlaybackEnabled] = useState(() => !getPrefersReducedMotion());
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotionPreference = () => setIsReducedMotion(mediaQuery.matches);
-    updateMotionPreference();
-    mediaQuery.addEventListener?.('change', updateMotionPreference);
-    return () => mediaQuery.removeEventListener?.('change', updateMotionPreference);
+    const figure = figureRef.current;
+    if (!figure || typeof IntersectionObserver === 'undefined') return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: '180px 0px' },
+    );
+
+    observer.observe(figure);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (isPaused || isReducedMotion || items.length < 2) return undefined;
+    const mediaQuery = window.matchMedia?.(REDUCED_MOTION_QUERY);
+    if (!mediaQuery) return undefined;
 
-    const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % items.length);
-    }, 4200);
+    const handlePreferenceChange = (event) => {
+      if (event.matches) setIsPlaybackEnabled(false);
+    };
 
-    return () => window.clearInterval(interval);
-  }, [isPaused, isReducedMotion, items.length]);
+    mediaQuery.addEventListener?.('change', handlePreferenceChange);
+    return () => mediaQuery.removeEventListener?.('change', handlePreferenceChange);
+  }, []);
 
-  const goToSlide = (index) => setActiveIndex(index);
-  const goToPrevious = () => setActiveIndex((current) => (current - 1 + items.length) % items.length);
-  const goToNext = () => setActiveIndex((current) => (current + 1) % items.length);
-  const activeItem = items[activeIndex];
+  useEffect(() => {
+    const media = mediaRef.current;
+    if (!media) return undefined;
+
+    media.muted = true;
+
+    if (isInView && isPlaybackEnabled && !hasError) {
+      media.play()?.catch?.(() => {});
+    } else {
+      media.pause();
+    }
+
+    return undefined;
+  }, [hasError, isInView, isPlaybackEnabled]);
+
+  const shouldPlay = isInView && isPlaybackEnabled;
 
   return (
-    <figure
-      className="materials-category-carousel"
-      onPointerEnter={() => setIsPaused(true)}
-      onPointerLeave={() => setIsPaused(false)}
-    >
-      <div className="materials-category-carousel-frame">
-        <div
-          className="materials-category-carousel-track"
-          style={{
-            transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
-            transition: isReducedMotion ? 'none' : undefined,
-          }}
-        >
-          {items.map((item) => (
-            <div key={item.label} className="materials-category-carousel-slide">
-              <img
-                src={item.image}
-                alt={item.alt}
-                width={900}
-                height={675}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))}
-        </div>
+    <figure ref={figureRef} className="materials-video">
+      <div
+        className="materials-video-frame"
+        style={{ aspectRatio: `${video.width} / ${video.height}` }}
+      >
+        <img
+          className={isReady ? 'is-hidden' : ''}
+          src={video.poster}
+          alt={video.alt}
+          width={video.width}
+          height={video.height}
+          loading={isInView ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        {!hasError && (
+          <video
+            ref={mediaRef}
+            className={isReady ? 'is-ready' : ''}
+            autoPlay={shouldPlay}
+            muted
+            loop
+            playsInline
+            disablePictureInPicture
+            disableRemotePlayback
+            preload={shouldPlay ? 'auto' : 'metadata'}
+            poster={video.poster}
+            width={video.width}
+            height={video.height}
+            tabIndex={-1}
+            onLoadedData={() => setIsReady(true)}
+            onCanPlay={() => setIsReady(true)}
+            onPlay={() => setIsReady(true)}
+            onError={() => {
+              setHasError(true);
+              setIsReady(false);
+              setIsPlaybackEnabled(false);
+            }}
+          >
+            <source src={video.src} type="video/mp4" />
+            Seu navegador não consegue reproduzir este vídeo.
+          </video>
+        )}
       </div>
 
-      <figcaption className="materials-category-carousel-caption">{activeItem?.label}</figcaption>
-
-      {items.length > 1 && (
-        <div className="materials-category-carousel-toolbar">
-          <button
-            type="button"
-            className="materials-category-carousel-control"
-            aria-label="Categoria anterior"
-            onClick={goToPrevious}
-          >
-            ‹
-          </button>
-          <div
-            className="materials-category-carousel-dots"
-            role="tablist"
-            aria-label="Categorias de materiais"
-          >
-            {items.map((item, index) => (
-              <button
-                key={item.label}
-                type="button"
-                role="tab"
-                aria-selected={index === activeIndex}
-                aria-label={`Ver ${item.label}`}
-                className={index === activeIndex ? 'is-active' : ''}
-                onClick={() => goToSlide(index)}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            className="materials-category-carousel-control"
-            aria-label="Próxima categoria"
-            onClick={goToNext}
-          >
-            ›
-          </button>
-        </div>
-      )}
+      <figcaption className="materials-video-caption">
+        <span>{video.label}</span>
+        <button
+          type="button"
+          className="materials-video-control"
+          onClick={() => setIsPlaybackEnabled((current) => !current)}
+          aria-label={`${isPlaybackEnabled ? 'Pausar' : 'Reproduzir'} vídeo: ${video.label}`}
+        >
+          {isPlaybackEnabled ? (
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M7 5.5A1.5 1.5 0 0 1 8.5 4h1A1.5 1.5 0 0 1 11 5.5v13A1.5 1.5 0 0 1 9.5 20h-1A1.5 1.5 0 0 1 7 18.5v-13Zm6 0A1.5 1.5 0 0 1 14.5 4h1A1.5 1.5 0 0 1 17 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-13Z" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8.5 5.2v13.6a1.2 1.2 0 0 0 1.84 1.02l9.1-6.8a1.27 1.27 0 0 0 0-2.04l-9.1-6.8A1.2 1.2 0 0 0 8.5 5.2Z" />
+            </svg>
+          )}
+        </button>
+      </figcaption>
     </figure>
   );
 }
@@ -126,9 +147,7 @@ export default function Features() {
               {materials.subheadline}
             </p>
 
-            {materials.categoryShowcase?.length > 0 && (
-              <MaterialsCategoryCarousel items={materials.categoryShowcase} />
-            )}
+            {materials.video && <MaterialsVideo video={materials.video} />}
           </div>
 
           <div className="materials-list">

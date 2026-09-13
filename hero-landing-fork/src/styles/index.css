@@ -991,10 +991,11 @@ textarea:focus-visible {
   text-transform: uppercase;
 }
 
-.materials-category-carousel {
+.materials-video {
   display: grid;
   gap: 0.75rem;
   width: 100%;
+  max-width: 20rem;
   margin: 2.5rem 0 0;
   padding: 0.75rem;
   border: 1px solid rgba(29, 29, 31, 0.09);
@@ -1002,28 +1003,17 @@ textarea:focus-visible {
   background: var(--color-pb-white);
 }
 
-.materials-category-carousel-frame {
+.materials-video-frame {
   position: relative;
   overflow: hidden;
   border-radius: 0.8rem;
   background: #edf0f2;
-  aspect-ratio: 4 / 3;
 }
 
-.materials-category-carousel-track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.materials-category-carousel-slide {
-  position: relative;
-  flex: 0 0 100%;
-  height: 100%;
-}
-
-.materials-category-carousel-slide img {
+.materials-video-frame img,
+.materials-video-frame video {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -1031,7 +1021,31 @@ textarea:focus-visible {
   object-position: center;
 }
 
-.materials-category-carousel-caption {
+.materials-video-frame img {
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.materials-video-frame img.is-hidden {
+  opacity: 0;
+}
+
+.materials-video-frame video {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.materials-video-frame video.is-ready {
+  opacity: 1;
+}
+
+.materials-video-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin: 0;
   padding: 0.1rem 0.15rem 0;
   color: var(--color-pb-ink);
@@ -1043,15 +1057,9 @@ textarea:focus-visible {
   text-transform: uppercase;
 }
 
-.materials-category-carousel-toolbar {
+.materials-video-control {
   display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr) 2rem;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.materials-category-carousel-control {
-  display: grid;
+  flex: 0 0 auto;
   place-items: center;
   width: 2rem;
   height: 2rem;
@@ -1059,31 +1067,20 @@ textarea:focus-visible {
   border-radius: 999px;
   background: #f4f8fb;
   color: var(--color-pb-accent-blue);
-  font-size: 1.2rem;
-  line-height: 1;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.materials-category-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-}
-
-.materials-category-carousel-dots button {
-  width: 0.45rem;
-  height: 0.45rem;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(0, 19, 78, 0.16);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.materials-category-carousel-dots button.is-active {
+.materials-video-control:hover,
+.materials-video-control:focus-visible {
+  border-color: var(--color-pb-accent-blue);
   background: var(--color-pb-accent-blue);
-  transform: scale(1.25);
+  color: var(--color-pb-white);
+}
+
+.materials-video-control svg {
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 .materials-client-carousel {
@@ -1611,6 +1608,16 @@ textarea:focus-visible {
   columns: 1;
   column-gap: 1.1rem;
   margin-top: 2rem;
+}
+
+.portfolio-mosaic-columns.is-empty {
+  margin-top: 0;
+}
+
+.portfolio-mosaic-columns.is-empty + .portfolio-production {
+  margin-top: 2.5rem;
+  border-top: 0;
+  padding-top: 0;
 }
 
 .portfolio-mosaic-group {

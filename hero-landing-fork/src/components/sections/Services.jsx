@@ -33,8 +33,36 @@ function ServiceNavTabs({ items, activeIndex, onTabClick }) {
 
 function normalizeGalleryEntry(entry) {
   if (typeof entry === 'string') return { src: entry };
-  if (entry && typeof entry.src === 'string') return entry;
+  if (entry && typeof entry.src === 'string') {
+    return entry.objectPosition
+      ? { src: entry.src, objectPosition: entry.objectPosition }
+      : { src: entry.src };
+  }
   return { src: '' };
+}
+
+function resolveServiceGallery(service) {
+  const primary = normalizeGalleryEntry(service.image);
+  const fromGallery = (service.gallery?.length ? service.gallery : []).map(normalizeGalleryEntry);
+  const entries = (fromGallery.length ? fromGallery : primary.src ? [primary] : []).filter(
+    (item) => item.src,
+  );
+
+  if (!entries.length) return [];
+
+  // Primary `image` may be `{ src, objectPosition }` while gallery[0] is a plain string.
+  return entries.map((item, index) => {
+    if (
+      index === 0 &&
+      primary.src &&
+      item.src === primary.src &&
+      primary.objectPosition &&
+      !item.objectPosition
+    ) {
+      return { ...item, objectPosition: primary.objectPosition };
+    }
+    return item;
+  });
 }
 
 function ServiceCard({ service, index, ctaText }) {
@@ -42,9 +70,7 @@ function ServiceCard({ service, index, ctaText }) {
   const [slide, setSlide] = useState(0);
   const isReducedMotion = usePrefersReducedMotion();
   const num = String(index + 1).padStart(2, '0');
-  const gallery = (service.gallery?.length ? service.gallery : [service.image]).map(
-    normalizeGalleryEntry,
-  );
+  const gallery = resolveServiceGallery(service);
 
   useEffect(() => {
     if (isReducedMotion || gallery.length < 2) return undefined;
@@ -96,7 +122,7 @@ function ServiceCard({ service, index, ctaText }) {
               style={{
                 zIndex: galleryIndex === slide ? 2 : 1,
                 opacity: galleryIndex === slide ? 1 : 0,
-                objectPosition: item.objectPosition,
+                ...(item.objectPosition ? { objectPosition: item.objectPosition } : null),
               }}
               loading={galleryIndex === 0 ? 'eager' : 'lazy'}
             />

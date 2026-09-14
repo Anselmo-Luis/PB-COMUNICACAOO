@@ -48,7 +48,7 @@ test.describe('site institucional P&B', () => {
     await portfolio.scrollIntoViewIfNeeded();
 
     const producaoTab = portfolio.getByRole('tab').nth(4);
-    await expect(producaoTab).toContainText('4 vídeos');
+    await expect(producaoTab).toContainText('10 vídeos');
     await expect(producaoTab).toHaveAttribute('aria-controls', 'portfolio-panel-producao');
     await producaoTab.click();
     await expect(producaoTab).toHaveAttribute('aria-selected', 'true');

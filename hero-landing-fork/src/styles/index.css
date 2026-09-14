@@ -23,6 +23,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Shared hero/nav logo gutter — tighter than max-w-7xl centering on wide viewports */
+  --page-inline-gutter: clamp(1.25rem, 4.5vw, 3rem);
 }
 
 html {
@@ -131,6 +133,12 @@ textarea:focus-visible {
     rgba(255, 255, 255, 0.58)
   );
   box-shadow: 0 10px 30px rgba(17, 24, 39, 0.1);
+}
+
+.site-navbar__inner {
+  width: 100%;
+  max-width: none;
+  padding-inline: var(--page-inline-gutter);
 }
 
 .site-navbar__logo {
@@ -584,9 +592,10 @@ textarea:focus-visible {
   width: 100%;
   max-width: min(52rem, 78vw);
   min-height: 100svh;
+  /* Same inline gutter as .site-navbar__inner — logo edges share one vertical line */
   padding:
     clamp(4.5rem, 10vh, 6.5rem)
-    clamp(1.25rem, 4.5vw, 3rem)
+    var(--page-inline-gutter)
     clamp(2rem, 6vh, 3.5rem);
   container-type: inline-size;
 }

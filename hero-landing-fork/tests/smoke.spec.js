@@ -48,7 +48,7 @@ test.describe('site institucional P&B', () => {
     await portfolio.scrollIntoViewIfNeeded();
 
     const producaoTab = portfolio.getByRole('tab').nth(4);
-    await expect(producaoTab).toContainText('7 vídeos');
+    await expect(producaoTab).toContainText('4 vídeos');
     await expect(producaoTab).toHaveAttribute('aria-controls', 'portfolio-panel-producao');
     await producaoTab.click();
     await expect(producaoTab).toHaveAttribute('aria-selected', 'true');
@@ -75,7 +75,7 @@ test.describe('site institucional P&B', () => {
     await carousel.scrollIntoViewIfNeeded();
     await expect(carousel).toBeVisible();
     await expect(carousel.locator('.portfolio-video-grid')).toHaveCount(0);
-    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(7);
+    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(4);
     await expect(carousel.locator('video')).toHaveCount(2);
 
     const playback = await carousel.locator('video').first().evaluate((video) => ({
@@ -86,7 +86,7 @@ test.describe('site institucional P&B', () => {
     expect(playback).toEqual({ autoplay: true, muted: true, playsInline: true });
 
     await carousel.getByRole('button', { name: 'Próximo vídeo' }).click();
-    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 07');
+    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 04');
     await expect(carousel.locator('.portfolio-video-carousel-dot.is-active')).toHaveAttribute(
       'aria-pressed',
       'true',

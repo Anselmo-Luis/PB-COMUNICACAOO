@@ -77,7 +77,7 @@ export default function Navbar() {
           scrolled ? 'is-scrolled' : ''
         }`}
       >
-        <div className="site-navbar__inner mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 md:px-6">
+        <div className="site-navbar__inner flex items-center justify-between gap-4">
           <a href="#" className="site-navbar__brand flex shrink-0 items-center" aria-label="Voltar ao início">
             <img
               src={siteData.company.logoSrc}

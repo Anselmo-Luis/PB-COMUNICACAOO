@@ -1646,32 +1646,34 @@ textarea:focus-visible {
 
 .portfolio-tabs {
   display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
   margin-top: 2.5rem;
-  padding: 0 0 0.35rem;
-  scrollbar-width: thin;
 }
 
 .portfolio-tabs button {
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.2rem;
+  min-height: 2.75rem;
   border: 1px solid rgba(29, 29, 31, 0.12);
-  border-radius: 1rem;
+  border-radius: 999px;
   background: var(--color-pb-white);
   color: var(--color-pb-ink-2);
-  padding: 0.72rem 1rem;
-  font-size: 0.74rem;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  letter-spacing: 0.04em;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .portfolio-tab-label {
   line-height: 1.25;
-  text-align: left;
+  text-align: center;
 }
 
 .portfolio-tab-meta {
@@ -1681,6 +1683,7 @@ textarea:focus-visible {
   font-weight: 600;
   letter-spacing: 0.08em;
   opacity: 0.55;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -1689,6 +1692,7 @@ textarea:focus-visible {
   border-color: var(--color-pb-accent-blue);
   background: #f1f7fd;
   color: var(--color-pb-accent-blue);
+  transform: translateY(-1px);
 }
 
 .portfolio-mosaic-columns {
@@ -2479,11 +2483,12 @@ textarea:focus-visible {
   }
 
   .portfolio-tabs {
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .portfolio-tabs button {
-    min-width: 11.5rem;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .portfolio-video-carousel-controls {

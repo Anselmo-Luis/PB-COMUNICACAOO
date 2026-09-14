@@ -261,7 +261,10 @@ export default function Features() {
                     width={600}
                     height={600}
                     loading="lazy"
-                    style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
+                    style={{
+                      ...(item.objectPosition ? { objectPosition: item.objectPosition } : null),
+                      ...(item.objectFit ? { objectFit: item.objectFit } : null),
+                    }}
                   />
                 </div>
                 <div className="min-w-0">

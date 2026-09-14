@@ -37,8 +37,8 @@ test.describe('site institucional P&B', () => {
     await tabs.nth(3).click();
     await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
     const pdvPanel = portfolio.getByRole('tabpanel');
-    await expect(pdvPanel.locator('.portfolio-mosaic-tile')).toHaveCount(11);
-    await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(11);
+    await expect(pdvPanel.locator('.portfolio-mosaic-tile')).toHaveCount(13);
+    await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(13);
   });
 
   test('a aba Produção anuncia vídeos em vez de fotos e não abre mosaico vazio', async ({ page }) => {

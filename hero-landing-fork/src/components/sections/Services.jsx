@@ -34,9 +34,10 @@ function ServiceNavTabs({ items, activeIndex, onTabClick }) {
 function normalizeGalleryEntry(entry) {
   if (typeof entry === 'string') return { src: entry };
   if (entry && typeof entry.src === 'string') {
-    return entry.objectPosition
-      ? { src: entry.src, objectPosition: entry.objectPosition }
-      : { src: entry.src };
+    const normalized = { src: entry.src };
+    if (entry.objectPosition) normalized.objectPosition = entry.objectPosition;
+    if (entry.objectFit) normalized.objectFit = entry.objectFit;
+    return normalized;
   }
   return { src: '' };
 }
@@ -50,18 +51,18 @@ function resolveServiceGallery(service) {
 
   if (!entries.length) return [];
 
-  // Primary `image` may be `{ src, objectPosition }` while gallery[0] is a plain string.
+  // Primary `image` may carry framing while gallery[0] is a plain string.
   return entries.map((item, index) => {
-    if (
-      index === 0 &&
-      primary.src &&
-      item.src === primary.src &&
-      primary.objectPosition &&
-      !item.objectPosition
-    ) {
-      return { ...item, objectPosition: primary.objectPosition };
+    if (index !== 0 || !primary.src || item.src !== primary.src) return item;
+
+    const next = { ...item };
+    if (primary.objectPosition && !item.objectPosition) {
+      next.objectPosition = primary.objectPosition;
     }
-    return item;
+    if (primary.objectFit && !item.objectFit) {
+      next.objectFit = primary.objectFit;
+    }
+    return next;
   });
 }
 
@@ -106,7 +107,6 @@ function ServiceCard({ service, index, ctaText }) {
         className="service-card group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-500 md:flex-row"
         aria-label={`Ver portfólio: ${service.title}`}
       >
-        <span className="service-card-accent-line" aria-hidden="true" />
         <span aria-hidden="true" className="service-card-number">
           {num}
         </span>
@@ -123,6 +123,7 @@ function ServiceCard({ service, index, ctaText }) {
                 zIndex: galleryIndex === slide ? 2 : 1,
                 opacity: galleryIndex === slide ? 1 : 0,
                 ...(item.objectPosition ? { objectPosition: item.objectPosition } : null),
+                ...(item.objectFit ? { objectFit: item.objectFit } : null),
               }}
               loading={galleryIndex === 0 ? 'eager' : 'lazy'}
             />
@@ -142,6 +143,7 @@ function ServiceCard({ service, index, ctaText }) {
         </div>
 
         <div className="service-card-content relative flex flex-col justify-between gap-5 p-8 md:w-[45%] md:p-10">
+          <span className="service-card-accent-line" aria-hidden="true" />
           <div className="flex items-center gap-3">
             <div className="service-icon" aria-hidden="true">
               {SERVICE_ICONS[service.icon] ?? DEFAULT_SERVICE_ICON}

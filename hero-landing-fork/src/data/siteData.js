@@ -260,7 +260,7 @@ export const siteData = {
         ],
         image: '/assets/materials/pdv-montana.webp',
         alt: 'Painel PDV Marfrig Montana',
-        objectPosition: 'center 32%',
+        objectFit: 'contain',
       },
       {
         title: 'Adesivação em geral',
@@ -339,9 +339,9 @@ export const siteData = {
         gallery: [
           { src: '/assets/gallery/banners/banner-01.webp', objectPosition: 'center 28%' },
           { src: '/assets/gallery/banners/banner-03.webp', objectPosition: 'center top' },
-          { src: '/assets/gallery/banners/banner-06.webp', objectPosition: 'center 58%' },
-          { src: '/assets/gallery/banners/banner-07.webp', objectPosition: 'center 45%' },
-          { src: '/assets/gallery/banners/banner-10.webp', objectPosition: 'center 22%' },
+          { src: '/assets/gallery/banners/banner-06.webp', objectFit: 'contain' },
+          { src: '/assets/gallery/banners/banner-07.webp', objectFit: 'contain' },
+          { src: '/assets/gallery/banners/banner-10.webp', objectFit: 'contain' },
         ],
         specs: ['Bastão de madeira', 'Alumínio', 'Ilhós', 'Pedestais', 'Roll-up'],
         category: 'Banner / Lona',
@@ -352,18 +352,17 @@ export const siteData = {
         title: 'PDVs e materiais diversos',
         description: 'Materiais para destacar produtos, orientar jornadas e deixar a experiência da marca mais presente no ponto de venda.',
         image: {
-          src: '/assets/gallery/pdv/montana-pdv.webp',
-          objectPosition: 'center 32%',
+          src: '/assets/gallery/pdv/pocoyo-standee.webp',
+          objectFit: 'contain',
         },
         gallery: [
-          { src: '/assets/gallery/pdv/montana-pdv.webp', objectPosition: 'center 32%' },
+          { src: '/assets/gallery/pdv/pocoyo-standee.webp', objectFit: 'contain' },
+          { src: '/assets/gallery/pdv/primor-pdv.webp', objectPosition: 'center 48%' },
+          { src: '/assets/gallery/pdv/montana-pdv.webp', objectFit: 'contain' },
           { src: '/assets/gallery/pdv/kitkat-pdv.webp', objectPosition: 'center 40%' },
-          { src: '/assets/gallery/pdv/jordan-adesivo.webp', objectPosition: 'center top' },
           { src: '/assets/gallery/pdv/friboi-banners.webp', objectPosition: 'center 40%' },
           { src: '/assets/gallery/pdv/seara-fatiador.webp', objectPosition: 'center 45%' },
-          { src: '/assets/gallery/pdv/sest-senat-totem.webp', objectPosition: 'center 35%' },
-          { src: '/assets/gallery/paineis/paineis-07.webp', objectPosition: 'center 38%' },
-          { src: '/assets/gallery/pdv/friboi-barris.webp', objectPosition: 'center 40%' },
+          { src: '/assets/gallery/paineis/paineis-07.webp', objectFit: 'contain' },
         ],
         specs: ['PDV', 'Displays', 'Materiais promocionais'],
         category: 'PDVs e materiais diversos',
@@ -625,52 +624,21 @@ export const siteData = {
         galleryImage('paineis', 'painel-08', 'Painel em mídia externa'),
       ]),
 
-      project('pdv-montana', 'pdv', 'Montana', [
-        galleryImage(
-          'pdv',
-          'montana-pdv',
-          'Display vertical PDV Montana Marfrig em corredor de supermercado',
-        ),
-      ]),
-      project('pdv-kitkat', 'pdv', 'KitKat', [
-        galleryImage(
-          'pdv',
-          'kitkat-pdv',
-          'Dois totens promocionais KitKat em corredor de supermercado',
-        ),
-      ]),
-      project('pdv-prudential', 'pdv', 'Prudential', [
-        galleryImage('paineis', 'paineis-07', 'Material Prudential em ponto de venda'),
-      ]),
-      project('pdv-friboi-banners', 'pdv', 'Friboi+', [
-        galleryImage(
-          'pdv',
-          'friboi-banners',
-          'Banners verticais Friboi+ com carne grelhada e textos sobre segurança e sabor',
-        ),
-      ]),
-      project('pdv-jordan-adesivo', 'pdv', 'Adesivagem em vidro', [
-        galleryImage(
-          'pdv',
-          'jordan-adesivo',
-          'Adesivagem em porta de vidro com imagem em tamanho real do Michael Jordan',
-        ),
-      ]),
-      project('pdv-cenografia', 'pdv', 'Materiais diversos', [
-        galleryImage('banners', 'banners-01', 'Cenografia promocional em ponto de venda'),
+      project('pdv-emily-in-paris', 'pdv', 'Emily in Paris', [
+        galleryImage('banners', 'banners-04', 'Display promocional Emily in Paris em ponto de venda'),
       ]),
       project('pdv-hinode-aplicacao', 'pdv', 'Hinode', [
         galleryImage('paineis', 'paineis-10', 'Aplicação Hinode em ponto de venda'),
       ]),
-      project('pdv-friboi-barris', 'pdv', 'Friboi', [
+      project('pdv-pocoyo', 'pdv', 'Pocoyo', [
         galleryImage(
           'pdv',
-          'friboi-barris',
-          'Barris metálicos azuis decorativos com logotipo Friboi em evento',
+          'pocoyo-standee',
+          'Totem promocional personalizado do personagem Pocoyo em vermelho, com boné escrito Sextou e segurando um emoji verde de carinha feliz, posicionado em ambiente interno',
         ),
       ]),
-      project('pdv-emily-in-paris', 'pdv', 'Emily in Paris', [
-        galleryImage('banners', 'banners-04', 'Display promocional Emily in Paris em ponto de venda'),
+      project('pdv-prudential', 'pdv', 'Prudential', [
+        galleryImage('paineis', 'paineis-07', 'Material Prudential em ponto de venda'),
       ]),
       project('pdv-seara-fatiador', 'pdv', 'Seara', [
         galleryImage(
@@ -684,6 +652,51 @@ export const siteData = {
           'pdv',
           'sest-senat-totem',
           'Totem vertical externo azul escuro SEST SENAT em canteiro paisagístico',
+        ),
+      ]),
+      project('pdv-jordan-adesivo', 'pdv', 'Adesivagem em vidro', [
+        galleryImage(
+          'pdv',
+          'jordan-adesivo',
+          'Adesivagem em porta de vidro com imagem em tamanho real do Michael Jordan',
+        ),
+      ]),
+      project('pdv-friboi-barris', 'pdv', 'Friboi', [
+        galleryImage(
+          'pdv',
+          'friboi-barris',
+          'Barris metálicos azuis decorativos com logotipo Friboi em evento',
+        ),
+      ]),
+      project('pdv-friboi-banners', 'pdv', 'Friboi+', [
+        galleryImage(
+          'pdv',
+          'friboi-banners',
+          'Banners verticais Friboi+ com carne grelhada e textos sobre segurança e sabor',
+        ),
+      ]),
+      project('pdv-primor', 'pdv', 'Primor', [
+        galleryImage(
+          'pdv',
+          'primor-pdv',
+          'Exposição promocional da margarina Primor em ambiente interno, destacando uma réplica gigante da embalagem de 500g, totens empilhados da campanha Sabor Premiado e bandeirolas decorativas suspensas',
+        ),
+      ]),
+      project('pdv-cenografia', 'pdv', 'Materiais diversos', [
+        galleryImage('banners', 'banners-01', 'Cenografia promocional em ponto de venda'),
+      ]),
+      project('pdv-montana', 'pdv', 'Montana', [
+        galleryImage(
+          'pdv',
+          'montana-pdv',
+          'Display vertical PDV Montana Marfrig em corredor de supermercado',
+        ),
+      ]),
+      project('pdv-kitkat', 'pdv', 'KitKat', [
+        galleryImage(
+          'pdv',
+          'kitkat-pdv',
+          'Dois totens promocionais KitKat em corredor de supermercado',
         ),
       ]),
     ],

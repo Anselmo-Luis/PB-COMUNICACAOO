@@ -339,6 +339,14 @@
     "width": 1024,
     "height": 1024
   },
+  "/assets/gallery/pdv/pocoyo-standee.webp": {
+    "width": 931,
+    "height": 1024
+  },
+  "/assets/gallery/pdv/primor-pdv.webp": {
+    "width": 768,
+    "height": 1024
+  },
   "/assets/gallery/pdv/seara-fatiador.webp": {
     "width": 1024,
     "height": 1021
@@ -346,6 +354,18 @@
   "/assets/gallery/pdv/sest-senat-totem.webp": {
     "width": 1024,
     "height": 1024
+  },
+  "/assets/gallery/producao/producao-02-poster.jpg": {
+    "width": 512,
+    "height": 768
+  },
+  "/assets/gallery/producao/producao-03-poster.jpg": {
+    "width": 464,
+    "height": 832
+  },
+  "/assets/gallery/producao/producao-04-poster.jpg": {
+    "width": 480,
+    "height": 848
   },
   "/assets/gallery/producao/producao-adesivacao-parede-cidade-poster.jpg": {
     "width": 480,

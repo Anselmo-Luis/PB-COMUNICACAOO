@@ -594,7 +594,7 @@ export const siteData = {
         galleryImage('banners', 'banner-04', 'Banner La Fleur e L’Epine'),
       ]),
       project('banner-feira-carandai', 'banner', 'Feira de Comida Carandaí', [
-        galleryImage('banners', 'banner-08b', 'Banner Feira de Comida Carandaí'),
+        galleryImage('banners', 'banner-08c', 'Banner Feira de Comida Carandaí'),
       ]),
       project('banner-backdrop-corporativo', 'banner', 'Backdrop corporativo', [
         galleryImage('banners', 'banner-05', 'Backdrop com logos corporativos'),
@@ -606,7 +606,7 @@ export const siteData = {
         galleryImage('banners', 'banner-06', 'Banner Big X Picanha'),
       ]),
       project('banner-santander', 'banner', 'Santander', [
-        galleryImage('paineis', 'painel-04', 'Painel Santander em mídia externa'),
+        galleryImage('paineis', 'painel-04b', 'Painel Santander em mídia externa'),
       ]),
       project('banner-jabra', 'banner', 'Jabra Evolve', [
         galleryImage('banners', 'banner-09', 'Banner Jabra Evolve'),

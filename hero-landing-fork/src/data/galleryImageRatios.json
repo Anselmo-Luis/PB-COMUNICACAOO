@@ -39,6 +39,10 @@
     "width": 631,
     "height": 451
   },
+  "/assets/gallery/banners/banner-08c.webp": {
+    "width": 422,
+    "height": 451
+  },
   "/assets/gallery/banners/banner-09.webp": {
     "width": 631,
     "height": 451
@@ -277,6 +281,10 @@
   },
   "/assets/gallery/paineis/painel-04.webp": {
     "width": 337,
+    "height": 287
+  },
+  "/assets/gallery/paineis/painel-04b.webp": {
+    "width": 297,
     "height": 287
   },
   "/assets/gallery/paineis/painel-05.webp": {

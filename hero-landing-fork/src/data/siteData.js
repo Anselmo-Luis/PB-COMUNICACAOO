@@ -585,7 +585,7 @@ export const siteData = {
         galleryImage('banners', 'banner-01', 'Banner Training Day Contax e Nespresso'),
       ]),
       project('banner-brinde-a-vida', 'banner', 'Brinde à Vida', [
-        galleryImage('banners', 'banner-02', 'Banner Brinde à vida'),
+        galleryImage('banners', 'banner-02b', 'Banner Brinde à vida'),
       ]),
       project('banner-korin', 'banner', 'Korin', [
         galleryImage('banners', 'banner-03', 'Banner Korin Agricultura Natural'),
@@ -594,7 +594,7 @@ export const siteData = {
         galleryImage('banners', 'banner-04', 'Banner La Fleur e L’Epine'),
       ]),
       project('banner-feira-carandai', 'banner', 'Feira de Comida Carandaí', [
-        galleryImage('banners', 'banner-08', 'Banner Feira de Comida Carandaí'),
+        galleryImage('banners', 'banner-08b', 'Banner Feira de Comida Carandaí'),
       ]),
       project('banner-backdrop-corporativo', 'banner', 'Backdrop corporativo', [
         galleryImage('banners', 'banner-05', 'Backdrop com logos corporativos'),

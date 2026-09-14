@@ -25,8 +25,8 @@ test.describe('site institucional P&B', () => {
 
     await tabs.nth(1).click();
     await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(34);
-    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(32);
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(38);
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(36);
 
     await tabs.nth(2).click();
     await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
@@ -37,8 +37,8 @@ test.describe('site institucional P&B', () => {
     await tabs.nth(3).click();
     await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
     const pdvPanel = portfolio.getByRole('tabpanel');
-    await expect(pdvPanel.locator('.portfolio-mosaic-tile')).toHaveCount(8);
-    await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(8);
+    await expect(pdvPanel.locator('.portfolio-mosaic-tile')).toHaveCount(11);
+    await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(11);
   });
 
   test('a aba Produção anuncia vídeos em vez de fotos e não abre mosaico vazio', async ({ page }) => {
@@ -117,7 +117,8 @@ test.describe('site institucional P&B', () => {
     const materialsVideo = page.locator('.materials-video');
     await materialsVideo.scrollIntoViewIfNeeded();
     await expect(materialsVideo.getByRole('button', { name: /Reproduzir vídeo/i })).toBeVisible();
-    await expect(materialsVideo.locator('img')).not.toHaveClass(/is-hidden/);
+    await expect(materialsVideo.getByRole('button', { name: /Próximo vídeo/i })).toBeVisible();
+    await expect(materialsVideo.locator('.materials-video-slide.is-active img')).not.toHaveClass(/is-hidden/);
   });
 
   test('mantém FAQ, orçamento e menu mobile operacionais', async ({ page }) => {

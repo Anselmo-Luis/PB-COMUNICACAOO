@@ -175,6 +175,10 @@
     "width": 960,
     "height": 536
   },
+  "/assets/gallery/paineis/adias-mural.webp": {
+    "width": 1024,
+    "height": 768
+  },
   "/assets/gallery/paineis/paineis-01.webp": {
     "width": 684,
     "height": 685
@@ -314,6 +318,34 @@
   "/assets/gallery/paineis/painel-16.webp": {
     "width": 1594,
     "height": 1600
+  },
+  "/assets/gallery/pdv/friboi-banners.webp": {
+    "width": 438,
+    "height": 355
+  },
+  "/assets/gallery/pdv/friboi-barris.webp": {
+    "width": 1024,
+    "height": 1024
+  },
+  "/assets/gallery/pdv/jordan-adesivo.webp": {
+    "width": 824,
+    "height": 1024
+  },
+  "/assets/gallery/pdv/kitkat-pdv.webp": {
+    "width": 1024,
+    "height": 1024
+  },
+  "/assets/gallery/pdv/montana-pdv.webp": {
+    "width": 1024,
+    "height": 1024
+  },
+  "/assets/gallery/pdv/seara-fatiador.webp": {
+    "width": 1024,
+    "height": 1021
+  },
+  "/assets/gallery/pdv/sest-senat-totem.webp": {
+    "width": 1024,
+    "height": 1024
   },
   "/assets/gallery/producao/producao-adesivacao-parede-cidade-poster.jpg": {
     "width": 480,

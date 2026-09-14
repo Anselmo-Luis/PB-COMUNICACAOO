@@ -995,12 +995,18 @@ textarea:focus-visible {
   display: grid;
   gap: 0.75rem;
   width: 100%;
-  max-width: 20rem;
+  max-width: 26rem;
   margin: 2.5rem 0 0;
   padding: 0.75rem;
   border: 1px solid rgba(29, 29, 31, 0.09);
   border-radius: 1.15rem;
   background: var(--color-pb-white);
+}
+
+@media (min-width: 1024px) {
+  .materials-video {
+    max-width: none;
+  }
 }
 
 .materials-video-frame {
@@ -1010,8 +1016,22 @@ textarea:focus-visible {
   background: #edf0f2;
 }
 
-.materials-video-frame img,
-.materials-video-frame video {
+.materials-video-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+.materials-video-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.materials-video-slide img,
+.materials-video-slide video {
   position: absolute;
   inset: 0;
   display: block;
@@ -1021,23 +1041,23 @@ textarea:focus-visible {
   object-position: center;
 }
 
-.materials-video-frame img {
+.materials-video-slide img {
   z-index: 0;
   opacity: 1;
   transition: opacity 300ms ease;
 }
 
-.materials-video-frame img.is-hidden {
+.materials-video-slide img.is-hidden {
   opacity: 0;
 }
 
-.materials-video-frame video {
+.materials-video-slide video {
   z-index: 1;
   opacity: 0;
   transition: opacity 300ms ease;
 }
 
-.materials-video-frame video.is-ready {
+.materials-video-slide video.is-ready {
   opacity: 1;
 }
 
@@ -1057,6 +1077,12 @@ textarea:focus-visible {
   text-transform: uppercase;
 }
 
+.materials-video-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .materials-video-control {
   display: grid;
   flex: 0 0 auto;
@@ -1071,6 +1097,11 @@ textarea:focus-visible {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
+.materials-video-control.is-primary {
+  border-color: rgba(0, 19, 78, 0.16);
+  background: #eaf1f8;
+}
+
 .materials-video-control:hover,
 .materials-video-control:focus-visible {
   border-color: var(--color-pb-accent-blue);
@@ -1081,6 +1112,53 @@ textarea:focus-visible {
 .materials-video-control svg {
   width: 0.8rem;
   height: 0.8rem;
+}
+
+.materials-video-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0 0.15rem;
+}
+
+.materials-video-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.materials-video-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 19, 78, 0.18);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.materials-video-dot:hover,
+.materials-video-dot:focus-visible,
+.materials-video-dot.is-active {
+  background: var(--color-pb-accent-blue);
+}
+
+.materials-video-dot.is-active {
+  transform: scale(1.18);
+}
+
+.materials-video-dot:focus-visible {
+  outline: 2px solid var(--color-pb-accent-blue);
+  outline-offset: 2px;
+}
+
+.materials-video-counter {
+  color: var(--color-pb-ink-2);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
 }
 
 .materials-client-carousel {

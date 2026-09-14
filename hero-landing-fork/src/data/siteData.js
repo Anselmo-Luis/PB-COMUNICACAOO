@@ -199,14 +199,26 @@ export const siteData = {
     },
     subheadline:
       'Escolhemos cada solução pela qualidade da aplicação, pela leitura da marca e pelo resultado no ambiente.',
-    video: {
-      label: 'Adesivação de frota',
-      src: '/assets/materials/jbs-fazer-o-bem.mp4',
-      poster: '/assets/materials/jbs-fazer-o-bem-poster.jpg',
-      alt: 'Carreta JBS Fazer o Bem com adesivação completa de baú',
-      width: 480,
-      height: 848,
-    },
+    videos: [
+      {
+        id: 'jbs-fazer-o-bem',
+        label: 'Adesivação de frota',
+        src: '/assets/materials/jbs-fazer-o-bem.mp4',
+        poster: '/assets/materials/jbs-fazer-o-bem-poster.jpg',
+        alt: 'Carreta JBS Fazer o Bem com adesivação completa de baú',
+        width: 480,
+        height: 848,
+      },
+      {
+        id: 'frota-pickups-galpao',
+        label: 'Frota adesivada',
+        src: '/assets/materials/frota-pickups-galpao.mp4',
+        poster: '/assets/materials/frota-pickups-galpao-poster.jpg',
+        alt: 'Frota de pickups brancos com adesivação colorida em galpão',
+        width: 478,
+        height: 850,
+      },
+    ],
     items: [
       {
         title: 'Adesivação de veículos',
@@ -326,9 +338,9 @@ export const siteData = {
         gallery: [
           { src: '/assets/gallery/banners/banner-01.webp', objectPosition: 'center 28%' },
           { src: '/assets/gallery/banners/banner-03.webp', objectPosition: 'center top' },
-          { src: '/assets/gallery/banners/banner-06.webp', objectPosition: 'center 30%' },
-          { src: '/assets/gallery/banners/banner-07.webp', objectPosition: 'center 30%' },
-          { src: '/assets/gallery/banners/banner-10.webp', objectPosition: 'center 22%' },
+          { src: '/assets/gallery/banners/banner-06.webp', objectPosition: 'center 58%' },
+          { src: '/assets/gallery/banners/banner-07.webp', objectPosition: 'center 45%' },
+          { src: '/assets/gallery/banners/banners-03.webp', objectPosition: 'center 45%' },
         ],
         specs: ['Bastão de madeira', 'Alumínio', 'Ilhós', 'Pedestais', 'Roll-up'],
         category: 'Banner / Lona',
@@ -344,11 +356,11 @@ export const siteData = {
         },
         gallery: [
           { src: '/assets/gallery/paineis/painel-13.webp', objectPosition: 'center 38%' },
+          { src: '/assets/gallery/pdv/kitkat-pdv.webp', objectPosition: 'center 40%' },
           { src: '/assets/gallery/paineis/paineis-07.webp', objectPosition: 'center 38%' },
+          { src: '/assets/gallery/pdv/jordan-adesivo.webp', objectPosition: 'center top' },
           { src: '/assets/gallery/paineis/paineis-10.webp', objectPosition: 'center 32%' },
-          { src: '/assets/gallery/fachadas/fachadas-05.webp', objectPosition: 'center 25%' },
-          { src: '/assets/gallery/paineis/paineis-03.webp', objectPosition: 'center top' },
-          { src: '/assets/gallery/paineis/painel-11.webp', objectPosition: 'center 36%' },
+          { src: '/assets/gallery/pdv/montana-pdv.webp', objectPosition: 'center 35%' },
           { src: '/assets/gallery/banners/banners-01.webp', objectPosition: 'center 24%' },
           { src: '/assets/gallery/banners/banners-04.webp', objectPosition: 'center top' },
         ],
@@ -488,8 +500,8 @@ export const siteData = {
       project('general-seara-marcas', 'general', 'Seara', [
         galleryImage('totens', 'totens-05', 'Totem de sinalização com marcas Seara'),
       ]),
-      project('general-future-intelbras', 'general', 'Future Intelbras', [
-        galleryImage('paineis', 'painel-14', 'Adesivação de parede Future Intelbras'),
+      project('general-hope', 'general', 'Hope', [
+        galleryImage('paineis', 'paineis-11', 'Painel Hope em circulação de shopping'),
       ]),
       project('general-parque-bruno-covas-acesso', 'general', 'Parque Bruno Covas', [
         galleryImage('totens', 'totens-03', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
@@ -506,8 +518,8 @@ export const siteData = {
       project('general-totens-diversos', 'general', 'Totens diversos', [
         galleryImage('paineis', 'paineis-14', 'Totens Seara e JBS em ambiente corporativo'),
       ]),
-      project('general-parque-global', 'general', 'Parque Global', [
-        galleryImage('totens', 'totens-04', 'Totem de sinalização Parque Global'),
+      project('general-unhas-cariocas', 'general', 'Unhas Cariocas', [
+        galleryImage('paineis', 'paineis-17', 'Adesivação Unhas Cariocas em portas de banheiro comercial'),
       ]),
       project('general-parque-bruno-covas', 'general', 'Parque Bruno Covas', [
         galleryImage('totens', 'totens-01', 'Totem Santander Parque Bruno Covas de sinalização esportiva'),
@@ -519,8 +531,8 @@ export const siteData = {
       project('general-jbs-evento', 'general', 'JBS', [
         galleryImage('paineis', 'painel-06', 'Painel JBS para evento corporativo'),
       ]),
-      project('general-hope', 'general', 'Hope', [
-        galleryImage('paineis', 'paineis-11', 'Painel Hope em circulação de shopping'),
+      project('general-future-intelbras', 'general', 'Future Intelbras', [
+        galleryImage('paineis', 'painel-14', 'Adesivação de parede Future Intelbras'),
       ]),
       project('general-sonda-supermercados', 'general', 'Sonda Supermercados', [
         galleryImage('paineis', 'paineis-18', 'Adesivação em escada rolante Sonda Supermercados'),
@@ -528,8 +540,8 @@ export const siteData = {
       project('general-prime-comfort', 'general', 'Prime Comfort', [
         galleryImage('paineis', 'painel-12', 'Fachada Prime Comfort com adesivação de parede'),
       ]),
-      project('general-unhas-cariocas', 'general', 'Unhas Cariocas', [
-        galleryImage('paineis', 'paineis-17', 'Adesivação Unhas Cariocas em portas de banheiro comercial'),
+      project('general-parque-global', 'general', 'Parque Global', [
+        galleryImage('totens', 'totens-04', 'Totem de sinalização Parque Global'),
       ]),
       project('general-batavo', 'general', 'Batavo', [
         galleryImage('banners', 'banners-06', 'Adesivação de porta de elevador Batavo'),
@@ -551,6 +563,22 @@ export const siteData = {
       ]),
       project('general-jbs-65-anos', 'general', 'JBS', [
         galleryImage('paineis', 'painel-10', 'Painel JBS 65 anos'),
+      ]),
+      project('general-mahogany', 'general', 'Mahogany', [
+        galleryImage('fachadas', 'fachadas-05', 'Vitrine Mahogany em shopping'),
+      ]),
+      project('general-samsung', 'general', 'Samsung', [
+        galleryImage('paineis', 'painel-13', 'Material Samsung em ponto de venda'),
+      ]),
+      project('general-vb-salao', 'general', 'VB Salão de Beleza', [
+        galleryImage('paineis', 'painel-11', 'Painel luminoso VB Salão de Beleza'),
+      ]),
+      project('general-mural-pdv', 'general', 'Mural corporativo', [
+        galleryImage(
+          'paineis',
+          'adias-mural',
+          'Mural corporativo Adias com logo iluminado e frase Seu sucesso é o nosso compromisso',
+        ),
       ]),
 
       project('banner-contax-nespresso', 'banner', 'Contax / Nespresso', [
@@ -596,29 +624,66 @@ export const siteData = {
         galleryImage('paineis', 'painel-08', 'Painel em mídia externa'),
       ]),
 
-      project('pdv-mahogany', 'pdv', 'Mahogany', [
-        galleryImage('fachadas', 'fachadas-05', 'Vitrine Mahogany em shopping'),
+      project('pdv-montana', 'pdv', 'Montana', [
+        galleryImage(
+          'pdv',
+          'montana-pdv',
+          'Display vertical PDV Montana Marfrig em corredor de supermercado',
+        ),
+      ]),
+      project('pdv-kitkat', 'pdv', 'KitKat', [
+        galleryImage(
+          'pdv',
+          'kitkat-pdv',
+          'Dois totens promocionais KitKat em corredor de supermercado',
+        ),
       ]),
       project('pdv-prudential', 'pdv', 'Prudential', [
         galleryImage('paineis', 'paineis-07', 'Material Prudential em ponto de venda'),
       ]),
-      project('pdv-samsung', 'pdv', 'Samsung', [
-        galleryImage('paineis', 'painel-13', 'Material Samsung em ponto de venda'),
+      project('pdv-friboi-banners', 'pdv', 'Friboi+', [
+        galleryImage(
+          'pdv',
+          'friboi-banners',
+          'Banners verticais Friboi+ com carne grelhada e textos sobre segurança e sabor',
+        ),
       ]),
-      project('pdv-hinode-aplicacao', 'pdv', 'Hinode', [
-        galleryImage('paineis', 'paineis-10', 'Aplicação Hinode em ponto de venda'),
-      ]),
-      project('pdv-materials', 'pdv', 'Materiais diversos', [
-        galleryImage('paineis', 'paineis-03', 'Mural corporativo em ponto de venda'),
+      project('pdv-jordan-adesivo', 'pdv', 'Adesivagem em vidro', [
+        galleryImage(
+          'pdv',
+          'jordan-adesivo',
+          'Adesivagem em porta de vidro com imagem em tamanho real do Michael Jordan',
+        ),
       ]),
       project('pdv-cenografia', 'pdv', 'Materiais diversos', [
         galleryImage('banners', 'banners-01', 'Cenografia promocional em ponto de venda'),
       ]),
-      project('pdv-vb-salao-beleza', 'pdv', 'VB Salão de Beleza', [
-        galleryImage('paineis', 'painel-11', 'Painel luminoso VB Salão de Beleza'),
+      project('pdv-hinode-aplicacao', 'pdv', 'Hinode', [
+        galleryImage('paineis', 'paineis-10', 'Aplicação Hinode em ponto de venda'),
+      ]),
+      project('pdv-friboi-barris', 'pdv', 'Friboi', [
+        galleryImage(
+          'pdv',
+          'friboi-barris',
+          'Barris metálicos azuis decorativos com logotipo Friboi em evento',
+        ),
       ]),
       project('pdv-emily-in-paris', 'pdv', 'Emily in Paris', [
         galleryImage('banners', 'banners-04', 'Display promocional Emily in Paris em ponto de venda'),
+      ]),
+      project('pdv-seara-fatiador', 'pdv', 'Seara', [
+        galleryImage(
+          'pdv',
+          'seara-fatiador',
+          'Fatiador de frios profissional personalizado com a marca Seara',
+        ),
+      ]),
+      project('pdv-sest-senat', 'pdv', 'SEST SENAT', [
+        galleryImage(
+          'pdv',
+          'sest-senat-totem',
+          'Totem vertical externo azul escuro SEST SENAT em canteiro paisagístico',
+        ),
       ]),
     ],
     videos: [

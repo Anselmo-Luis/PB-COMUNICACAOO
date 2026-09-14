@@ -5,13 +5,19 @@ import { siteData } from '../../data/siteData';
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
-function MaterialsVideo({ video }) {
+function MaterialsVideo({ videos }) {
   const figureRef = useRef(null);
-  const mediaRef = useRef(null);
+  const mediaRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isInView, setIsInView] = useState(() => typeof IntersectionObserver === 'undefined');
-  const [isReady, setIsReady] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [readyById, setReadyById] = useState({});
+  const [errorById, setErrorById] = useState({});
+  const [isReducedMotion, setIsReducedMotion] = useState(getPrefersReducedMotion);
   const [isPlaybackEnabled, setIsPlaybackEnabled] = useState(() => !getPrefersReducedMotion());
+
+  const videoCount = videos.length;
+  const activeVideo = videos[activeIndex];
+  const activeHasError = Boolean(activeVideo && errorById[activeVideo.id]);
 
   useEffect(() => {
     const figure = figureRef.current;
@@ -31,6 +37,7 @@ function MaterialsVideo({ video }) {
     if (!mediaQuery) return undefined;
 
     const handlePreferenceChange = (event) => {
+      setIsReducedMotion(event.matches);
       if (event.matches) setIsPlaybackEnabled(false);
     };
 
@@ -39,84 +46,180 @@ function MaterialsVideo({ video }) {
   }, []);
 
   useEffect(() => {
-    const media = mediaRef.current;
-    if (!media) return undefined;
+    mediaRefs.current.forEach((media, index) => {
+      if (!media) return;
 
-    media.muted = true;
+      media.muted = true;
+      const video = videos[index];
+      const isActive = index === activeIndex;
+      const hasError = Boolean(video && errorById[video.id]);
 
-    if (isInView && isPlaybackEnabled && !hasError) {
-      media.play()?.catch?.(() => {});
-    } else {
-      media.pause();
+      if (isActive && isInView && isPlaybackEnabled && !hasError) {
+        if (media.ended) media.currentTime = 0;
+        media.play()?.catch?.(() => {});
+      } else {
+        media.pause();
+      }
+    });
+  }, [activeIndex, errorById, isInView, isPlaybackEnabled, videos]);
+
+  if (!activeVideo) return null;
+
+  const shouldPlay = isInView && isPlaybackEnabled && !activeHasError;
+
+  const goTo = (targetIndex) => {
+    if (videoCount < 2 || targetIndex === activeIndex || targetIndex < 0 || targetIndex >= videoCount) {
+      return;
     }
+    setActiveIndex(targetIndex);
+  };
 
-    return undefined;
-  }, [hasError, isInView, isPlaybackEnabled]);
+  const goToPrevious = () => goTo((activeIndex - 1 + videoCount) % videoCount);
+  const goToNext = () => goTo((activeIndex + 1) % videoCount);
 
-  const shouldPlay = isInView && isPlaybackEnabled;
+  const handleVideoEnded = () => {
+    if (videoCount > 1 && isPlaybackEnabled && !isReducedMotion) {
+      goToNext();
+      return;
+    }
+    setIsPlaybackEnabled(false);
+  };
 
   return (
-    <figure ref={figureRef} className="materials-video">
+    <figure
+      ref={figureRef}
+      className="materials-video"
+      role="region"
+      aria-roledescription="carrossel"
+      aria-label="Vídeos de materiais e aplicações"
+    >
       <div
         className="materials-video-frame"
-        style={{ aspectRatio: `${video.width} / ${video.height}` }}
+        style={{ aspectRatio: `${activeVideo.width} / ${activeVideo.height}` }}
       >
-        <img
-          className={isReady ? 'is-hidden' : ''}
-          src={video.poster}
-          alt={video.alt}
-          width={video.width}
-          height={video.height}
-          loading={isInView ? 'eager' : 'lazy'}
-          decoding="async"
-        />
-        {!hasError && (
-          <video
-            ref={mediaRef}
-            className={isReady ? 'is-ready' : ''}
-            autoPlay={shouldPlay}
-            muted
-            loop
-            playsInline
-            disablePictureInPicture
-            disableRemotePlayback
-            preload={shouldPlay ? 'auto' : 'metadata'}
-            poster={video.poster}
-            width={video.width}
-            height={video.height}
-            tabIndex={-1}
-            onPlaying={() => setIsReady(true)}
-            onError={() => {
-              setHasError(true);
-              setIsReady(false);
-              setIsPlaybackEnabled(false);
-            }}
-          >
-            <source src={video.src} type="video/mp4" />
-            Seu navegador não consegue reproduzir este vídeo.
-          </video>
-        )}
+        {videos.map((video, index) => {
+          const isActive = index === activeIndex;
+          const isReady = Boolean(readyById[video.id]);
+          const hasError = Boolean(errorById[video.id]);
+
+          return (
+            <div
+              key={video.id}
+              className={`materials-video-slide${isActive ? ' is-active' : ''}`}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={video.alt}
+              aria-hidden={!isActive}
+            >
+              <img
+                className={isReady && isActive && shouldPlay ? 'is-hidden' : ''}
+                src={video.poster}
+                alt={isActive ? video.alt : ''}
+                width={video.width}
+                height={video.height}
+                loading={isActive && isInView ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+              {!hasError && (
+                <video
+                  ref={(node) => {
+                    mediaRefs.current[index] = node;
+                  }}
+                  className={isReady ? 'is-ready' : ''}
+                  autoPlay={isActive && shouldPlay}
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  preload={isActive && shouldPlay ? 'auto' : 'metadata'}
+                  poster={video.poster}
+                  width={video.width}
+                  height={video.height}
+                  tabIndex={-1}
+                  onPlaying={() => {
+                    setReadyById((current) => ({ ...current, [video.id]: true }));
+                  }}
+                  onError={() => {
+                    setErrorById((current) => ({ ...current, [video.id]: true }));
+                    setReadyById((current) => ({ ...current, [video.id]: false }));
+                    if (isActive) setIsPlaybackEnabled(false);
+                  }}
+                  onEnded={isActive ? handleVideoEnded : undefined}
+                >
+                  <source src={video.src} type="video/mp4" />
+                  Seu navegador não consegue reproduzir este vídeo.
+                </video>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <figcaption className="materials-video-caption">
-        <span>{video.label}</span>
-        <button
-          type="button"
-          className="materials-video-control"
-          onClick={() => setIsPlaybackEnabled((current) => !current)}
-          aria-label={`${isPlaybackEnabled ? 'Pausar' : 'Reproduzir'} vídeo: ${video.label}`}
-        >
-          {isPlaybackEnabled ? (
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M7 5.5A1.5 1.5 0 0 1 8.5 4h1A1.5 1.5 0 0 1 11 5.5v13A1.5 1.5 0 0 1 9.5 20h-1A1.5 1.5 0 0 1 7 18.5v-13Zm6 0A1.5 1.5 0 0 1 14.5 4h1A1.5 1.5 0 0 1 17 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-13Z" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M8.5 5.2v13.6a1.2 1.2 0 0 0 1.84 1.02l9.1-6.8a1.27 1.27 0 0 0 0-2.04l-9.1-6.8A1.2 1.2 0 0 0 8.5 5.2Z" />
-            </svg>
+        <span>{activeVideo.label}</span>
+        <div className="materials-video-controls" role="group" aria-label="Controles do carrossel de materiais">
+          {videoCount > 1 && (
+            <button
+              type="button"
+              className="materials-video-control"
+              onClick={goToPrevious}
+              aria-label={`Vídeo anterior: ${videos[(activeIndex - 1 + videoCount) % videoCount].label}`}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
           )}
-        </button>
+          <button
+            type="button"
+            className="materials-video-control is-primary"
+            onClick={() => setIsPlaybackEnabled((current) => !current)}
+            aria-label={`${isPlaybackEnabled ? 'Pausar' : 'Reproduzir'} vídeo: ${activeVideo.label}`}
+          >
+            {isPlaybackEnabled ? (
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M7 5.5A1.5 1.5 0 0 1 8.5 4h1A1.5 1.5 0 0 1 11 5.5v13A1.5 1.5 0 0 1 9.5 20h-1A1.5 1.5 0 0 1 7 18.5v-13Zm6 0A1.5 1.5 0 0 1 14.5 4h1A1.5 1.5 0 0 1 17 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-13Z" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8.5 5.2v13.6a1.2 1.2 0 0 0 1.84 1.02l9.1-6.8a1.27 1.27 0 0 0 0-2.04l-9.1-6.8A1.2 1.2 0 0 0 8.5 5.2Z" />
+              </svg>
+            )}
+          </button>
+          {videoCount > 1 && (
+            <button
+              type="button"
+              className="materials-video-control"
+              onClick={goToNext}
+              aria-label={`Próximo vídeo: ${videos[(activeIndex + 1) % videoCount].label}`}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+        </div>
       </figcaption>
+
+      {videoCount > 1 && (
+        <div className="materials-video-progress">
+          <div className="materials-video-dots" role="group" aria-label="Selecionar vídeo de materiais">
+            {videos.map((video, index) => (
+              <button
+                key={video.id}
+                type="button"
+                className={`materials-video-dot${index === activeIndex ? ' is-active' : ''}`}
+                onClick={() => goTo(index)}
+                aria-label={`Mostrar vídeo ${index + 1} de ${videoCount}: ${video.label}`}
+                aria-pressed={index === activeIndex}
+              />
+            ))}
+          </div>
+          <span className="materials-video-counter" aria-live="polite">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(videoCount).padStart(2, '0')}
+          </span>
+        </div>
+      )}
     </figure>
   );
 }
@@ -145,7 +248,7 @@ export default function Features() {
               {materials.subheadline}
             </p>
 
-            {materials.video && <MaterialsVideo video={materials.video} />}
+            {materials.videos?.length > 0 && <MaterialsVideo videos={materials.videos} />}
           </div>
 
           <div className="materials-list">

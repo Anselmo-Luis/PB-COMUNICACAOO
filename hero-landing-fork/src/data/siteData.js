@@ -463,7 +463,7 @@ export const siteData = {
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
       ]),
       project('vehicle-jamtur', 'vehicles', 'Jamtur', [
-        galleryImage('frota', 'frota-20', 'Ônibus Jamtur Viagens e Turismo adesivado'),
+        galleryImage('frota', 'frota-20-b', 'Ônibus Jamtur Viagens e Turismo adesivado'),
       ]),
 
       project('general-swift-klabin', 'general', 'Swift', [
@@ -501,7 +501,7 @@ export const siteData = {
         galleryImage('totens', 'totens-05', 'Totem de sinalização com marcas Seara'),
       ]),
       project('general-hope', 'general', 'Hope', [
-        galleryImage('paineis', 'paineis-11', 'Painel Hope em circulação de shopping'),
+        galleryImage('paineis', 'paineis-11-b', 'Painel Hope em circulação de shopping'),
       ]),
       project('general-parque-bruno-covas-acesso', 'general', 'Parque Bruno Covas', [
         galleryImage('totens', 'totens-03', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
@@ -538,7 +538,7 @@ export const siteData = {
         galleryImage('paineis', 'paineis-18', 'Adesivação em escada rolante Sonda Supermercados'),
       ]),
       project('general-prime-comfort', 'general', 'Prime Comfort', [
-        galleryImage('paineis', 'painel-12', 'Fachada Prime Comfort com adesivação de parede'),
+        galleryImage('paineis', 'painel-12-b', 'Fachada Prime Comfort com adesivação de parede'),
       ]),
       project('general-parque-global', 'general', 'Parque Global', [
         galleryImage('totens', 'totens-04', 'Totem de sinalização Parque Global'),
@@ -638,7 +638,7 @@ export const siteData = {
         ),
       ]),
       project('pdv-prudential', 'pdv', 'Prudential', [
-        galleryImage('paineis', 'paineis-07', 'Material Prudential em ponto de venda'),
+        galleryImage('paineis', 'paineis-07-b', 'Material Prudential em ponto de venda'),
       ]),
       project('pdv-seara-fatiador', 'pdv', 'Seara', [
         galleryImage(
@@ -695,7 +695,7 @@ export const siteData = {
       project('pdv-kitkat', 'pdv', 'KitKat', [
         galleryImage(
           'pdv',
-          'kitkat-pdv',
+          'kitkat-pdv-b',
           'Dois totens promocionais KitKat em corredor de supermercado',
         ),
       ]),

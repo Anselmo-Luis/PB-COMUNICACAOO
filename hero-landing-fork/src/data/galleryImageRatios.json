@@ -546,5 +546,25 @@
   "/assets/gallery/veiculos/veiculo-22.webp": {
     "width": 1024,
     "height": 1021
+  },
+  "/assets/gallery/paineis/paineis-11-b.webp": {
+    "width": 890,
+    "height": 1280
+  },
+  "/assets/gallery/paineis/painel-12-b.webp": {
+    "width": 1565,
+    "height": 1603
+  },
+  "/assets/gallery/frota/frota-20-b.webp": {
+    "width": 1002,
+    "height": 960
+  },
+  "/assets/gallery/paineis/paineis-07-b.webp": {
+    "width": 932,
+    "height": 1280
+  },
+  "/assets/gallery/pdv/kitkat-pdv-b.webp": {
+    "width": 971,
+    "height": 1024
   }
 }

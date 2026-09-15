@@ -143,7 +143,6 @@ function ServiceCard({ service, index, ctaText }) {
         </div>
 
         <div className="service-card-content relative flex flex-col justify-between gap-5 p-8 md:w-[45%] md:p-10">
-          <span className="service-card-accent-line" aria-hidden="true" />
           <div className="flex items-center gap-3">
             <div className="service-icon" aria-hidden="true">
               {SERVICE_ICONS[service.icon] ?? DEFAULT_SERVICE_ICON}

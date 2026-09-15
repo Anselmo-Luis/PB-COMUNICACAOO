@@ -60,7 +60,6 @@ export default function Hero() {
   });
 
   const { video, headline, highlight, intro, subheadline } = siteData.hero;
-  const { logoSrc } = siteData.company;
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -260,10 +259,10 @@ export default function Hero() {
         <div className="hero-copy">
           <img
             className="hero-brand-logo"
-            src={logoSrc}
+            src="/assets/logo-original.png"
             alt="P&B Comunicação Visual"
-            width={200}
-            height={144}
+            width={863}
+            height={666}
           />
 
           <h1 className="hero-title fade-in-up-delay-1">

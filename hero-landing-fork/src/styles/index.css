@@ -417,10 +417,10 @@ textarea:focus-visible {
 
 .hero-brand-logo {
   display: block;
-  width: min(9.5rem, 42%);
+  width: min(11.5rem, 48%);
   height: auto;
-  margin-bottom: clamp(1rem, 2.5vh, 1.6rem);
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+  margin-bottom: clamp(0.85rem, 2.2vh, 1.4rem);
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.28));
 }
 
 .hero-title {
@@ -1320,16 +1320,6 @@ textarea:focus-visible {
   border: 1px solid rgba(29, 29, 31, 0.1);
   background: var(--color-pb-white);
   box-shadow: 0 16px 44px rgba(29, 29, 31, 0.07);
-}
-
-.service-card-accent-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 5px;
-  height: 100%;
-  background: var(--color-pb-accent);
 }
 
 .service-card-number {

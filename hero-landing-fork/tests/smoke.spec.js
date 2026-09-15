@@ -117,7 +117,7 @@ test.describe('site institucional P&B', () => {
     const materialsVideo = page.locator('.materials-video');
     await materialsVideo.scrollIntoViewIfNeeded();
     await expect(materialsVideo.getByRole('button', { name: /Reproduzir vídeo/i })).toBeVisible();
-    await expect(materialsVideo.getByRole('button', { name: /Próximo vídeo/i })).toBeVisible();
+    await expect(materialsVideo.getByRole('button', { name: /Próximo vídeo/i })).toHaveCount(0);
     await expect(materialsVideo.locator('.materials-video-slide.is-active img')).not.toHaveClass(/is-hidden/);
   });
 

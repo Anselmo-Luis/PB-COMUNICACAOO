@@ -77,17 +77,7 @@ export default function Navbar() {
           scrolled ? 'is-scrolled' : ''
         }`}
       >
-        <div className="site-navbar__inner flex items-center justify-between gap-4">
-          <a href="#" className="site-navbar__brand flex shrink-0 items-center" aria-label="Voltar ao início">
-            <img
-              src={siteData.company.logoSrc}
-              alt={siteData.company.name}
-              width={200}
-              height={144}
-              className="site-navbar__logo h-14 w-auto md:h-16"
-            />
-          </a>
-
+        <div className="site-navbar__inner flex items-center justify-end gap-4">
           <div className="site-navbar__links hidden items-center justify-end gap-2 md:flex lg:gap-2.5">
             {siteData.nav.links.map((link) => (
               <a key={link.href} href={link.href} className="nav-chip">

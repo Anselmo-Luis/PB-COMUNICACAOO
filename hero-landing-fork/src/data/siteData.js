@@ -201,15 +201,6 @@ export const siteData = {
       'Escolhemos cada solução pela qualidade da aplicação, pela leitura da marca e pelo resultado no ambiente.',
     videos: [
       {
-        id: 'jbs-fazer-o-bem',
-        label: 'Adesivação de frota',
-        src: '/assets/materials/jbs-fazer-o-bem.mp4',
-        poster: '/assets/materials/jbs-fazer-o-bem-poster.jpg',
-        alt: 'Carreta JBS Fazer o Bem com adesivação completa de baú',
-        width: 480,
-        height: 848,
-      },
-      {
         id: 'frota-pickups-galpao',
         label: 'Frota adesivada',
         src: '/assets/materials/frota-pickups-galpao.mp4',

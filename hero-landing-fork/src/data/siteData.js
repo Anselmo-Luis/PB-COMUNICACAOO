@@ -420,7 +420,7 @@ export const siteData = {
       ]),
       project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
         galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
-        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal', 'plate-blur'),
+        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal', 'plate-blur-2'),
         galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
       ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [

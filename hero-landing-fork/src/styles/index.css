@@ -2485,6 +2485,20 @@ textarea:focus-visible {
     padding: 1.1rem;
   }
 
+  .portfolio-video-carousel-stage {
+    aspect-ratio: 3 / 4;
+  }
+
+  .material-item {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .material-item-image {
+    max-width: 26rem;
+    margin: 0 auto;
+  }
+
   .portfolio-lightbox {
     padding: 1rem;
   }

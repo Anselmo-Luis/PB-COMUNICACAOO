@@ -12,12 +12,12 @@ function buildWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
 
 const FALLBACK_RATIO = 4 / 3;
 
-const galleryImage = (folder, file, alt) => {
-  const src = `/assets/gallery/${folder}/${file}.webp`;
-  const meta = galleryImageRatios[src];
+const galleryImage = (folder, file, alt, cacheBust) => {
+  const path = `/assets/gallery/${folder}/${file}.webp`;
+  const meta = galleryImageRatios[path];
 
   return {
-    src,
+    src: cacheBust ? `${path}?v=${cacheBust}` : path,
     alt,
     width: meta?.width ?? 800,
     height: meta?.height ?? 600,
@@ -420,7 +420,7 @@ export const siteData = {
       ]),
       project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
         galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
-        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal'),
+        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal', 'plate-blur'),
         galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
       ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [

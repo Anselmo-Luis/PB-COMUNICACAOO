@@ -78,12 +78,9 @@ export default function CTA() {
 
               <div className="cta-contact-card-light editorial-surface-soft-light rounded-[1.35rem] px-6 py-5 text-sm text-[var(--color-pb-ink-2)]">
                 <div className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-pb-ink-2)]" style={{ opacity: 0.5 }}>Contato direto</div>
-                <div className="mt-3 space-y-2">
-                  <a href={`mailto:${siteData.contact.email}`} className="block text-[var(--color-pb-ink)] transition-colors hover:text-[var(--color-pb-accent-on-light)]">
-                    {siteData.contact.email}
-                  </a>
-                  <p>{siteData.contact.address}</p>
-                </div>
+                <a href={`mailto:${siteData.contact.email}`} className="mt-3 block text-[var(--color-pb-ink)] transition-colors hover:text-[var(--color-pb-accent-on-light)]">
+                  {siteData.contact.email}
+                </a>
               </div>
             </div>
           </div>

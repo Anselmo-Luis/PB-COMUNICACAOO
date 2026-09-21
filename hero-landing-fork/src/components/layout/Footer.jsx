@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import { siteData } from '../../data/siteData';
 
 const socialIcons = {
@@ -48,10 +48,6 @@ export default function Footer() {
           <div>
             <p className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-pb-ink)] mb-4">Contato</p>
             <ul className="space-y-2 text-sm text-[var(--color-pb-ink-2)]">
-              <li className="flex items-start gap-2">
-                <MapPin size={16} strokeWidth={1.5} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
-                {siteData.contact.address}
-              </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} strokeWidth={1.5} className="flex-shrink-0" aria-hidden="true" />
                 <a href={siteData.contact.phoneLink} className="hover:text-[var(--color-pb-ink)]">

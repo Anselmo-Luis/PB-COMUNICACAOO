@@ -95,10 +95,6 @@ export default function FAQ() {
                     {siteData.contact.email}
                   </a>
                 </div>
-                <div className="border-t border-black/8 pt-4">
-                  <div className="text-[0.68rem] uppercase tracking-[0.18em] text-[var(--color-pb-ink-2)]" style={{ opacity: 0.5 }}>Endereço</div>
-                  <p className="mt-1 text-[var(--color-pb-ink)]">{siteData.contact.address}</p>
-                </div>
               </div>
             </div>
           </div>

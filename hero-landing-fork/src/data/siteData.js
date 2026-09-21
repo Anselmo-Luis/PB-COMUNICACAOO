@@ -21,7 +21,7 @@ const galleryImage = (folder, file, alt, cacheBust) => {
     srcSet: meta?.width > 800
       ? `${path.replace('.webp', '-480.webp')} 480w, ${path.replace('.webp', '-800.webp')} 800w, ${path} ${meta.width}w`
       : undefined,
-    sizes: '(max-width: 767px) 92vw, (max-width: 1099px) 46vw, 30vw',
+    sizes: '(max-width: 767px) 92vw, 30vw',
     alt,
     width: meta?.width ?? 800,
     height: meta?.height ?? 600,

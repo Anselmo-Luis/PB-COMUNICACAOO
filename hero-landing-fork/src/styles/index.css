@@ -283,9 +283,11 @@ textarea:focus-visible {
   left: auto;
   width: min(20rem, 88vw);
   max-width: 100vw;
-  /* Notch/ilha dinâmica no iPhone em paisagem e indicador home no rodapé */
+  /* Notch/ilha dinâmica no iPhone em paisagem. O painel acompanha o conteúdo, então
+     o indicador home entra no limite de altura em vez de virar padding vazio. */
   padding-right: env(safe-area-inset-right, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  max-height: 100vh;
+  max-height: calc(100dvh - env(safe-area-inset-bottom, 0px));
 }
 
 .nav-drawer-backdrop {

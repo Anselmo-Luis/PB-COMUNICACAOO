@@ -131,7 +131,7 @@ export default function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
-            className="nav-drawer fixed right-0 top-0 z-[101] flex h-full flex-col border-l border-black/[0.08] bg-white text-[var(--color-pb-ink)] shadow-2xl md:hidden"
+            className="nav-drawer fixed right-0 top-0 z-[101] flex flex-col rounded-bl-[1.75rem] border-b border-l border-black/[0.08] bg-white text-[var(--color-pb-ink)] shadow-2xl md:hidden"
             style={{ right: 0, left: 'auto', width: 'min(20rem, 88vw)', maxWidth: '100vw' }}
           >
             <span
@@ -156,7 +156,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            <nav aria-label="Menu mobile" className="flex flex-1 flex-col justify-center overflow-y-auto px-5 py-5">
+            <nav aria-label="Menu mobile" className="min-h-0 overflow-y-auto px-5 py-5">
               <div className="overflow-hidden rounded-2xl border border-black/[0.07] bg-[#fcfcfd] shadow-[0_10px_28px_rgba(29,29,31,0.05)]">
                 {siteData.nav.links.map((link, index) => (
                   <a
@@ -190,7 +190,7 @@ export default function Navbar() {
                 href={siteData.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3.5 font-[var(--font-display)] text-sm font-bold text-white shadow-[0_10px_24px_rgba(37,211,102,0.35)] transition-all hover:-translate-y-0.5 hover:bg-[#1fae55]"
+                className="flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-3 py-3.5 font-[var(--font-display)] text-sm font-bold text-white shadow-[0_10px_24px_rgba(37,211,102,0.35)] transition-all hover:-translate-y-0.5 hover:bg-[#1fae55]"
               >
                 <WhatsAppGlyph size={19} />
                 Solicite seu Orçamento

@@ -150,6 +150,38 @@ test.describe('site institucional P&B', () => {
     await expect(page.getByRole('dialog', { name: 'Menu de navegação' })).toHaveCount(0);
   });
 
+  test('mantém o menu mobile compacto e alcançável em qualquer celular', async ({ page }) => {
+    for (const [width, height] of [[320, 568], [390, 844], [667, 375]]) {
+      await page.setViewportSize({ width, height });
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      await page.getByRole('button', { name: 'Abrir menu' }).click();
+      const drawer = page.getByRole('dialog', { name: 'Menu de navegação' });
+      await expect(drawer).toBeVisible();
+
+      const layout = await drawer.evaluate((d) => {
+        const nav = d.querySelector('nav');
+        const card = nav.firstElementChild.getBoundingClientRect();
+        const header = d.children[1].getBoundingClientRect();
+        const cta = d.children[3].querySelector('a').getBoundingClientRect();
+        return {
+          panelHeight: d.getBoundingClientRect().height,
+          gapAboveLinks: card.top - header.bottom,
+          ctaBottom: cta.bottom,
+          ctaHeight: cta.height,
+          scrolls: nav.scrollHeight > nav.clientHeight,
+        };
+      });
+      const label = `${width}x${height}`;
+      expect(layout.panelHeight, label).toBeLessThanOrEqual(height);
+      expect(layout.ctaBottom, `${label}: CTA na tela`).toBeLessThanOrEqual(height);
+      expect(layout.ctaHeight, `${label}: CTA em uma linha`).toBeLessThan(60);
+      if (!layout.scrolls) expect(layout.gapAboveLinks, `${label}: sem vão vazio`).toBeLessThan(40);
+
+      await drawer.getByRole('link', { name: 'Contato' }).scrollIntoViewIfNeeded();
+      await expect(drawer.getByRole('link', { name: 'Contato' })).toBeInViewport();
+    }
+  });
+
   test('leva o cache-bust das fotos a todas as variantes do srcset', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 

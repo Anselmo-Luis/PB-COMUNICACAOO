@@ -150,6 +150,27 @@ test.describe('site institucional P&B', () => {
     await expect(page.getByRole('dialog', { name: 'Menu de navegação' })).toHaveCount(0);
   });
 
+  test('leva o cache-bust das fotos a todas as variantes do srcset', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const portfolio = page.locator('#portfolio');
+    await portfolio.scrollIntoViewIfNeeded();
+    await expect(portfolio.getByRole('tab').first()).toBeVisible();
+
+    const busted = await portfolio.locator('img[src*="?v="]').evaluateAll((imgs) => imgs.map((img) => ({
+      src: img.getAttribute('src'),
+      srcset: img.getAttribute('srcset') || '',
+    })));
+    expect(busted.length).toBeGreaterThan(0);
+
+    for (const { src, srcset } of busted) {
+      const version = src.split('?v=')[1];
+      for (const candidate of srcset.split(',').map((entry) => entry.trim().split(/\s+/)[0]).filter(Boolean)) {
+        expect(candidate, `srcset de ${src}`).toContain(`?v=${version}`);
+      }
+    }
+  });
+
   test('reproduz o texto e as cores aprovadas no overlay do vídeo', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/?hero=a', { waitUntil: 'domcontentloaded' });

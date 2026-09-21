@@ -15,11 +15,13 @@ const FALLBACK_RATIO = 4 / 3;
 const galleryImage = (folder, file, alt, cacheBust) => {
   const path = `/assets/gallery/${folder}/${file}.webp`;
   const meta = galleryImageRatios[path];
+  // /assets is served as immutable, so the bust must reach every srcset candidate, not just src.
+  const url = (p) => (cacheBust ? `${p}?v=${cacheBust}` : p);
 
   return {
-    src: cacheBust ? `${path}?v=${cacheBust}` : path,
+    src: url(path),
     srcSet: meta?.width > 800
-      ? `${path.replace('.webp', '-480.webp')} 480w, ${path.replace('.webp', '-800.webp')} 800w, ${path} ${meta.width}w`
+      ? `${url(path.replace('.webp', '-480.webp'))} 480w, ${url(path.replace('.webp', '-800.webp'))} 800w, ${url(path)} ${meta.width}w`
       : undefined,
     sizes: '(max-width: 767px) 92vw, 30vw',
     alt,
@@ -407,7 +409,7 @@ export const siteData = {
       ]),
       project('vehicle-smart-fit', 'vehicles', 'Smart Fit', [
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
-        galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor'),
+        galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor', 'smart-truck-1'),
       ]),
       project('vehicle-instituto-taupet', 'vehicles', 'Instituto Taupet', [
         galleryImage('veiculos', 'veiculo-03', 'Van Instituto Taupet personalizada com identidade visual'),

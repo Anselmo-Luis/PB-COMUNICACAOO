@@ -127,17 +127,12 @@ a {
   text-decoration: none;
 }
 
-img,
-video,
-iframe,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-img,
-video {
-  height: auto;
+/* Preflight already handles img/video; this must stay layered or it beats utilities like h-20. */
+@layer base {
+  iframe,
+  svg {
+    max-width: 100%;
+  }
 }
 
 button:focus-visible,

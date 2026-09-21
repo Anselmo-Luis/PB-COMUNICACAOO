@@ -5,7 +5,7 @@ import { siteData } from '../../data/siteData';
 export default function Process() {
   const revealRef = useReveal();
   const { process } = siteData;
-  const { logoSrc } = siteData.company;
+  const { logoSrc, logoWidth, logoHeight } = siteData.company;
 
   return (
     <section
@@ -32,8 +32,8 @@ export default function Process() {
               <img
                 src={logoSrc}
                 alt="P&B Comunicação Visual"
-                width={440}
-                height={220}
+                width={logoWidth}
+                height={logoHeight}
                 loading="lazy"
                 decoding="async"
               />

@@ -142,7 +142,9 @@ export default function Navbar() {
               <img
                 src={siteData.company.logoSrc}
                 alt={siteData.company.name}
-                className="h-9 w-auto"
+                width={siteData.company.logoWidth}
+                height={siteData.company.logoHeight}
+                className="h-12 w-auto"
               />
               <button
                 type="button"

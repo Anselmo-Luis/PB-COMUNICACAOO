@@ -32,8 +32,8 @@ export default function Footer() {
             <img
               src={siteData.company.logoSrc}
               alt={siteData.company.name}
-              width={160}
-              height={80}
+              width={siteData.company.logoWidth}
+              height={siteData.company.logoHeight}
               className="mb-4 h-20 w-auto sm:h-24"
             />
             <h3 className="font-[var(--font-display)] text-lg sm:text-xl font-bold text-[var(--color-pb-ink)] mb-2">
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="pt-6 border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p className="text-xs text-[var(--color-pb-ink-2)]">
             &copy; {new Date().getFullYear()} {siteData.footer.copyright}
           </p>

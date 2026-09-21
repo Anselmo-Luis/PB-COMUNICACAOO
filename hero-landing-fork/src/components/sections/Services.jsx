@@ -2,17 +2,9 @@ import { useEffect, useState } from 'react';
 import { Car, Flag, PaintRoller, Store } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
-import { siteData } from '../../data/siteData';
-import galleryImageRatios from '../../data/galleryImageRatios.json';
+import { gallerySrcSet, galleryUrl, siteData } from '../../data/siteData';
 
 const SERVICE_IMAGE_SIZES = '(min-width: 768px) 38rem, 92vw';
-
-function buildSrcSet(src) {
-  const meta = galleryImageRatios[src];
-  if (!meta || meta.width <= 800) return undefined;
-  const base = src.replace('.webp', '');
-  return `${base}-480.webp 480w, ${base}-800.webp 800w, ${src} ${meta.width}w`;
-}
 
 const SERVICE_ICONS = {
   vehicle: <Car size={26} strokeWidth={1.5} aria-hidden="true" />,
@@ -125,8 +117,8 @@ function ServiceCard({ service, index, ctaText }) {
           {gallery.map((item, galleryIndex) => (
             <img
               key={item.src}
-              src={item.src}
-              srcSet={buildSrcSet(item.src)}
+              src={galleryUrl(item.src)}
+              srcSet={gallerySrcSet(item.src)}
               sizes={SERVICE_IMAGE_SIZES}
               alt={galleryIndex === slide ? service.title : ''}
               aria-hidden={galleryIndex === slide ? undefined : 'true'}

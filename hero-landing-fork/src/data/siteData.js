@@ -12,17 +12,26 @@ function buildWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
 
 const FALLBACK_RATIO = 4 / 3;
 
-const galleryImage = (folder, file, alt, cacheBust) => {
+// /assets is served as immutable and replaced photos keep their names, so every gallery
+// URL carries the content hash from the manifest (npm run generate-gallery-ratios).
+const withVersion = (url, version) => (version ? `${url}?v=${version}` : url);
+
+export const galleryUrl = (path) => withVersion(path, galleryImageRatios[path]?.v);
+
+export const gallerySrcSet = (path) => {
+  const meta = galleryImageRatios[path];
+  if (!meta || meta.width <= 800) return undefined;
+  const variant = (size) => withVersion(path.replace('.webp', `-${size}.webp`), meta.v);
+  return `${variant(480)} 480w, ${variant(800)} 800w, ${galleryUrl(path)} ${meta.width}w`;
+};
+
+const galleryImage = (folder, file, alt) => {
   const path = `/assets/gallery/${folder}/${file}.webp`;
   const meta = galleryImageRatios[path];
-  // /assets is served as immutable, so the bust must reach every srcset candidate, not just src.
-  const url = (p) => (cacheBust ? `${p}?v=${cacheBust}` : p);
 
   return {
-    src: url(path),
-    srcSet: meta?.width > 800
-      ? `${url(path.replace('.webp', '-480.webp'))} 480w, ${url(path.replace('.webp', '-800.webp'))} 800w, ${url(path)} ${meta.width}w`
-      : undefined,
+    src: galleryUrl(path),
+    srcSet: gallerySrcSet(path),
     sizes: '(max-width: 767px) 92vw, 30vw',
     alt,
     width: meta?.width ?? 800,
@@ -370,7 +379,7 @@ export const siteData = {
       ]),
       project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
         galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
-        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal', 'plate-blur-2'),
+        galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal'),
         galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
       ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [
@@ -409,7 +418,7 @@ export const siteData = {
       ]),
       project('vehicle-smart-fit', 'vehicles', 'Smart Fit', [
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
-        galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor', 'smart-truck-1'),
+        galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor'),
       ]),
       project('vehicle-instituto-taupet', 'vehicles', 'Instituto Taupet', [
         galleryImage('veiculos', 'veiculo-03', 'Van Instituto Taupet personalizada com identidade visual'),

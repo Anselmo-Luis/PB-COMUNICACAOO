@@ -1,4 +1,6 @@
+import fs from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
+import { buildGalleryManifest } from '../scripts/generate-gallery-ratios.mjs';
 
 test.describe('site institucional P&B', () => {
   test('apresenta a proposta e permite filtrar o portfólio', async ({ page }) => {
@@ -182,25 +184,34 @@ test.describe('site institucional P&B', () => {
     }
   });
 
-  test('leva o cache-bust das fotos a todas as variantes do srcset', async ({ page }) => {
+  test('versiona as fotos da galeria em todas as variantes do srcset e no lightbox', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     const portfolio = page.locator('#portfolio');
     await portfolio.scrollIntoViewIfNeeded();
     await expect(portfolio.getByRole('tab').first()).toBeVisible();
 
-    const busted = await portfolio.locator('img[src*="?v="]').evaluateAll((imgs) => imgs.map((img) => ({
+    const images = await page.locator('#servicos img, #portfolio .portfolio-mosaic-tile img').evaluateAll((imgs) => imgs.map((img) => ({
       src: img.getAttribute('src'),
       srcset: img.getAttribute('srcset') || '',
     })));
-    expect(busted.length).toBeGreaterThan(0);
+    expect(images.length).toBeGreaterThan(37);
 
-    for (const { src, srcset } of busted) {
-      const version = src.split('?v=')[1];
+    for (const { src, srcset } of images) {
+      const version = src.match(/\?v=([0-9a-f]{8})$/)?.[1];
+      expect(version, `versão em ${src}`).toBeTruthy();
       for (const candidate of srcset.split(',').map((entry) => entry.trim().split(/\s+/)[0]).filter(Boolean)) {
         expect(candidate, `srcset de ${src}`).toContain(`?v=${version}`);
       }
     }
+
+    await portfolio.getByRole('button', { name: /Smart Truck Smart Fit amarelo/ }).click();
+    await expect(page.locator('.portfolio-lightbox-stage img')).toHaveAttribute('src', /veiculo-09\.webp\?v=[0-9a-f]{8}$/);
+  });
+
+  test('o manifesto da galeria acompanha as fotos em disco', async () => {
+    const committed = JSON.parse(await fs.readFile(new URL('../src/data/galleryImageRatios.json', import.meta.url), 'utf8'));
+    expect(await buildGalleryManifest(), 'foto trocada sem rodar npm run generate-gallery-ratios').toEqual(committed);
   });
 
   test('reproduz o texto e as cores aprovadas no overlay do vídeo', async ({ page }) => {

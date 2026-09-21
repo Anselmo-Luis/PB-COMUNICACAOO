@@ -1,574 +1,717 @@
 {
   "/assets/gallery/banners/banner-01.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "f2bf058f"
   },
   "/assets/gallery/banners/banner-02.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "a970dd2a"
   },
   "/assets/gallery/banners/banner-02b.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "a970dd2a"
   },
   "/assets/gallery/banners/banner-03.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "e0621f70"
   },
   "/assets/gallery/banners/banner-04.webp": {
     "width": 338,
-    "height": 451
+    "height": 451,
+    "v": "1cfc84cc"
   },
   "/assets/gallery/banners/banner-05.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "a1670fbf"
   },
   "/assets/gallery/banners/banner-06.webp": {
     "width": 338,
-    "height": 451
+    "height": 451,
+    "v": "97ab0874"
   },
   "/assets/gallery/banners/banner-07.webp": {
     "width": 338,
-    "height": 451
+    "height": 451,
+    "v": "d31acd54"
   },
   "/assets/gallery/banners/banner-08.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "db5caa97"
   },
   "/assets/gallery/banners/banner-08b.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "db5caa97"
   },
   "/assets/gallery/banners/banner-08c.webp": {
     "width": 422,
-    "height": 451
+    "height": 451,
+    "v": "e81b2b50"
   },
   "/assets/gallery/banners/banner-09.webp": {
     "width": 631,
-    "height": 451
+    "height": 451,
+    "v": "ba199c76"
   },
   "/assets/gallery/banners/banner-10.webp": {
     "width": 1179,
-    "height": 1914
+    "height": 1914,
+    "v": "461e5fff"
   },
   "/assets/gallery/banners/banners-01.webp": {
     "width": 536,
-    "height": 940
+    "height": 940,
+    "v": "dd46a773"
   },
   "/assets/gallery/banners/banners-02.webp": {
     "width": 1032,
-    "height": 489
+    "height": 489,
+    "v": "d577f960"
   },
   "/assets/gallery/banners/banners-03.webp": {
     "width": 1280,
-    "height": 720
+    "height": 720,
+    "v": "fe0b2e3e"
   },
   "/assets/gallery/banners/banners-04.webp": {
     "width": 768,
-    "height": 1024
+    "height": 1024,
+    "v": "e3948257"
   },
   "/assets/gallery/banners/banners-05.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "815afdbf"
   },
   "/assets/gallery/banners/banners-06.webp": {
     "width": 900,
-    "height": 1600
+    "height": 1600,
+    "v": "6e1723dd"
   },
   "/assets/gallery/fachadas/fachadas-01.webp": {
     "width": 694,
-    "height": 665
+    "height": 665,
+    "v": "cff23cdd"
   },
   "/assets/gallery/fachadas/fachadas-02.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "65e22f25"
   },
   "/assets/gallery/fachadas/fachadas-03.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "3863f224"
   },
   "/assets/gallery/fachadas/fachadas-04.webp": {
     "width": 960,
-    "height": 1280
+    "height": 1280,
+    "v": "dfd90b9d"
   },
   "/assets/gallery/fachadas/fachadas-05.webp": {
     "width": 1600,
-    "height": 1200
+    "height": 1200,
+    "v": "7c1c65ba"
   },
   "/assets/gallery/fachadas/fachadas-06.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "e21d18cb"
   },
   "/assets/gallery/fachadas/swift-klabin-01.webp": {
     "width": 1600,
-    "height": 1600
+    "height": 1600,
+    "v": "5ee4e664"
   },
   "/assets/gallery/frota/frota-01.webp": {
     "width": 899,
-    "height": 1599
+    "height": 1599,
+    "v": "ca22d970"
   },
   "/assets/gallery/frota/frota-02.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "359ce4d3"
   },
   "/assets/gallery/frota/frota-03.webp": {
     "width": 1280,
-    "height": 720
+    "height": 720,
+    "v": "399d0de3"
   },
   "/assets/gallery/frota/frota-04.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "a8f976e2"
   },
   "/assets/gallery/frota/frota-05.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "59bf0b92"
   },
   "/assets/gallery/frota/frota-06.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "b82d8aa6"
   },
   "/assets/gallery/frota/frota-07.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "89f56e2e"
   },
   "/assets/gallery/frota/frota-08.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "8ffe4339"
   },
   "/assets/gallery/frota/frota-09.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "3c9a4d06"
   },
   "/assets/gallery/frota/frota-10.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "159d048b"
   },
   "/assets/gallery/frota/frota-11.webp": {
     "width": 1280,
-    "height": 960
+    "height": 960,
+    "v": "278a41d6"
   },
   "/assets/gallery/frota/frota-12.webp": {
     "width": 1280,
-    "height": 721
+    "height": 721,
+    "v": "a9886d06"
   },
   "/assets/gallery/frota/frota-13.webp": {
     "width": 1200,
-    "height": 1600
+    "height": 1600,
+    "v": "61c7f9fa"
   },
   "/assets/gallery/frota/frota-14.webp": {
     "width": 960,
-    "height": 1280
+    "height": 1280,
+    "v": "3dab31dc"
   },
   "/assets/gallery/frota/frota-15.webp": {
     "width": 1600,
-    "height": 1200
+    "height": 1200,
+    "v": "49694efe"
   },
   "/assets/gallery/frota/frota-16.webp": {
     "width": 1280,
-    "height": 720
+    "height": 720,
+    "v": "f88b94db"
   },
   "/assets/gallery/frota/frota-17.webp": {
     "width": 1200,
-    "height": 1600
+    "height": 1600,
+    "v": "ec6bc344"
   },
   "/assets/gallery/frota/frota-18.webp": {
     "width": 1600,
-    "height": 1200
+    "height": 1200,
+    "v": "2724d56f"
   },
   "/assets/gallery/frota/frota-19.webp": {
     "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/frota/frota-20.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/frota/frota-video-01-poster.webp": {
-    "width": 960,
-    "height": 536
-  },
-  "/assets/gallery/paineis/adias-mural.webp": {
-    "width": 1024,
-    "height": 768
-  },
-  "/assets/gallery/paineis/paineis-02.webp": {
-    "width": 718,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-03.webp": {
-    "width": 1024,
-    "height": 768
-  },
-  "/assets/gallery/paineis/paineis-04.webp": {
-    "width": 1280,
-    "height": 720
-  },
-  "/assets/gallery/paineis/paineis-05.webp": {
-    "width": 1280,
-    "height": 720
-  },
-  "/assets/gallery/paineis/paineis-06.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-07.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-08.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-09.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-10.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-11.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-12.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-13.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-14.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-15.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-16.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-17.webp": {
-    "width": 768,
-    "height": 1024
-  },
-  "/assets/gallery/paineis/paineis-19.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/paineis-20.webp": {
-    "width": 626,
-    "height": 824
-  },
-  "/assets/gallery/paineis/paineis-21.webp": {
-    "width": 561,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-22.webp": {
-    "width": 745,
-    "height": 1004
-  },
-  "/assets/gallery/paineis/paineis-23.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/paineis/paineis-24.webp": {
-    "width": 1040,
-    "height": 780
-  },
-  "/assets/gallery/paineis/painel-01.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/paineis/painel-02.webp": {
-    "width": 1600,
-    "height": 1597
-  },
-  "/assets/gallery/paineis/painel-03.webp": {
-    "width": 1600,
-    "height": 2000
-  },
-  "/assets/gallery/paineis/painel-04.webp": {
-    "width": 337,
-    "height": 287
-  },
-  "/assets/gallery/paineis/painel-04b.webp": {
-    "width": 297,
-    "height": 287
-  },
-  "/assets/gallery/paineis/painel-05.webp": {
-    "width": 603,
-    "height": 451
-  },
-  "/assets/gallery/paineis/painel-06.webp": {
-    "width": 701,
-    "height": 451
-  },
-  "/assets/gallery/paineis/painel-07.webp": {
-    "width": 1600,
-    "height": 1998
-  },
-  "/assets/gallery/paineis/painel-08.webp": {
-    "width": 601,
-    "height": 451
-  },
-  "/assets/gallery/paineis/painel-09.webp": {
-    "width": 601,
-    "height": 451
-  },
-  "/assets/gallery/paineis/painel-10.webp": {
-    "width": 601,
-    "height": 451
-  },
-  "/assets/gallery/paineis/painel-11.webp": {
-    "width": 823,
-    "height": 695
-  },
-  "/assets/gallery/paineis/painel-12.webp": {
-    "width": 1600,
-    "height": 1603
-  },
-  "/assets/gallery/paineis/painel-13.webp": {
-    "width": 1600,
-    "height": 1607
-  },
-  "/assets/gallery/paineis/painel-14.webp": {
-    "width": 1179,
-    "height": 1434
-  },
-  "/assets/gallery/paineis/painel-15.webp": {
-    "width": 1508,
-    "height": 1508
-  },
-  "/assets/gallery/paineis/painel-16.webp": {
-    "width": 1594,
-    "height": 1600
-  },
-  "/assets/gallery/pdv/friboi-banners.webp": {
-    "width": 438,
-    "height": 355
-  },
-  "/assets/gallery/pdv/friboi-barris.webp": {
-    "width": 1024,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/jordan-adesivo.webp": {
-    "width": 824,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/kitkat-pdv.webp": {
-    "width": 1024,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/montana-pdv.webp": {
-    "width": 1024,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/pocoyo-standee.webp": {
-    "width": 931,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/primor-pdv.webp": {
-    "width": 768,
-    "height": 1024
-  },
-  "/assets/gallery/pdv/seara-fatiador.webp": {
-    "width": 1024,
-    "height": 1021
-  },
-  "/assets/gallery/pdv/sest-senat-totem.webp": {
-    "width": 1024,
-    "height": 1024
-  },
-  "/assets/gallery/producao/producao-02-poster.jpg": {
-    "width": 512,
-    "height": 768
-  },
-  "/assets/gallery/producao/producao-03-poster.jpg": {
-    "width": 464,
-    "height": 832
-  },
-  "/assets/gallery/producao/producao-adesivacao-parede-cidade-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
-  "/assets/gallery/producao/producao-adesivacao-parede-escritorio-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
-  "/assets/gallery/producao/producao-adesivacao-parede-floresta-poster.jpg": {
-    "width": 848,
-    "height": 480
-  },
-  "/assets/gallery/producao/producao-fachada-pb-poster.jpg": {
-    "width": 512,
-    "height": 768
-  },
-  "/assets/gallery/producao/producao-impressao-medalhista-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
-  "/assets/gallery/producao/producao-impressao-seara-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
-  "/assets/gallery/producao/producao-impressao-vinil-verde-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
-  "/assets/gallery/totens/totens-01.webp": {
-    "width": 720,
-    "height": 1280
-  },
-  "/assets/gallery/totens/totens-03.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/totens/totens-04.webp": {
-    "width": 720,
-    "height": 1280
-  },
-  "/assets/gallery/totens/totens-05.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/totens/totens-06.webp": {
-    "width": 1280,
-    "height": 957
-  },
-  "/assets/gallery/totens/totens-07.webp": {
-    "width": 720,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-01.webp": {
-    "width": 1280,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-02.webp": {
-    "width": 1280,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-03.webp": {
-    "width": 1280,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-04.webp": {
-    "width": 1280,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-05.webp": {
-    "width": 1280,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-06.webp": {
-    "width": 1600,
-    "height": 1597
-  },
-  "/assets/gallery/veiculos/veiculo-07.webp": {
-    "width": 1600,
-    "height": 1603
-  },
-  "/assets/gallery/veiculos/veiculo-08.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/veiculos/veiculo-09.webp": {
-    "width": 1024,
-    "height": 770
-  },
-  "/assets/gallery/veiculos/veiculo-10.webp": {
-    "width": 1600,
-    "height": 1603
-  },
-  "/assets/gallery/veiculos/veiculo-11.webp": {
-    "width": 1464,
-    "height": 1464
-  },
-  "/assets/gallery/veiculos/veiculo-12.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/veiculos/veiculo-13.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/veiculos/veiculo-14.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/veiculos/veiculo-15.webp": {
-    "width": 1600,
-    "height": 1600
-  },
-  "/assets/gallery/veiculos/veiculo-16.webp": {
-    "width": 1600,
-    "height": 1594
-  },
-  "/assets/gallery/veiculos/veiculo-17.jpg": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-17.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-18.jpg": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/veiculos/veiculo-18.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/veiculos/veiculo-19.jpg": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-19.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-20.jpg": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-20.webp": {
-    "width": 960,
-    "height": 1280
-  },
-  "/assets/gallery/veiculos/veiculo-21.jpg": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/veiculos/veiculo-21.webp": {
-    "width": 1280,
-    "height": 960
-  },
-  "/assets/gallery/veiculos/veiculo-22.webp": {
-    "width": 1024,
-    "height": 1021
-  },
-  "/assets/gallery/paineis/paineis-11-b.webp": {
-    "width": 890,
-    "height": 1280
-  },
-  "/assets/gallery/paineis/painel-12-b.webp": {
-    "width": 1565,
-    "height": 1603
+    "height": 1280,
+    "v": "b87b4f0e"
   },
   "/assets/gallery/frota/frota-20-b.webp": {
     "width": 1002,
-    "height": 960
+    "height": 960,
+    "v": "d0e1995e"
+  },
+  "/assets/gallery/frota/frota-20.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "e0d5d7a1"
+  },
+  "/assets/gallery/frota/frota-video-01-poster.webp": {
+    "width": 960,
+    "height": 536,
+    "v": "0b258c54"
+  },
+  "/assets/gallery/paineis/adias-mural.webp": {
+    "width": 1024,
+    "height": 768,
+    "v": "4bd1c435"
+  },
+  "/assets/gallery/paineis/paineis-02.webp": {
+    "width": 718,
+    "height": 1280,
+    "v": "93615973"
+  },
+  "/assets/gallery/paineis/paineis-03.webp": {
+    "width": 1024,
+    "height": 768,
+    "v": "e9d4e49c"
+  },
+  "/assets/gallery/paineis/paineis-04.webp": {
+    "width": 1280,
+    "height": 720,
+    "v": "ebaed540"
+  },
+  "/assets/gallery/paineis/paineis-05.webp": {
+    "width": 1280,
+    "height": 720,
+    "v": "69ced070"
+  },
+  "/assets/gallery/paineis/paineis-06.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "28ba0653"
   },
   "/assets/gallery/paineis/paineis-07-b.webp": {
     "width": 932,
-    "height": 1280
+    "height": 1280,
+    "v": "59d31c6b"
+  },
+  "/assets/gallery/paineis/paineis-07.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "7a212927"
+  },
+  "/assets/gallery/paineis/paineis-08.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "4ec6277e"
+  },
+  "/assets/gallery/paineis/paineis-09.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "e127b84b"
+  },
+  "/assets/gallery/paineis/paineis-10.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "0e6e0a53"
+  },
+  "/assets/gallery/paineis/paineis-11-b.webp": {
+    "width": 890,
+    "height": 1280,
+    "v": "07dc8e96"
+  },
+  "/assets/gallery/paineis/paineis-11.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "6a9042af"
+  },
+  "/assets/gallery/paineis/paineis-12.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "09dec93a"
+  },
+  "/assets/gallery/paineis/paineis-13.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "75b33e34"
+  },
+  "/assets/gallery/paineis/paineis-14.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "2218eae7"
+  },
+  "/assets/gallery/paineis/paineis-15.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "79583d2c"
+  },
+  "/assets/gallery/paineis/paineis-16.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "094e570f"
+  },
+  "/assets/gallery/paineis/paineis-17.webp": {
+    "width": 768,
+    "height": 1024,
+    "v": "35df6242"
+  },
+  "/assets/gallery/paineis/paineis-19.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "9946b238"
+  },
+  "/assets/gallery/paineis/paineis-20.webp": {
+    "width": 626,
+    "height": 824,
+    "v": "008e8d48"
+  },
+  "/assets/gallery/paineis/paineis-21.webp": {
+    "width": 561,
+    "height": 960,
+    "v": "30b3f0af"
+  },
+  "/assets/gallery/paineis/paineis-22.webp": {
+    "width": 745,
+    "height": 1004,
+    "v": "7bbf0bed"
+  },
+  "/assets/gallery/paineis/paineis-23.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "35d20e93"
+  },
+  "/assets/gallery/paineis/paineis-24.webp": {
+    "width": 1040,
+    "height": 780,
+    "v": "9f1c80d1"
+  },
+  "/assets/gallery/paineis/painel-01.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "df9a70d1"
+  },
+  "/assets/gallery/paineis/painel-02.webp": {
+    "width": 1600,
+    "height": 1597,
+    "v": "9209e4ff"
+  },
+  "/assets/gallery/paineis/painel-03.webp": {
+    "width": 1600,
+    "height": 2000,
+    "v": "cbb8cb12"
+  },
+  "/assets/gallery/paineis/painel-04.webp": {
+    "width": 337,
+    "height": 287,
+    "v": "b4be7e55"
+  },
+  "/assets/gallery/paineis/painel-04b.webp": {
+    "width": 297,
+    "height": 287,
+    "v": "6c189788"
+  },
+  "/assets/gallery/paineis/painel-05.webp": {
+    "width": 603,
+    "height": 451,
+    "v": "7dca1b10"
+  },
+  "/assets/gallery/paineis/painel-06.webp": {
+    "width": 701,
+    "height": 451,
+    "v": "2bcdfe02"
+  },
+  "/assets/gallery/paineis/painel-07.webp": {
+    "width": 1600,
+    "height": 1998,
+    "v": "f29efcc0"
+  },
+  "/assets/gallery/paineis/painel-08.webp": {
+    "width": 601,
+    "height": 451,
+    "v": "bf1a186c"
+  },
+  "/assets/gallery/paineis/painel-09.webp": {
+    "width": 601,
+    "height": 451,
+    "v": "ef31d345"
+  },
+  "/assets/gallery/paineis/painel-10.webp": {
+    "width": 601,
+    "height": 451,
+    "v": "f8fa11d9"
+  },
+  "/assets/gallery/paineis/painel-11.webp": {
+    "width": 823,
+    "height": 695,
+    "v": "ac157deb"
+  },
+  "/assets/gallery/paineis/painel-12-b.webp": {
+    "width": 1565,
+    "height": 1603,
+    "v": "12f6d6f1"
+  },
+  "/assets/gallery/paineis/painel-12.webp": {
+    "width": 1600,
+    "height": 1603,
+    "v": "78425934"
+  },
+  "/assets/gallery/paineis/painel-13.webp": {
+    "width": 1600,
+    "height": 1607,
+    "v": "bcee9abb"
+  },
+  "/assets/gallery/paineis/painel-14.webp": {
+    "width": 1179,
+    "height": 1434,
+    "v": "bee796bf"
+  },
+  "/assets/gallery/paineis/painel-15.webp": {
+    "width": 1508,
+    "height": 1508,
+    "v": "972bdda1"
+  },
+  "/assets/gallery/paineis/painel-16.webp": {
+    "width": 1594,
+    "height": 1600,
+    "v": "db260e17"
+  },
+  "/assets/gallery/pdv/friboi-banners.webp": {
+    "width": 438,
+    "height": 355,
+    "v": "83341ae6"
+  },
+  "/assets/gallery/pdv/friboi-barris.webp": {
+    "width": 1024,
+    "height": 1024,
+    "v": "c5092725"
+  },
+  "/assets/gallery/pdv/jordan-adesivo.webp": {
+    "width": 824,
+    "height": 1024,
+    "v": "6d58615d"
   },
   "/assets/gallery/pdv/kitkat-pdv-b.webp": {
     "width": 971,
-    "height": 1024
+    "height": 1024,
+    "v": "e4fc3575"
+  },
+  "/assets/gallery/pdv/kitkat-pdv.webp": {
+    "width": 1024,
+    "height": 1024,
+    "v": "14ff29a1"
+  },
+  "/assets/gallery/pdv/montana-pdv.webp": {
+    "width": 1024,
+    "height": 1024,
+    "v": "6473b6af"
+  },
+  "/assets/gallery/pdv/pocoyo-standee.webp": {
+    "width": 931,
+    "height": 1024,
+    "v": "70c73c21"
+  },
+  "/assets/gallery/pdv/primor-pdv.webp": {
+    "width": 768,
+    "height": 1024,
+    "v": "a686526a"
+  },
+  "/assets/gallery/pdv/seara-fatiador.webp": {
+    "width": 1024,
+    "height": 1021,
+    "v": "7f9fdc27"
+  },
+  "/assets/gallery/pdv/sest-senat-totem.webp": {
+    "width": 1024,
+    "height": 1024,
+    "v": "bdbb2e0d"
+  },
+  "/assets/gallery/producao/producao-02-poster.jpg": {
+    "width": 512,
+    "height": 768,
+    "v": "dbe04858"
+  },
+  "/assets/gallery/producao/producao-03-poster.jpg": {
+    "width": 464,
+    "height": 832,
+    "v": "020979cb"
+  },
+  "/assets/gallery/producao/producao-adesivacao-parede-cidade-poster.jpg": {
+    "width": 480,
+    "height": 848,
+    "v": "8f19fda4"
+  },
+  "/assets/gallery/producao/producao-adesivacao-parede-escritorio-poster.jpg": {
+    "width": 480,
+    "height": 848,
+    "v": "bc772bfa"
+  },
+  "/assets/gallery/producao/producao-adesivacao-parede-floresta-poster.jpg": {
+    "width": 848,
+    "height": 480,
+    "v": "2bbb1d59"
+  },
+  "/assets/gallery/producao/producao-fachada-pb-poster.jpg": {
+    "width": 512,
+    "height": 768,
+    "v": "79874eb3"
+  },
+  "/assets/gallery/producao/producao-impressao-medalhista-poster.jpg": {
+    "width": 480,
+    "height": 848,
+    "v": "5de24266"
+  },
+  "/assets/gallery/producao/producao-impressao-seara-poster.jpg": {
+    "width": 480,
+    "height": 848,
+    "v": "07df6f67"
+  },
+  "/assets/gallery/producao/producao-impressao-vinil-verde-poster.jpg": {
+    "width": 480,
+    "height": 848,
+    "v": "ab13691a"
+  },
+  "/assets/gallery/totens/totens-01.webp": {
+    "width": 720,
+    "height": 1280,
+    "v": "2fe83187"
+  },
+  "/assets/gallery/totens/totens-03.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "ea79c059"
+  },
+  "/assets/gallery/totens/totens-04.webp": {
+    "width": 720,
+    "height": 1280,
+    "v": "8d206d8e"
+  },
+  "/assets/gallery/totens/totens-05.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "ae2435d8"
+  },
+  "/assets/gallery/totens/totens-06.webp": {
+    "width": 1280,
+    "height": 957,
+    "v": "a39bff9c"
+  },
+  "/assets/gallery/totens/totens-07.webp": {
+    "width": 720,
+    "height": 1280,
+    "v": "dc9bad13"
+  },
+  "/assets/gallery/veiculos/veiculo-01.webp": {
+    "width": 1280,
+    "height": 1280,
+    "v": "0e4593eb"
+  },
+  "/assets/gallery/veiculos/veiculo-02.webp": {
+    "width": 1280,
+    "height": 1280,
+    "v": "e4c4f01c"
+  },
+  "/assets/gallery/veiculos/veiculo-03.webp": {
+    "width": 1280,
+    "height": 1280,
+    "v": "af8f8ced"
+  },
+  "/assets/gallery/veiculos/veiculo-04.webp": {
+    "width": 1280,
+    "height": 1280,
+    "v": "b4698c88"
+  },
+  "/assets/gallery/veiculos/veiculo-05.webp": {
+    "width": 1280,
+    "height": 1280,
+    "v": "e52156f1"
+  },
+  "/assets/gallery/veiculos/veiculo-06.webp": {
+    "width": 1600,
+    "height": 1597,
+    "v": "dbac0c4a"
+  },
+  "/assets/gallery/veiculos/veiculo-07.webp": {
+    "width": 1600,
+    "height": 1603,
+    "v": "7e5954f1"
+  },
+  "/assets/gallery/veiculos/veiculo-08.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "6f1f66db"
+  },
+  "/assets/gallery/veiculos/veiculo-09.webp": {
+    "width": 1024,
+    "height": 770,
+    "v": "1f65b6e7"
+  },
+  "/assets/gallery/veiculos/veiculo-10.webp": {
+    "width": 1600,
+    "height": 1603,
+    "v": "317df01a"
+  },
+  "/assets/gallery/veiculos/veiculo-11.webp": {
+    "width": 1464,
+    "height": 1464,
+    "v": "dc5a21b2"
+  },
+  "/assets/gallery/veiculos/veiculo-12.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "44d33682"
+  },
+  "/assets/gallery/veiculos/veiculo-13.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "f336ea52"
+  },
+  "/assets/gallery/veiculos/veiculo-14.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "71ea258f"
+  },
+  "/assets/gallery/veiculos/veiculo-15.webp": {
+    "width": 1600,
+    "height": 1600,
+    "v": "d2752621"
+  },
+  "/assets/gallery/veiculos/veiculo-16.webp": {
+    "width": 1600,
+    "height": 1594,
+    "v": "9b4231a6"
+  },
+  "/assets/gallery/veiculos/veiculo-17.jpg": {
+    "width": 960,
+    "height": 1280,
+    "v": "9e4d7804"
+  },
+  "/assets/gallery/veiculos/veiculo-17.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "3ec41d29"
+  },
+  "/assets/gallery/veiculos/veiculo-18.jpg": {
+    "width": 1280,
+    "height": 960,
+    "v": "afa3a28e"
+  },
+  "/assets/gallery/veiculos/veiculo-18.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "496b36ed"
+  },
+  "/assets/gallery/veiculos/veiculo-19.jpg": {
+    "width": 960,
+    "height": 1280,
+    "v": "83aabe86"
+  },
+  "/assets/gallery/veiculos/veiculo-19.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "77c49234"
+  },
+  "/assets/gallery/veiculos/veiculo-20.jpg": {
+    "width": 960,
+    "height": 1280,
+    "v": "cfa631bf"
+  },
+  "/assets/gallery/veiculos/veiculo-20.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "603474a8"
+  },
+  "/assets/gallery/veiculos/veiculo-21.jpg": {
+    "width": 1280,
+    "height": 960,
+    "v": "05aa88cc"
+  },
+  "/assets/gallery/veiculos/veiculo-21.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "77c9fc5a"
+  },
+  "/assets/gallery/veiculos/veiculo-22.webp": {
+    "width": 1024,
+    "height": 1021,
+    "v": "77563780"
   }
 }

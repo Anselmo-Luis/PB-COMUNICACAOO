@@ -129,15 +129,15 @@ export default function ContactForm() {
   return (
     <section
       id={copy.id}
+      aria-labelledby="contato-heading"
       className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6"
     >
       <div ref={revealRef} className="reveal-section mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)] lg:items-start lg:gap-16">
           <div>
             <span className="section-kicker-light">{copy.kicker}</span>
-            <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold leading-[1.08] tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
-              {copy.headline.before}{' '}
-              <span className="accent-text-light">{copy.headline.accent}</span>
+            <h2 id="contato-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold leading-[1.08] tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
+              {copy.headline.before} {copy.headline.accent}
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
               {copy.subheadline}

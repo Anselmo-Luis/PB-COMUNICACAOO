@@ -29,14 +29,13 @@ export default function Benefits() {
   const { whyUs } = siteData;
 
   return (
-    <section id="sobre" className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6">
+    <section id="sobre" aria-labelledby="sobre-heading" className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6">
       <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <span className="section-kicker-light">{whyUs.label}</span>
-            <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
-              {whyUs.headline.before}{' '}
-              <span className="text-[var(--color-pb-accent-blue)]">{whyUs.headline.accent}</span>
+            <h2 id="sobre-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
+              {whyUs.headline.before} {whyUs.headline.accent}
               {whyUs.headline.after && ` ${whyUs.headline.after}`}
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">

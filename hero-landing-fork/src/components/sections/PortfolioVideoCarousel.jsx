@@ -66,17 +66,20 @@ function VideoSlide({
           autoPlay={isPlayable && isInView && shouldPlay}
           muted
           playsInline
-          preload={isPlayable && isInView && shouldPlay ? 'auto' : 'metadata'}
+          preload={isPlayable && isInView && shouldPlay ? 'auto' : 'none'}
           poster={video.poster}
           onPlaying={() => setIsReady(true)}
-          onError={() => {
-            setHasError(true);
-            setIsReady(false);
-            onError?.();
-          }}
           onEnded={onEnded}
         >
-          <source src={video.src} type="video/mp4" />
+          <source
+            src={video.src}
+            type="video/mp4"
+            onError={() => {
+              setHasError(true);
+              setIsReady(false);
+              onError?.();
+            }}
+          />
           Seu navegador não consegue reproduzir este vídeo.
         </video>
       )}

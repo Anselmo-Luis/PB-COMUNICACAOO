@@ -1,3 +1,71 @@
+/* Fontes self-hosted (subset latin) — substitui o CSS render-blocking do Google Fonts */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/plus-jakarta-sans-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/plus-jakarta-sans-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/plus-jakarta-sans-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/plus-jakarta-sans-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/space-grotesk-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/space-grotesk-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/space-grotesk-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/space-grotesk-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 @import "tailwindcss";
 
 @theme {
@@ -11,7 +79,7 @@
   --color-pb-black: #000000;
   --color-pb-accent: #18aa2b;
   --color-pb-accent-on-light: #18aa2b;
-  --color-pb-accent-blue: #00134e;
+  --color-pb-accent-blue: #0004e1;
   --color-pb-offwhite: #f5f5f7;
   --color-pb-muted: #5f6368;
 }
@@ -29,11 +97,13 @@
 
 html {
   scroll-behavior: smooth;
+  /* Garante que nenhum conteúdo alargue o layout além da tela — sem isso
+     qualquer estouro escondido dá zoom-out no celular e corta o menu fixed. */
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
   background: var(--color-pb-white);
   color: var(--color-pb-ink);
   font-family: var(--font-body);
@@ -58,9 +128,16 @@ a {
 }
 
 img,
-video {
+video,
+iframe,
+svg {
   display: block;
   max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
 }
 
 button:focus-visible,
@@ -174,6 +251,80 @@ textarea:focus-visible {
   transform: translateY(-1px);
 }
 
+@keyframes nav-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes nav-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nav-drawer-link-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-drawer {
+  animation: nav-drawer-in 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Largura por CSS puro: nunca deixa o painel passar da tela, em qualquer
+     viewport, scrollbar ou zoom do navegador. */
+  right: 0;
+  left: auto;
+  width: min(20rem, 88vw);
+  max-width: 100vw;
+  /* Notch/ilha dinâmica no iPhone em paisagem e indicador home no rodapé */
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.nav-drawer-backdrop {
+  animation: nav-backdrop-in 280ms ease;
+}
+
+.nav-drawer-link {
+  opacity: 0;
+  animation: nav-drawer-link-in 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: background-color 200ms ease;
+}
+
+.nav-drawer-link .nav-drawer-link-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+}
+
+.nav-drawer-link:hover,
+.nav-drawer-link:focus-visible {
+  background: #f1f7fd;
+}
+
+.nav-drawer-link:hover .nav-drawer-link-arrow,
+.nav-drawer-link:focus-visible .nav-drawer-link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-drawer-link:hover .nav-drawer-link-index,
+.nav-drawer-link:focus-visible .nav-drawer-link-index {
+  color: var(--color-pb-accent-blue);
+}
+
 .reveal-section {
   opacity: 1;
   transform: none;
@@ -224,19 +375,19 @@ textarea:focus-visible {
 .section-kicker-light {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
   color: var(--color-pb-accent-on-light);
   font-family: var(--font-display);
-  font-size: 0.68rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.06em;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
 .section-kicker-light::before {
-  width: 2.25rem;
-  height: 2px;
+  width: 2.5rem;
+  height: 3px;
   background: var(--color-pb-accent);
   content: '';
 }
@@ -262,7 +413,6 @@ textarea:focus-visible {
 }
 
 .benefit-row,
-.material-item,
 .service-card,
 .client-logo-card,
 .portfolio-video-carousel,
@@ -272,7 +422,6 @@ textarea:focus-visible {
 }
 
 .benefit-row:hover,
-.material-item:hover,
 .service-card:hover,
 .client-logo-card:hover,
 .portfolio-video-carousel:hover {
@@ -316,13 +465,11 @@ textarea:focus-visible {
 
 .benefit-row-icon {
   display: flex;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
-  background: rgba(24, 170, 43, 0.08);
   color: var(--color-pb-accent-on-light);
 }
 
@@ -517,6 +664,7 @@ textarea:focus-visible {
 
 /* Overlay hero (V4) — texto sobre vídeo full-bleed */
 .hero-overlay.hero-section {
+  min-height: 100vh; /* fallback p/ browsers sem svh */
   min-height: 100svh;
   padding: 0;
   background: #101522;
@@ -533,6 +681,7 @@ textarea:focus-visible {
   width: 100%;
   max-width: none;
   margin: 0;
+  min-height: 100vh; /* fallback p/ browsers sem svh */
   min-height: 100svh;
   gap: 0;
   container-type: normal;
@@ -560,26 +709,7 @@ textarea:focus-visible {
 }
 
 .hero-overlay .hero-scrim {
-  display: block;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      105deg,
-      rgba(6, 10, 22, 0.72) 0%,
-      rgba(6, 10, 22, 0.48) 28%,
-      rgba(6, 10, 22, 0.18) 48%,
-      transparent 68%
-    ),
-    linear-gradient(
-      180deg,
-      transparent 0%,
-      transparent 42%,
-      rgba(6, 10, 22, 0.28) 72%,
-      rgba(6, 10, 22, 0.52) 100%
-    );
+  display: none;
 }
 
 .hero-overlay .hero-copy {
@@ -591,6 +721,7 @@ textarea:focus-visible {
   grid-column: 1;
   width: 100%;
   max-width: min(52rem, 78vw);
+  min-height: 100vh; /* fallback p/ browsers sem svh */
   min-height: 100svh;
   /* Same inline gutter as .site-navbar__inner — logo edges share one vertical line */
   padding:
@@ -714,6 +845,7 @@ textarea:focus-visible {
 @media (min-width: 1100px) {
   .hero-variant-a.hero-section:not(.hero-overlay) {
     --hero-pad-top: clamp(9rem, 10vw, 11rem);
+    min-height: 100vh; /* fallback p/ browsers sem svh */
     min-height: 100svh;
     padding: 0;
   }
@@ -734,6 +866,7 @@ textarea:focus-visible {
     width: 100%;
     max-width: none;
     margin: 0;
+    min-height: 100vh; /* fallback p/ browsers sem svh */
     min-height: 100svh;
     gap: 0;
     align-items: stretch;
@@ -772,6 +905,7 @@ textarea:focus-visible {
     grid-column: 2;
     grid-row: 1;
     width: 100%;
+    min-height: 100vh; /* fallback p/ browsers sem svh */
     min-height: 100svh;
     display: block;
     margin: 0;
@@ -882,7 +1016,7 @@ textarea:focus-visible {
 }
 
 .process-heading-mark {
-  color: #00237c;
+  color: var(--color-pb-accent-blue);
 }
 
 .process-brand-card {
@@ -890,7 +1024,6 @@ textarea:focus-visible {
   align-items: center;
   justify-content: center;
   aspect-ratio: 16 / 10;
-  min-height: 12rem;
   overflow: hidden;
   border: 1px solid rgba(0, 19, 78, 0.1);
   border-radius: 1.5rem;
@@ -947,75 +1080,16 @@ textarea:focus-visible {
   }
 }
 
-.materials-list {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.material-item {
-  display: grid;
-  grid-template-columns: 8.75rem minmax(0, 1fr);
-  align-items: center;
-  gap: 1.25rem;
-  border: 1px solid rgba(29, 29, 31, 0.09);
-  border-radius: 1.15rem;
-  background: var(--color-pb-white);
-  padding: 0.875rem;
-}
-
-.material-item-image {
-  overflow: hidden;
-  border-radius: 0.8rem;
-  background: #edf0f2;
-}
-
-.material-item-image img {
-  aspect-ratio: 1;
-  width: 100%;
-  object-fit: cover;
-}
-
-.material-specs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.85rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.material-specs--lead {
-  margin-top: 0.65rem;
-}
-
-.material-specs li {
-  border: 1px solid rgba(0, 19, 78, 0.12);
-  border-radius: 999px;
-  background: #f4f8fb;
-  color: var(--color-pb-accent-blue);
-  padding: 0.28rem 0.62rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
 .materials-video {
   display: grid;
   gap: 0.75rem;
   width: 100%;
   max-width: 26rem;
-  margin: 2.5rem 0 0;
+  margin: 2.5rem auto 0;
   padding: 0.75rem;
   border: 1px solid rgba(29, 29, 31, 0.09);
   border-radius: 1.15rem;
   background: var(--color-pb-white);
-}
-
-@media (min-width: 1024px) {
-  .materials-video {
-    max-width: none;
-  }
 }
 
 .materials-video-frame {
@@ -1073,7 +1147,7 @@ textarea:focus-visible {
 .materials-video-caption {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 0.75rem;
   margin: 0;
   padding: 0.1rem 0.15rem 0;
@@ -1138,6 +1212,7 @@ textarea:focus-visible {
 }
 
 .materials-video-dot {
+  position: relative;
   width: 0.55rem;
   height: 0.55rem;
   border: 0;
@@ -1145,6 +1220,13 @@ textarea:focus-visible {
   background: rgba(0, 19, 78, 0.18);
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hit area invisível para dedo (~36px) sem alterar o visual do dot */
+.materials-video-dot::before {
+  content: '';
+  position: absolute;
+  inset: -0.85rem;
 }
 
 .materials-video-dot:hover,
@@ -1450,56 +1532,68 @@ textarea:focus-visible {
 }
 
 .client-logo-marquee {
+  --client-logo-card-h: 4.5rem;
   display: grid;
   gap: 0.65rem;
   width: 100%;
-  overflow: hidden;
 }
 
 .client-logo-rail {
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .client-logo-track {
   display: flex;
-  width: max-content;
-  gap: 0.75rem;
-  will-change: transform;
-}
-
-.client-logo-sequence {
-  display: flex;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-width: 0;
   gap: 0.75rem;
   margin: 0;
-  padding: 0;
+  padding: 0.25rem 0;
   list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.client-logo-rail .client-logo-track {
-  animation: client-logo-scroll-left 42s linear infinite;
+.client-logo-track::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes client-logo-scroll-left {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(calc(-50% - 0.375rem), 0, 0);
-  }
+.client-logo-nav {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 1px solid rgba(29, 29, 31, 0.14);
+  border-radius: 999px;
+  background: var(--color-pb-white);
+  color: var(--color-pb-ink);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
-.client-logo-rail:hover .client-logo-track,
-.client-logo-rail:focus-within .client-logo-track {
-  animation-play-state: paused;
+.client-logo-nav:hover,
+.client-logo-nav:focus-visible {
+  border-color: var(--color-pb-accent-blue);
+  background: #f1f7fd;
+  color: var(--color-pb-accent-blue);
+}
+
+.client-logo-nav svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .client-logo-card {
   display: flex;
   flex: 0 0 10rem;
-  height: 4.5rem;
-  min-height: 4.5rem;
+  height: var(--client-logo-card-h);
+  min-height: var(--client-logo-card-h);
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -1507,6 +1601,7 @@ textarea:focus-visible {
   border-radius: 1rem;
   background: var(--color-pb-white);
   padding: 0.4rem 0.55rem;
+  scroll-snap-align: start;
 }
 
 .client-logo-card img {
@@ -1531,7 +1626,7 @@ textarea:focus-visible {
 .client-logo-card--fill {
   flex: 0 0 7.4rem;
   width: 7.4rem;
-  height: 4.5rem;
+  height: var(--client-logo-card-h);
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -1540,7 +1635,7 @@ textarea:focus-visible {
 
 .client-logo-card--sonda {
   flex: 0 0 auto;
-  width: calc(4.5rem * 1200 / 783);
+  width: calc(var(--client-logo-card-h) * 1200 / 783);
   background: transparent;
   border: 0;
 }
@@ -1581,7 +1676,7 @@ textarea:focus-visible {
 .portfolio-header h2,
 .portfolio-production-header h2 {
   margin: 0.8rem 0 0;
-  color: var(--color-pb-ink);
+  color: var(--color-pb-accent-blue);
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 5vw, 4.6rem);
   font-weight: 700;
@@ -1683,6 +1778,12 @@ textarea:focus-visible {
   background: #f1f7fd;
   color: var(--color-pb-accent-blue);
   transform: translateY(-1px);
+}
+
+.faq-question-heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .portfolio-mosaic-columns {
@@ -2256,6 +2357,7 @@ textarea:focus-visible {
 .contact-field textarea {
   display: block;
   width: 100%;
+  font-size: 1rem; /* evita zoom automático do iOS ao focar */
   border: 1px solid rgba(29, 29, 31, 0.14);
   border-radius: 0.8rem;
   background: #fbfbfc;
@@ -2459,6 +2561,14 @@ textarea:focus-visible {
     border-radius: 1.25rem;
   }
 
+  /* Full-bleed hero video is 16:9 covering a tall portrait viewport, so
+     most of its width gets cropped; shift the crop left so the painted
+     P&B logo stays in frame instead of only the van's cab. */
+  .hero-overlay .hero-video,
+  .hero-overlay .hero-poster {
+    object-position: 26% center;
+  }
+
   .portfolio-header,
   .portfolio-production-header {
     align-items: flex-start;
@@ -2489,14 +2599,37 @@ textarea:focus-visible {
     aspect-ratio: 3 / 4;
   }
 
-  .material-item {
-    grid-template-columns: 1fr;
-    gap: 0.9rem;
+  .client-logo-marquee {
+    --client-logo-card-h: 3.75rem;
   }
 
-  .material-item-image {
-    max-width: 26rem;
-    margin: 0 auto;
+  .client-logo-card {
+    flex-basis: 7.75rem;
+  }
+
+  .client-logo-card--fill {
+    flex-basis: 6.4rem;
+    width: 6.4rem;
+  }
+
+  .client-logo-nav {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .materials-video-control {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .contact-consent input {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .client-logo-nav svg {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 
   .portfolio-lightbox {
@@ -2540,13 +2673,7 @@ textarea:focus-visible {
     transition-duration: 0.001ms !important;
   }
 
-  .client-logo-track {
-    animation: none !important;
-    transform: none !important;
-  }
-
   .benefit-row:hover,
-  .material-item:hover,
   .service-card:hover,
   .client-logo-card:hover,
   .portfolio-mosaic-tile:hover,

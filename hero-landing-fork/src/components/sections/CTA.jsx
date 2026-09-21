@@ -7,16 +7,16 @@ export default function CTA() {
   const trustPoints = siteData.ctaBanner.trustLine.split(' • ');
 
   return (
-    <section className="relative z-10 overflow-hidden bg-[var(--color-pb-surface)] px-6 py-6">
+    <section aria-labelledby="cta-heading" className="relative z-10 overflow-hidden bg-[var(--color-pb-surface)] px-6 py-6">
       <div ref={revealRef} className="reveal-section mx-auto max-w-6xl">
         <div className="cta-panel-light rounded-[2rem] p-8 sm:p-10 md:p-12">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center">
             <div>
               <span className="section-kicker-light">Solicite seu orçamento</span>
-              <h2 className="mt-6 font-[var(--font-display)] text-4xl font-bold leading-[1.04] tracking-tight text-[var(--color-pb-ink)] sm:text-5xl md:text-6xl">
+              <h2 id="cta-heading" className="mt-6 font-[var(--font-display)] text-4xl font-bold leading-[1.04] tracking-tight text-[var(--color-pb-accent-blue)] sm:text-5xl md:text-6xl">
                 {siteData.ctaBanner.headline.before}
                 {siteData.ctaBanner.headline.lineBreak && <br />}
-                <span className="accent-text-light">{siteData.ctaBanner.headline.accent}</span>
+                {' '}{siteData.ctaBanner.headline.accent}
               </h2>
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">

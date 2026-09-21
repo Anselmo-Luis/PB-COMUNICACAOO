@@ -140,7 +140,16 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
               aria-label={`Visualizar ${thumbnail.alt}`}
               aria-current={thumbnailIndex === index ? 'true' : undefined}
             >
-              <img src={thumbnail.src} alt="" width={96} height={64} />
+              <img
+                src={thumbnail.src}
+                srcSet={thumbnail.srcSet}
+                sizes="96px"
+                alt=""
+                width={96}
+                height={64}
+                loading="lazy"
+                decoding="async"
+              />
             </button>
           ))}
         </div>
@@ -240,7 +249,7 @@ export default function Portfolio() {
       <div className="portfolio-production-header">
         <div>
           <span className="section-kicker-light">Bastidores</span>
-          <h2>Produção</h2>
+          <h2>Essência P&B</h2>
         </div>
         <p>Vídeos de instalação, frota e produção interna.</p>
       </div>

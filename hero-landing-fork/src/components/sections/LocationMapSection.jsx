@@ -25,13 +25,14 @@ export default function LocationMapSection() {
   return (
     <section
       id="localizacao"
+      aria-labelledby="localizacao-heading"
       className="relative z-10 bg-[var(--color-pb-surface)] px-6 py-6"
     >
       <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,0.42fr)] lg:items-start lg:gap-16">
           <div>
             <span className="section-kicker-light">Nossa Localização</span>
-            <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
+            <h2 id="localizacao-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
               Estamos na{' '}
               <span className="accent-text-light">Lapa</span>,{' '}
               <br className="hidden sm:block" />

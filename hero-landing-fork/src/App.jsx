@@ -5,7 +5,7 @@ import TrustLogos from './components/sections/TrustLogos'
 
 const Benefits = lazy(() => import('./components/sections/Benefits'))
 const Process = lazy(() => import('./components/sections/Process'))
-const Features = lazy(() => import('./components/sections/Features'))
+const MaterialsVideo = lazy(() => import('./components/sections/MaterialsVideo'))
 const Services = lazy(() => import('./components/sections/Services'))
 const Portfolio = lazy(() => import('./components/sections/Portfolio'))
 const FAQ = lazy(() => import('./components/sections/FAQ'))
@@ -30,7 +30,7 @@ function App() {
         <TrustLogos />
         <LazySection><Benefits /></LazySection>
         <LazySection><Process /></LazySection>
-        <LazySection><Features /></LazySection>
+        <LazySection><MaterialsVideo /></LazySection>
         <LazySection><Services /></LazySection>
         <LazySection><Portfolio /></LazySection>
         <LazySection><FAQ /></LazySection>

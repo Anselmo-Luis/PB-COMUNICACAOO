@@ -19,14 +19,14 @@ test.describe('site institucional P&B', () => {
     await expect(tabs.nth(1)).toContainText('Adesivação geral');
     await expect(tabs.nth(2)).toContainText('Banner / Lona');
     await expect(tabs.nth(3)).toContainText('PDVs e materiais diversos');
-    await expect(tabs.nth(4)).toContainText('Produção');
+    await expect(tabs.nth(4)).toContainText('Essência P&B');
     await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(37);
     await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(22);
 
     await tabs.nth(1).click();
     await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(38);
-    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(36);
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(40);
+    await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(38);
 
     await tabs.nth(2).click();
     await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
@@ -41,21 +41,21 @@ test.describe('site institucional P&B', () => {
     await expect(pdvPanel.locator('.portfolio-mosaic-group')).toHaveCount(13);
   });
 
-  test('a aba Produção anuncia vídeos em vez de fotos e não abre mosaico vazio', async ({ page }) => {
+  test('a aba Essência P&B anuncia vídeos em vez de fotos e não abre mosaico vazio', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     const portfolio = page.locator('#portfolio');
     await portfolio.scrollIntoViewIfNeeded();
 
     const producaoTab = portfolio.getByRole('tab').nth(4);
-    await expect(producaoTab).toContainText('10 vídeos');
+    await expect(producaoTab).toContainText('9 vídeos');
     await expect(producaoTab).toHaveAttribute('aria-controls', 'portfolio-panel-producao');
     await producaoTab.click();
     await expect(producaoTab).toHaveAttribute('aria-selected', 'true');
 
     const count = portfolio.locator('.portfolio-project-count');
     await expect(count).toContainText('vídeos');
-    await expect(count).toContainText('em Produção');
+    await expect(count).toContainText('em Essência P&B');
     await expect(count).not.toContainText('fotos');
     await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(0);
 
@@ -117,7 +117,7 @@ test.describe('site institucional P&B', () => {
     const materialsVideo = page.locator('.materials-video');
     await materialsVideo.scrollIntoViewIfNeeded();
     await expect(materialsVideo.getByRole('button', { name: /Reproduzir vídeo/i })).toBeVisible();
-    await expect(materialsVideo.getByRole('button', { name: /Próximo vídeo/i })).toHaveCount(0);
+    await expect(materialsVideo.getByRole('button', { name: /Próximo vídeo/i })).toBeVisible();
     await expect(materialsVideo.locator('.materials-video-slide.is-active img')).not.toHaveClass(/is-hidden/);
   });
 

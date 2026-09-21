@@ -6,7 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="robots" content="index, follow" />
     <meta name="description" content="P&B Comunicação Visual — Projetos integrados de sinalização corporativa, produção e instalação em nível nacional desde 2002." />
     <link rel="canonical" href="__SITE_URL__" />
@@ -24,20 +24,37 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="P&B Comunicação Visual" />
+    <meta name="twitter:title" content="P&B Comunicação Visual — Sinalização Corporativa Nacional" />
     <meta name="twitter:description" content="Projetos integrados de sinalização corporativa, produção e instalação em nível nacional desde 2002." />
     <meta name="twitter:image" content="__OG_IMAGE_URL__" />
     <meta name="twitter:image:alt" content="P&B Comunicação Visual — projetos visuais corporativos" />
     <meta name="theme-color" content="#2EA729" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/hero/hero-van-decal-poster-1280.webp"
+      imagesrcset="/assets/hero/hero-van-decal-poster-640.webp 640w, /assets/hero/hero-van-decal-poster-960.webp 960w, /assets/hero/hero-van-decal-poster-1280.webp 1280w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link rel="preload" href="/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/plus-jakarta-sans-400.woff2" as="font" type="font/woff2" crossorigin />
     <script type="application/ld+json">
       __JSON_LD__
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; color: #1d1d1f;">
+        <h1>P&B Comunicação Visual — Sinalização Corporativa desde 2002</h1>
+        <p>Projetos integrados de sinalização corporativa, adesivação de veículos, adesivação geral, banners/lona e PDVs, com produção própria e instalação em todo o Brasil.</p>
+        <p><strong>Endereço:</strong> Rua Antonio Raposo, 149, Lapa, São Paulo - SP, CEP 05074-020 (próximo à estação de Trem Lapa).</p>
+        <p><strong>Telefones:</strong> (11) 3836-0196 / 3644-8907<br /><strong>E-mail:</strong> vendas1@pbcomunicacao.com.br</p>
+        <p>Siga-nos: <a href="https://www.facebook.com/PBComunicacao/?locale=pt_BR">Facebook</a> · <a href="https://www.instagram.com/pb.comunicacaovisual/">Instagram</a></p>
+        <p>Atendemos B2B e B2C em todo o território nacional: frotas, fachadas, pisos, vidros, elevadores, geladeiras e freezers, totens e materiais de ponto de venda.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

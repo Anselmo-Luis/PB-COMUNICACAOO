@@ -8,33 +8,46 @@ function FAQItem({ faq, index }) {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    if (open && contentRef.current) {
-      contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
-    } else if (contentRef.current) {
-      contentRef.current.style.maxHeight = '0';
+    const content = contentRef.current;
+    if (!content) return undefined;
+
+    if (open) {
+      content.style.maxHeight = `${content.scrollHeight}px`;
+      // Ao girar o celular/redimensionar, o scrollHeight muda e o texto
+      // ficaria cortado pelo max-height antigo.
+      const updateMaxHeight = () => {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+      };
+      window.addEventListener('resize', updateMaxHeight);
+      return () => window.removeEventListener('resize', updateMaxHeight);
     }
+
+    content.style.maxHeight = '0';
+    return undefined;
   }, [open]);
 
   return (
     <div className="border-b border-black/[0.07] last:border-0">
-      <button
-        type="button"
-        onClick={() => setOpen((current) => !current)}
-        className="group flex w-full cursor-pointer items-center justify-between py-6 text-left"
-        id={`faq-question-${index}`}
-        aria-expanded={open}
-        aria-controls={`faq-content-${index}`}
-      >
-        <span className="pr-4 font-[var(--font-display)] text-base font-medium text-[var(--color-pb-ink)] transition-colors group-hover:text-[var(--color-pb-accent-on-light)] sm:text-lg">
-          {faq.q}
-        </span>
-        <ChevronDown
-          size={20}
-          strokeWidth={2}
-          aria-hidden="true"
-          className={`flex-shrink-0 text-[var(--color-pb-ink-2)] transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
+      <h3 className="faq-question-heading">
+        <button
+          type="button"
+          onClick={() => setOpen((current) => !current)}
+          className="group flex w-full cursor-pointer items-center justify-between py-6 text-left"
+          id={`faq-question-${index}`}
+          aria-expanded={open}
+          aria-controls={`faq-content-${index}`}
+        >
+          <span className="pr-4 font-[var(--font-display)] text-base font-medium text-[var(--color-pb-ink)] transition-colors group-hover:text-[var(--color-pb-accent-on-light)] sm:text-lg">
+            {faq.q}
+          </span>
+          <ChevronDown
+            size={20}
+            strokeWidth={2}
+            aria-hidden="true"
+            className={`flex-shrink-0 text-[var(--color-pb-ink-2)] transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          />
+        </button>
+      </h3>
       <div
         ref={contentRef}
         id={`faq-content-${index}`}
@@ -56,13 +69,13 @@ export default function FAQ() {
   const { faq } = siteData;
 
   return (
-    <section id="faq" className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6">
+    <section id="faq" aria-labelledby="faq-heading" className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6">
       <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <span className="section-kicker-light">{faq.label}</span>
-            <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
-              {faq.headline.before} <span className="accent-text-light">{faq.headline.accent}</span>
+            <h2 id="faq-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
+              {faq.headline.before} {faq.headline.accent}
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
               {faq.subheadline}

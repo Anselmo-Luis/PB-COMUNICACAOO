@@ -18,6 +18,10 @@ const galleryImage = (folder, file, alt, cacheBust) => {
 
   return {
     src: cacheBust ? `${path}?v=${cacheBust}` : path,
+    srcSet: meta?.width > 800
+      ? `${path.replace('.webp', '-480.webp')} 480w, ${path.replace('.webp', '-800.webp')} 800w, ${path} ${meta.width}w`
+      : undefined,
+    sizes: '(max-width: 767px) 92vw, (max-width: 1099px) 46vw, 30vw',
     alt,
     width: meta?.width ?? 800,
     height: meta?.height ?? 600,
@@ -93,9 +97,12 @@ export const siteData = {
       'Agilidade máxima e compromisso absoluto.',
     ],
     video: {
-      poster: '/assets/hero/hero-van-decal-poster.jpg',
-      posterSrcSet: '/assets/hero/hero-van-decal-poster.jpg',
-      sources: [{ src: '/assets/hero/hero-van-decal.mp4', type: 'video/mp4' }],
+      poster: '/assets/hero/hero-van-decal-poster-1280.webp',
+      posterSrcSet: '/assets/hero/hero-van-decal-poster-640.webp 640w, /assets/hero/hero-van-decal-poster-960.webp 960w, /assets/hero/hero-van-decal-poster-1280.webp 1280w',
+      sources: [
+        { src: '/assets/hero/hero-van-decal.mp4', type: 'video/mp4' },
+        { src: '/assets/hero/hero-van-decal.webm', type: 'video/webm' },
+      ],
     },
   },
 
@@ -103,20 +110,20 @@ export const siteData = {
     label: 'Clientes',
     logos: [
       { name: 'JBS', src: '/assets/clients/jbs-1.jpg' },
-      { name: 'Swift', src: '/assets/clients/swift-1.jpg' },
-      { name: 'Friboi', src: '/assets/clients/friboi-1.jpg' },
-      { name: 'Seara', src: '/assets/clients/seara-1.jpg' },
-      { name: 'Vigor', src: '/assets/clients/vigor-1.jpg' },
       { name: 'Mapfre', src: '/assets/clients/mapfre.jpg' },
       { name: 'Mahogany', src: '/assets/clients/mahogany.jpg' },
-      { name: 'Açovisa', src: '/assets/clients/acovisa.jpg' },
-      { name: 'Viveo', src: '/assets/clients/viveo.jpg' },
-      { name: 'Hinode', src: '/assets/clients/hinode.jpg' },
-      { name: 'Adias', src: '/assets/clients/adias.png' },
-      { name: 'Auto Glass', src: '/assets/clients/auto-glass.jpg' },
       { name: 'Sabesp', src: '/assets/clients/sabesp.jpg' },
+      { name: 'Seara', src: '/assets/clients/seara-1.jpg' },
+      { name: 'Vigor', src: '/assets/clients/vigor-1.jpg' },
+      { name: 'Friboi', src: '/assets/clients/friboi-1.jpg' },
+      { name: 'Viveo', src: '/assets/clients/viveo.jpg' },
+      { name: 'Swift', src: '/assets/clients/swift-1.jpg' },
+      { name: 'Hinode', src: '/assets/clients/hinode.jpg' },
+      { name: 'Açovisa', src: '/assets/clients/acovisa.jpg' },
+      { name: 'Auto Glass', src: '/assets/clients/auto-glass.jpg' },
       { name: 'EDP Energia', src: '/assets/clients/edp.jpg' },
-      { name: 'Sonda', src: '/assets/clients/sonda.png?v=gemini' },
+      { name: 'Sonda', src: '/assets/clients/sonda.webp' },
+      { name: 'Adias', src: '/assets/clients/adias.webp' },
     ],
   },
 
@@ -201,6 +208,24 @@ export const siteData = {
       'Escolhemos cada solução pela qualidade da aplicação, pela leitura da marca e pelo resultado no ambiente.',
     videos: [
       {
+        id: 'jbs-fazer-o-bem',
+        label: 'Adesivação de frota',
+        src: '/assets/materials/jbs-fazer-o-bem.mp4',
+        poster: '/assets/materials/jbs-fazer-o-bem-poster.jpg',
+        alt: 'Carreta JBS Fazer o Bem com adesivação completa de baú',
+        width: 480,
+        height: 848,
+      },
+      {
+        id: 'elevador',
+        label: 'Adesivação de elevador',
+        src: '/assets/materials/elevador.mp4',
+        poster: '/assets/materials/elevador-poster.jpg',
+        alt: 'Elevador com adesivação de marca aplicada nas portas',
+        width: 480,
+        height: 848,
+      },
+      {
         id: 'frota-pickups-galpao',
         label: 'Frota adesivada',
         src: '/assets/materials/frota-pickups-galpao.mp4',
@@ -208,67 +233,6 @@ export const siteData = {
         alt: 'Frota de pickups brancos com adesivação colorida em galpão',
         width: 478,
         height: 850,
-      },
-    ],
-    items: [
-      {
-        title: 'Adesivação de veículos',
-        description: 'Adesivo de alta performance.',
-        specs: ['Carros', 'Vans', 'Caminhões', 'Carretas', 'Ônibus', 'Frotas'],
-        image: '/assets/materials/veiculos-seara.webp',
-        alt: 'Veículo Seara adesivado',
-      },
-      {
-        title: 'Painéis com e sem Estrutura',
-        description:
-          'Painéis para fachadas, ambientes internos e sinalização, com ou sem estrutura de fixação.',
-        specs: ['P.S', 'ACM', 'Lona', 'Vidro', 'Acrílico'],
-        image: '/assets/gallery/paineis/paineis-06.webp',
-        alt: 'Painel corporativo em ambiente interno',
-      },
-      {
-        title: 'Lona',
-        description:
-          'Impressão digital em lona tensionada para fachadas, banners e painéis.',
-        specs: ['Bastão de madeira', 'Alumínio', 'Ilhós', 'Pedestais', 'Roll-up'],
-        image: '/assets/materials/lona.webp',
-        alt: 'Lona impressa em grande formato',
-      },
-      {
-        title: 'Material Ponto de Venda',
-        description:
-          'Peças e aplicações que destacam produtos, ofertas e experiências no ponto de venda.',
-        specs: [
-          'Tag',
-          'Totem',
-          'Móbile',
-          'Display',
-          'Stopper',
-          'Wobbler',
-          'Letra bloco',
-          'Faixa de gôndola',
-          'Manta magnética',
-        ],
-        image: '/assets/materials/pdv-montana.webp',
-        alt: 'Painel PDV Marfrig Montana',
-        objectFit: 'contain',
-      },
-      {
-        title: 'Adesivação em geral',
-        description:
-          'Adesivação em geral, com verniz e laminado adequado para qualquer superfície lisa.',
-        specs: ['Pisos', 'Vidros', 'Paredes', 'Madeiras', 'Elevadores', 'Geladeiras / Freezers'],
-        image: '/assets/materials/adesivos-swift.webp',
-        alt: 'Adesivação Swift Klabin',
-      },
-      {
-        title: 'Impressão digital',
-        descriptionLines: [
-          'Impressão em alta resolução',
-          'Cores vibrantes com garantia de durabilidade em ambiente externo.',
-        ],
-        image: '/assets/materials/impressao.webp',
-        alt: 'Impressão digital em alta resolução',
       },
     ],
   },
@@ -286,6 +250,7 @@ export const siteData = {
       {
         title: 'Adesivação de Veículos',
         description: 'Adesivação de carros, vans e frotas com aplicação precisa, acabamento limpo e identidade alinhada à sua marca.',
+        specs: ['Carros', 'Vans', 'Caminhões', 'Carretas', 'Ônibus', 'Frotas'],
         image: '/assets/gallery/veiculos/veiculo-22.webp',
         gallery: [
           '/assets/gallery/veiculos/veiculo-22.webp',
@@ -302,6 +267,7 @@ export const siteData = {
         title: 'Adesivação Geral',
         description:
           'Adesivação em geral, com verniz e laminado adequado para qualquer superfície lisa: pisos, vidros, paredes, madeiras, elevadores e geladeiras/freezers.',
+        specs: ['Pisos', 'Vidros', 'Paredes', 'Madeiras', 'Elevadores', 'Geladeiras / Freezers'],
         image: {
           src: '/assets/gallery/paineis/adias-mural.webp',
           objectPosition: 'center 40%',
@@ -355,7 +321,17 @@ export const siteData = {
           { src: '/assets/gallery/pdv/seara-fatiador.webp', objectPosition: 'center 45%' },
           { src: '/assets/gallery/paineis/paineis-07.webp', objectFit: 'contain' },
         ],
-        specs: ['PDV', 'Displays', 'Materiais promocionais'],
+        specs: [
+          'Tag',
+          'Totem',
+          'Móbile',
+          'Display',
+          'Stopper',
+          'Wobbler',
+          'Letra bloco',
+          'Faixa de gôndola',
+          'Manta magnética',
+        ],
         category: 'PDVs e materiais diversos',
         metric: 'Mais presença no momento da decisão',
         icon: 'pdv',
@@ -372,46 +348,16 @@ export const siteData = {
       { id: 'general', label: 'Adesivação geral' },
       { id: 'banner', label: 'Banner / Lona' },
       { id: 'pdv', label: 'PDVs e materiais diversos' },
-      { id: 'producao', label: 'Produção', videoOnly: true },
+      { id: 'producao', label: 'Essência P&B', videoOnly: true },
     ],
     projects: [
       project('vehicle-seara-truck', 'vehicles', 'Seara', [
         galleryImage('veiculos', 'veiculo-22', 'Caminhão Seara adesivado'),
       ]),
-      project('vehicle-louv-clean', 'vehicles', 'Louv Clean', [
-        galleryImage('veiculos', 'veiculo-02', 'Veículo Louv Clean personalizado com aplicação gráfica'),
-      ]),
-      project('vehicle-instituto-taupet', 'vehicles', 'Instituto Taupet', [
-        galleryImage('veiculos', 'veiculo-03', 'Van Instituto Taupet personalizada com identidade visual'),
-      ]),
-      project('vehicle-cef-distribuidora', 'vehicles', 'C&F Distribuidora', [
-        galleryImage('veiculos', 'veiculo-04', 'Caminhão C&F Distribuidora com adesivação de alta performance'),
-      ]),
-      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
-        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
-        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
-        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
-      ]),
-      project('vehicle-cartao-todos', 'vehicles', 'Cartão de TODOS / Rio de Prêmios', [
-        galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
-        galleryImage('veiculos', 'veiculo-20', 'Veículo Rio de Prêmios adesivado'),
-      ]),
-      project('vehicle-auto-glass', 'vehicles', 'Auto Glass', [
-        galleryImage('veiculos', 'veiculo-11', 'Veículo Auto Glass adesivado em vista lateral'),
-        galleryImage('veiculos', 'veiculo-12', 'Veículo Auto Glass adesivado em outro ângulo'),
-      ]),
       project('vehicle-friboi', 'vehicles', 'Friboi', [
         galleryImage('veiculos', 'veiculo-06', 'Veículo Friboi adesivado em vista lateral'),
         galleryImage('veiculos', 'veiculo-07', 'Veículo Friboi adesivado em outro ângulo'),
         galleryImage('veiculos', 'veiculo-08', 'Detalhe da adesivação Friboi'),
-      ]),
-      project('vehicle-swift', 'vehicles', 'Swift', [
-        galleryImage('veiculos', 'veiculo-09', 'Veículo Swift adesivado'),
-        galleryImage('veiculos', 'veiculo-14', 'Veículo Swift e Degusta adesivado'),
-        galleryImage('frota', 'frota-18', 'Veículo Swift de frota em campo'),
-      ]),
-      project('vehicle-attos-rh', 'vehicles', 'Attos RH', [
-        galleryImage('veiculos', 'veiculo-10', 'Veículo Attos RH personalizado com identidade visual'),
       ]),
       project('vehicle-sabesp', 'vehicles', 'Sabesp', [
         galleryImage('veiculos', 'veiculo-18', 'Van Sabesp adesivada em vista lateral'),
@@ -426,9 +372,19 @@ export const siteData = {
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [
         galleryImage('veiculos', 'veiculo-05', 'Carro Roadstar com comunicação visual aplicada'),
       ]),
-      project('vehicle-vigor', 'vehicles', 'Vigor', [
-        galleryImage('veiculos', 'veiculo-15', 'Veículo Vigor adesivado'),
-        galleryImage('frota', 'frota-05', 'Veículo Vigor de frota em campo'),
+      project('vehicle-louv-clean', 'vehicles', 'Louv Clean', [
+        galleryImage('veiculos', 'veiculo-02', 'Veículo Louv Clean personalizado com aplicação gráfica'),
+      ]),
+      project('vehicle-cef-distribuidora', 'vehicles', 'C&F Distribuidora', [
+        galleryImage('veiculos', 'veiculo-04', 'Caminhão C&F Distribuidora com adesivação de alta performance'),
+      ]),
+      project('vehicle-auto-glass', 'vehicles', 'Auto Glass', [
+        galleryImage('veiculos', 'veiculo-11', 'Veículo Auto Glass adesivado em vista lateral'),
+        galleryImage('veiculos', 'veiculo-12', 'Veículo Auto Glass adesivado em outro ângulo'),
+      ]),
+      project('vehicle-swift', 'vehicles', 'Swift', [
+        galleryImage('veiculos', 'veiculo-14', 'Veículo Swift e Degusta adesivado'),
+        galleryImage('frota', 'frota-18', 'Veículo Swift de frota em campo'),
       ]),
       project('vehicle-jbs', 'vehicles', 'JBS', [
         galleryImage('frota', 'frota-03', 'Caminhão JBS adesivado'),
@@ -444,67 +400,57 @@ export const siteData = {
       project('vehicle-uol', 'vehicles', 'UOL', [
         galleryImage('frota', 'frota-09', 'Veículo UOL adesivado'),
       ]),
-      project('vehicle-edp', 'vehicles', 'EDP Energia', [
-        galleryImage('frota', 'frota-10', 'Veículo EDP Energia adesivado'),
-      ]),
       project('vehicle-correios', 'vehicles', 'Correios', [
         galleryImage('frota', 'frota-06', 'Van Correios adesivada com campanha "A vida segue"'),
       ]),
       project('vehicle-smart-fit', 'vehicles', 'Smart Fit', [
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
+        galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor'),
+      ]),
+      project('vehicle-instituto-taupet', 'vehicles', 'Instituto Taupet', [
+        galleryImage('veiculos', 'veiculo-03', 'Van Instituto Taupet personalizada com identidade visual'),
+      ]),
+      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
+        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
+        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
+        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
+      ]),
+      project('vehicle-cartao-todos', 'vehicles', 'Cartão de TODOS / Rio de Prêmios', [
+        galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
+        galleryImage('veiculos', 'veiculo-20', 'Veículo Rio de Prêmios adesivado'),
+      ]),
+      project('vehicle-attos-rh', 'vehicles', 'Attos RH', [
+        galleryImage('veiculos', 'veiculo-10', 'Veículo Attos RH personalizado com identidade visual'),
+      ]),
+      project('vehicle-vigor', 'vehicles', 'Vigor', [
+        galleryImage('veiculos', 'veiculo-15', 'Veículo Vigor adesivado'),
+        galleryImage('frota', 'frota-05', 'Veículo Vigor de frota em campo'),
+      ]),
+      project('vehicle-edp', 'vehicles', 'EDP Energia', [
+        galleryImage('frota', 'frota-10', 'Veículo EDP Energia adesivado'),
       ]),
       project('vehicle-jamtur', 'vehicles', 'Jamtur', [
         galleryImage('frota', 'frota-20-b', 'Ônibus Jamtur Viagens e Turismo adesivado'),
       ]),
 
-      project('general-swift-klabin', 'general', 'Swift', [
-        galleryImage('fachadas', 'fachadas-04', 'Fachada Swift Cambuci com comunicação visual'),
-      ]),
-      project('general-jbs-facade', 'general', 'JBS', [
-        galleryImage('fachadas', 'fachadas-06', 'Fachada JBS com comunicação visual'),
+      project('general-future-intelbras', 'general', 'Future Intelbras', [
+        galleryImage('paineis', 'painel-14', 'Adesivação de parede Future Intelbras'),
       ]),
       project('general-jbs-mural', 'general', 'JBS', [
         galleryImage('paineis', 'painel-03', 'Mural JBS com arquitetura de marcas em parede'),
         galleryImage('paineis', 'paineis-13', 'Parede corporativa com adesivação de marcas JBS'),
       ]),
-      project('general-jbs-parede', 'general', 'JBS', [
-        galleryImage('paineis', 'painel-01', 'Adesivação de parede JBS em ambiente corporativo'),
-      ]),
-      project('general-vigor', 'general', 'Vigor', [
-        galleryImage('paineis', 'paineis-01', 'Adesivação de parede Vigor VIV em ambiente corporativo'),
-      ]),
-      project('general-vigor-logo', 'general', 'Vigor', [
-        galleryImage('paineis', 'paineis-02', 'Adesivação de parede com logotipo Vigor'),
+      project('general-vigor-expositor', 'general', 'Vigor', [
+        galleryImage('paineis', 'paineis-21', 'Adesivação de expositor refrigerado VIGOR Grego Gourmet'),
       ]),
       project('general-delicia', 'general', 'Delícia', [
         galleryImage('paineis', 'paineis-04', 'Adesivação de parede Delícia em ambiente interno'),
       ]),
-      project('general-lactalis', 'general', 'Lactalis', [
-        galleryImage('paineis', 'paineis-08', 'Adesivação de parede Lactalis em sala corporativa'),
+      project('general-jbs-facade', 'general', 'JBS', [
+        galleryImage('fachadas', 'fachadas-06', 'Fachada JBS com comunicação visual'),
       ]),
-      project('general-soul-brasileira', 'general', 'Soul Brasileira', [
-        galleryImage('paineis', 'paineis-15', 'Adesivação de parede Soul Brasileira'),
-      ]),
-      project('general-bonafont', 'general', 'Bonafont', [
-        galleryImage('paineis', 'painel-09', 'Fachada adesivada Bonafont'),
-      ]),
-      project('general-seara-marcas', 'general', 'Seara', [
-        galleryImage('totens', 'totens-05', 'Totem de sinalização com marcas Seara'),
-      ]),
-      project('general-hope', 'general', 'Hope', [
-        galleryImage('paineis', 'paineis-11-b', 'Painel Hope em circulação de shopping'),
-      ]),
-      project('general-parque-bruno-covas-acesso', 'general', 'Parque Bruno Covas', [
-        galleryImage('totens', 'totens-03', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
-      ]),
-      project('general-shopping-best-center', 'general', 'Best Center', [
-        galleryImage('totens', 'totens-02', 'Totem de sinalização do shopping Best Center'),
-      ]),
-      project('general-sanfra-kids', 'general', 'Sanfra Kids', [
-        galleryImage('paineis', 'paineis-09', 'Adesivação de parede Ludoteca Sanfra Kids em ambiente infantil'),
-      ]),
-      project('general-nescau', 'general', 'Nescau', [
-        galleryImage('banners', 'banners-05', 'Adesivação em escada rolante Nescau'),
+      project('general-johnnie-walker', 'general', 'Johnnie Walker', [
+        galleryImage('paineis', 'paineis-22', 'Geladeira Johnnie Walker adesivada com frase da marca'),
       ]),
       project('general-totens-diversos', 'general', 'Totens diversos', [
         galleryImage('paineis', 'paineis-14', 'Totens Seara e JBS em ambiente corporativo'),
@@ -512,9 +458,68 @@ export const siteData = {
       project('general-unhas-cariocas', 'general', 'Unhas Cariocas', [
         galleryImage('paineis', 'paineis-17', 'Adesivação Unhas Cariocas em portas de banheiro comercial'),
       ]),
-      project('general-parque-bruno-covas', 'general', 'Parque Bruno Covas', [
-        galleryImage('totens', 'totens-01', 'Totem Santander Parque Bruno Covas de sinalização esportiva'),
-        galleryImage('totens', 'totens-07', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
+      project('general-vb-salao', 'general', 'VB Salão de Beleza', [
+        galleryImage('paineis', 'painel-11', 'Painel luminoso VB Salão de Beleza'),
+      ]),
+      project('general-seara-marcas', 'general', 'Seara', [
+        galleryImage('totens', 'totens-05', 'Totem de sinalização com marcas Seara'),
+      ]),
+      project('general-gregario', 'general', 'Gregario', [
+        galleryImage('paineis', 'painel-16', 'Painel Gregario Cycling em mídia externa'),
+      ]),
+      project('general-jbs-65-anos', 'general', 'JBS', [
+        galleryImage('paineis', 'painel-10', 'Painel JBS 65 anos'),
+      ]),
+      project('general-viveo', 'general', 'Viveo', [
+        galleryImage('paineis', 'paineis-23', 'Mural corporativo Viveo com cadeia de suprimentos em escritório'),
+      ]),
+      project('general-gregario-comemorativo', 'general', 'Gregario', [
+        galleryImage('paineis', 'painel-05', 'Painel Gregario Cycling comemorativo'),
+      ]),
+      project('general-seara-porta', 'general', 'Seara', [
+        galleryImage('paineis', 'paineis-20', 'Adesivação em porta de vidro da unidade Seara de Osasco'),
+      ]),
+      project('general-vigor-logo', 'general', 'Vigor', [
+        galleryImage('paineis', 'paineis-02', 'Adesivação de parede com logotipo Vigor'),
+      ]),
+      project('general-lactalis', 'general', 'Lactalis', [
+        galleryImage('paineis', 'paineis-08', 'Adesivação de parede Lactalis em sala corporativa'),
+      ]),
+      project('general-parque-bruno-covas-acesso', 'general', 'Parque Bruno Covas', [
+        galleryImage('totens', 'totens-03', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
+      ]),
+      project('general-sanfra-kids', 'general', 'Sanfra Kids', [
+        galleryImage('paineis', 'paineis-09', 'Adesivação de parede Ludoteca Sanfra Kids em ambiente infantil'),
+      ]),
+      project('general-acougue', 'general', 'Açougue', [
+        galleryImage('paineis', 'paineis-24', 'Adesivação de freezers do açougue em supermercado'),
+      ]),
+      project('general-jbs-parede', 'general', 'JBS', [
+        galleryImage('paineis', 'painel-01', 'Adesivação de parede JBS em ambiente corporativo'),
+      ]),
+      project('general-parque-global', 'general', 'Parque Global', [
+        galleryImage('totens', 'totens-04', 'Totem de sinalização Parque Global'),
+      ]),
+      project('general-bonafont', 'general', 'Bonafont', [
+        galleryImage('paineis', 'painel-09', 'Fachada adesivada Bonafont'),
+      ]),
+      project('general-bis', 'general', 'BIS', [
+        galleryImage('paineis', 'paineis-19', 'Adesivação de piso BIS em corredor de supermercado'),
+      ]),
+      project('general-mahogany', 'general', 'Mahogany', [
+        galleryImage('fachadas', 'fachadas-05', 'Vitrine Mahogany em shopping'),
+      ]),
+      project('general-soul-brasileira', 'general', 'Soul Brasileira', [
+        galleryImage('paineis', 'paineis-15', 'Adesivação de parede Soul Brasileira'),
+      ]),
+      project('general-prime-comfort', 'general', 'Prime Comfort', [
+        galleryImage('paineis', 'painel-12-b', 'Fachada Prime Comfort com adesivação de parede'),
+      ]),
+      project('general-hope', 'general', 'Hope', [
+        galleryImage('paineis', 'paineis-11-b', 'Painel Hope em circulação de shopping'),
+      ]),
+      project('general-nescau', 'general', 'Nescau', [
+        galleryImage('banners', 'banners-05', 'Adesivação em escada rolante Nescau'),
       ]),
       project('general-mma-octagon', 'general', 'Krew Krew', [
         galleryImage('paineis', 'paineis-16', 'Adesivação de octógono de MMA Krew Krew'),
@@ -522,47 +527,24 @@ export const siteData = {
       project('general-jbs-evento', 'general', 'JBS', [
         galleryImage('paineis', 'painel-06', 'Painel JBS para evento corporativo'),
       ]),
-      project('general-future-intelbras', 'general', 'Future Intelbras', [
-        galleryImage('paineis', 'painel-14', 'Adesivação de parede Future Intelbras'),
-      ]),
-      project('general-sonda-supermercados', 'general', 'Sonda Supermercados', [
-        galleryImage('paineis', 'paineis-18', 'Adesivação em escada rolante Sonda Supermercados'),
-      ]),
-      project('general-prime-comfort', 'general', 'Prime Comfort', [
-        galleryImage('paineis', 'painel-12-b', 'Fachada Prime Comfort com adesivação de parede'),
-      ]),
-      project('general-parque-global', 'general', 'Parque Global', [
-        galleryImage('totens', 'totens-04', 'Totem de sinalização Parque Global'),
+      project('general-swift-klabin', 'general', 'Swift', [
+        galleryImage('fachadas', 'fachadas-04', 'Fachada Swift Cambuci com comunicação visual'),
       ]),
       project('general-batavo', 'general', 'Batavo', [
         galleryImage('banners', 'banners-06', 'Adesivação de porta de elevador Batavo'),
       ]),
-      project('general-gregario', 'general', 'Gregario', [
-        galleryImage('paineis', 'painel-16', 'Painel Gregario Cycling em mídia externa'),
-      ]),
-      project('general-gregario-comemorativo', 'general', 'Gregario', [
-        galleryImage('paineis', 'painel-05', 'Painel Gregario Cycling comemorativo'),
-      ]),
       project('general-jbs-paineis', 'general', 'JBS', [
         galleryImage('paineis', 'paineis-12', 'Painel corporativo JBS em recepção'),
-      ]),
-      project('general-bis', 'general', 'BIS', [
-        galleryImage('paineis', 'paineis-19', 'Adesivação de piso BIS em corredor de supermercado'),
       ]),
       project('general-hinode', 'general', 'Hinode', [
         galleryImage('paineis', 'paineis-05', 'Adesivação Hinode em ambiente interno'),
       ]),
-      project('general-jbs-65-anos', 'general', 'JBS', [
-        galleryImage('paineis', 'painel-10', 'Painel JBS 65 anos'),
-      ]),
-      project('general-mahogany', 'general', 'Mahogany', [
-        galleryImage('fachadas', 'fachadas-05', 'Vitrine Mahogany em shopping'),
-      ]),
       project('general-samsung', 'general', 'Samsung', [
         galleryImage('paineis', 'painel-13', 'Material Samsung em ponto de venda'),
       ]),
-      project('general-vb-salao', 'general', 'VB Salão de Beleza', [
-        galleryImage('paineis', 'painel-11', 'Painel luminoso VB Salão de Beleza'),
+      project('general-parque-bruno-covas', 'general', 'Parque Bruno Covas', [
+        galleryImage('totens', 'totens-01', 'Totem Santander Parque Bruno Covas de sinalização esportiva'),
+        galleryImage('totens', 'totens-07', 'Totem Santander Parque Bruno Covas de entrada de veículos'),
       ]),
       project('general-mural-pdv', 'general', 'Mural corporativo', [
         galleryImage(
@@ -693,28 +675,16 @@ export const siteData = {
     ],
     videos: [
       {
-        id: 'production-facade',
-        src: '/assets/gallery/producao/producao-fachada-pb.mp4',
-        poster: '/assets/gallery/producao/producao-fachada-pb-poster.jpg',
-        alt: 'Fachada da P&B Comunicação Visual',
-      },
-      {
-        id: 'production-02',
-        src: '/assets/gallery/producao/producao-02.mp4',
-        poster: '/assets/gallery/producao/producao-02-poster.jpg',
-        alt: 'Produção em andamento na oficina da P&B',
+        id: 'production-wall-forest',
+        src: '/assets/gallery/producao/producao-adesivacao-parede-floresta.mp4',
+        poster: '/assets/gallery/producao/producao-adesivacao-parede-floresta-poster.jpg',
+        alt: 'Adesivação de parede com paisagem de floresta',
       },
       {
         id: 'production-03',
         src: '/assets/gallery/producao/producao-03.mp4',
         poster: '/assets/gallery/producao/producao-03-poster.jpg',
         alt: 'Equipe em processo de produção visual',
-      },
-      {
-        id: 'production-04',
-        src: '/assets/gallery/producao/producao-04.mp4',
-        poster: '/assets/gallery/producao/producao-04-poster.jpg',
-        alt: 'Acabamento e montagem de material gráfico',
       },
       {
         id: 'production-printing-vinyl',
@@ -735,10 +705,16 @@ export const siteData = {
         alt: 'Impressão digital de banner em produção',
       },
       {
-        id: 'production-wall-forest',
-        src: '/assets/gallery/producao/producao-adesivacao-parede-floresta.mp4',
-        poster: '/assets/gallery/producao/producao-adesivacao-parede-floresta-poster.jpg',
-        alt: 'Adesivação de parede com paisagem de floresta',
+        id: 'production-facade',
+        src: '/assets/gallery/producao/producao-fachada-pb.mp4',
+        poster: '/assets/gallery/producao/producao-fachada-pb-poster.jpg',
+        alt: 'Fachada da P&B Comunicação Visual',
+      },
+      {
+        id: 'production-02',
+        src: '/assets/gallery/producao/producao-02.mp4',
+        poster: '/assets/gallery/producao/producao-02-poster.jpg',
+        alt: 'Produção em andamento na oficina da P&B',
       },
       {
         id: 'production-wall-city',

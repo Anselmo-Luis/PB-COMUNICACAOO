@@ -55,11 +55,14 @@ export default function Hero() {
   const [shouldAutoplay] = useState(() => !getPrefersReducedMotion());
   const [isVideoEnabled, setIsVideoEnabled] = useState(() => {
     if (typeof window === 'undefined') return true;
-
+    // Respeita apenas o "Economia de dados" do aparelho; em qualquer tela o
+    // vídeo toca.
     return navigator.connection?.saveData !== true;
   });
 
   const { video, headline, highlight, intro, subheadline } = siteData.hero;
+
+  const handleSourceError = () => setIsVideoEnabled(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -235,8 +238,13 @@ export default function Hero() {
                 height={1080}
                 tabIndex={-1}
               >
-                {video.sources.map((source) => (
-                  <source key={source.src} src={source.src} type={source.type} />
+                {video.sources.map((source, index) => (
+                  <source
+                    key={source.src}
+                    src={source.src}
+                    type={source.type}
+                    onError={index === video.sources.length - 1 ? handleSourceError : undefined}
+                  />
                 ))}
               </video>
             )}

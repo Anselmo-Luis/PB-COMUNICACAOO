@@ -39,6 +39,7 @@ function buildJsonLd(siteUrl) {
       {
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
+        '@id': `${siteUrl}#business`,
         name: company.name,
         description: company.description,
         url: siteUrl,
@@ -46,7 +47,10 @@ function buildJsonLd(siteUrl) {
         image: imageUrl,
         foundingDate: String(company.founded),
         email: contact.email,
-        telephone: contact.phones,
+        telephone: '+551138360196',
+        priceRange: '$$',
+        areaServed: { '@type': 'Country', name: 'Brasil' },
+        hasMap: contact.location.googleMapsUrl,
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'Rua Antonio Raposo, 149',

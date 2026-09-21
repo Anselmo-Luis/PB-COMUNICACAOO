@@ -3,6 +3,16 @@ import { Car, Flag, PaintRoller, Store } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { siteData } from '../../data/siteData';
+import galleryImageRatios from '../../data/galleryImageRatios.json';
+
+const SERVICE_IMAGE_SIZES = '(min-width: 768px) 38rem, 92vw';
+
+function buildSrcSet(src) {
+  const meta = galleryImageRatios[src];
+  if (!meta || meta.width <= 800) return undefined;
+  const base = src.replace('.webp', '');
+  return `${base}-480.webp 480w, ${base}-800.webp 800w, ${src} ${meta.width}w`;
+}
 
 const SERVICE_ICONS = {
   vehicle: <Car size={26} strokeWidth={1.5} aria-hidden="true" />,
@@ -116,6 +126,8 @@ function ServiceCard({ service, index, ctaText }) {
             <img
               key={item.src}
               src={item.src}
+              srcSet={buildSrcSet(item.src)}
+              sizes={SERVICE_IMAGE_SIZES}
               alt={galleryIndex === slide ? service.title : ''}
               aria-hidden={galleryIndex === slide ? undefined : 'true'}
               className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
@@ -125,7 +137,8 @@ function ServiceCard({ service, index, ctaText }) {
                 ...(item.objectPosition ? { objectPosition: item.objectPosition } : null),
                 ...(item.objectFit ? { objectFit: item.objectFit } : null),
               }}
-              loading={galleryIndex === 0 ? 'eager' : 'lazy'}
+              loading="lazy"
+              decoding="async"
             />
           ))}
           <div className="service-media-overlay" aria-hidden="true" />
@@ -199,13 +212,12 @@ export default function Services() {
   };
 
   return (
-    <section id="servicos" className="services-section relative z-10 bg-[var(--color-pb-white)] py-6">
+    <section id="servicos" aria-labelledby="servicos-heading" className="services-section relative z-10 bg-[var(--color-pb-white)] py-6">
       <div className="mx-auto max-w-6xl px-6">
         <div ref={headerRevealRef} className="reveal-section mb-10 text-center">
           <span className="section-kicker-light">{services.label}</span>
-          <h2 className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-ink)] sm:text-4xl md:text-5xl">
-            {services.headline.before}{' '}
-            <span className="text-[var(--color-pb-accent-blue)]">{services.headline.accent}</span>
+          <h2 id="servicos-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
+            {services.headline.before} {services.headline.accent}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-[var(--color-pb-ink-2)]">
             {services.subheadline}

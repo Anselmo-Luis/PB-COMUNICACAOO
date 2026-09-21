@@ -191,10 +191,6 @@
     "width": 1024,
     "height": 768
   },
-  "/assets/gallery/paineis/paineis-01.webp": {
-    "width": 684,
-    "height": 685
-  },
   "/assets/gallery/paineis/paineis-02.webp": {
     "width": 718,
     "height": 1280
@@ -259,13 +255,29 @@
     "width": 768,
     "height": 1024
   },
-  "/assets/gallery/paineis/paineis-18.webp": {
-    "width": 1280,
-    "height": 960
-  },
   "/assets/gallery/paineis/paineis-19.webp": {
     "width": 960,
     "height": 1280
+  },
+  "/assets/gallery/paineis/paineis-20.webp": {
+    "width": 626,
+    "height": 824
+  },
+  "/assets/gallery/paineis/paineis-21.webp": {
+    "width": 561,
+    "height": 960
+  },
+  "/assets/gallery/paineis/paineis-22.webp": {
+    "width": 745,
+    "height": 1004
+  },
+  "/assets/gallery/paineis/paineis-23.webp": {
+    "width": 1280,
+    "height": 960
+  },
+  "/assets/gallery/paineis/paineis-24.webp": {
+    "width": 1040,
+    "height": 780
   },
   "/assets/gallery/paineis/painel-01.webp": {
     "width": 1600,
@@ -379,10 +391,6 @@
     "width": 464,
     "height": 832
   },
-  "/assets/gallery/producao/producao-04-poster.jpg": {
-    "width": 480,
-    "height": 848
-  },
   "/assets/gallery/producao/producao-adesivacao-parede-cidade-poster.jpg": {
     "width": 480,
     "height": 848
@@ -413,10 +421,6 @@
   },
   "/assets/gallery/totens/totens-01.webp": {
     "width": 720,
-    "height": 1280
-  },
-  "/assets/gallery/totens/totens-02.webp": {
-    "width": 960,
     "height": 1280
   },
   "/assets/gallery/totens/totens-03.webp": {
@@ -472,8 +476,8 @@
     "height": 1600
   },
   "/assets/gallery/veiculos/veiculo-09.webp": {
-    "width": 1600,
-    "height": 1609
+    "width": 1024,
+    "height": 770
   },
   "/assets/gallery/veiculos/veiculo-10.webp": {
     "width": 1600,

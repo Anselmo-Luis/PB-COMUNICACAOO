@@ -14,7 +14,7 @@ export default function Process() {
     >
       <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
             <span className="section-kicker-light">{process.label}</span>
             <h2
               id="process-heading"

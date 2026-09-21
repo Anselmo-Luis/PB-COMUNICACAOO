@@ -19,6 +19,8 @@ function MosaicTile({ image, imageIndex, startIndex, onOpenLightbox, isHero }) {
     >
       <img
         src={image.src}
+        srcSet={image.srcSet}
+        sizes={image.sizes}
         alt={image.alt}
         width={image.width}
         height={image.height}

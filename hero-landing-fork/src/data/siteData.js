@@ -282,12 +282,12 @@ export const siteData = {
           'Adesivação em geral, com verniz e laminado adequado para qualquer superfície lisa: pisos, vidros, paredes, madeiras, elevadores e geladeiras/freezers.',
         specs: ['Pisos', 'Vidros', 'Paredes', 'Madeiras', 'Elevadores', 'Geladeiras / Freezers'],
         image: {
-          src: '/assets/gallery/paineis/adias-mural.webp',
-          objectPosition: 'center 40%',
+          src: '/assets/gallery/fachadas/fachadas-04.webp',
+          objectPosition: 'center 35%',
         },
         gallery: [
-          { src: '/assets/gallery/paineis/adias-mural.webp', objectPosition: 'center 40%' },
           { src: '/assets/gallery/fachadas/fachadas-04.webp', objectPosition: 'center 35%' },
+          { src: '/assets/gallery/paineis/adias-mural.webp', objectPosition: 'center 40%' },
           { src: '/assets/gallery/paineis/paineis-02.webp', objectPosition: 'center 42%' },
           { src: '/assets/gallery/paineis/painel-03.webp', objectPosition: 'center 68%' },
           { src: '/assets/gallery/fachadas/fachadas-05.webp', objectPosition: 'center 25%' },

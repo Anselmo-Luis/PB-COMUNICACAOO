@@ -112,11 +112,13 @@ export const siteData = {
       'Agilidade máxima e compromisso absoluto.',
     ],
     video: {
-      poster: '/assets/hero/hero-van-decal-poster-1280.webp',
-      posterSrcSet: '/assets/hero/hero-van-decal-poster-640.webp 640w, /assets/hero/hero-van-decal-poster-960.webp 960w, /assets/hero/hero-van-decal-poster-1280.webp 1280w',
+      poster: '/assets/hero/hero-video-02-poster-1280.webp',
+      posterSrcSet: '/assets/hero/hero-video-02-poster-640.webp 640w, /assets/hero/hero-video-02-poster-960.webp 960w, /assets/hero/hero-video-02-poster-1280.webp 1280w',
+      // The clip is shot upright: portrait screens get it as is, wider ones a 16:9
+      // cut with the clip sharp on the right over a blurred fill of itself.
       sources: [
-        { src: '/assets/hero/hero-van-decal.mp4', type: 'video/mp4' },
-        { src: '/assets/hero/hero-van-decal.webm', type: 'video/webm' },
+        { src: '/assets/hero/hero-video-02-portrait.mp4', type: 'video/mp4', media: '(max-aspect-ratio: 1/1)' },
+        { src: '/assets/hero/hero-video-02.mp4', type: 'video/mp4' },
       ],
     },
   },

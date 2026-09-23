@@ -243,6 +243,7 @@ export default function Hero() {
                     key={source.src}
                     src={source.src}
                     type={source.type}
+                    media={source.media}
                     onError={index === video.sources.length - 1 ? handleSourceError : undefined}
                   />
                 ))}

@@ -132,18 +132,20 @@ export default function ContactForm() {
       aria-labelledby="contato-heading"
       className="relative z-10 bg-[var(--color-pb-white)] px-6 py-6"
     >
-      <div ref={revealRef} className="reveal-section mx-auto max-w-6xl">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)] lg:items-start lg:gap-16">
-          <div>
+      <div ref={revealRef} className="reveal-section @container mx-auto max-w-7xl">
+        {/* Two columns only once the form column fits its side-by-side rows (see .contact-form-row);
+            narrower than that it stacks instead of squeezing the form. */}
+        <div className="grid gap-12 @min-[70rem]:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)] @min-[70rem]:items-stretch @min-[70rem]:gap-16">
+          <div className="flex flex-col">
             <span className="section-kicker-light">{copy.kicker}</span>
             <h2 id="contato-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold leading-[1.08] tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">
               {copy.headline.before} {copy.headline.accent}
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
+            <p className="mt-6 mb-10 max-w-xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
               {copy.subheadline}
             </p>
 
-            <div id={lgpdNoteId} className="lgpd-note mt-10">
+            <div id={lgpdNoteId} className="lgpd-note mt-auto">
               <div className="flex items-center gap-2 text-[var(--color-pb-ink)]">
                 <ShieldCheck size={18} strokeWidth={1.75} aria-hidden="true" />
                 <span className="font-[var(--font-display)] text-sm font-semibold">
@@ -179,7 +181,7 @@ export default function ContactForm() {
             onSubmit={handleSubmit}
             aria-describedby={lgpdNoteId}
           >
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="contact-form-row">
               <Field
                 label={copy.fields.name.label}
                 placeholder={copy.fields.name.placeholder}
@@ -244,7 +246,7 @@ export default function ContactForm() {
               </span>
             </label>
 
-            <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+            <div className="contact-actions">
               <button type="submit" className="contact-submit-primary group">
                 <WhatsAppIcon className="h-5 w-5" />
                 <span>{copy.submit}</span>

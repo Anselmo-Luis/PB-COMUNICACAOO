@@ -139,11 +139,6 @@
     "height": 721,
     "v": "359ce4d3"
   },
-  "/assets/gallery/frota/frota-03.webp": {
-    "width": 1280,
-    "height": 720,
-    "v": "399d0de3"
-  },
   "/assets/gallery/frota/frota-04.webp": {
     "width": 1280,
     "height": 721,
@@ -669,26 +664,6 @@
     "height": 1280,
     "v": "3ec41d29"
   },
-  "/assets/gallery/veiculos/veiculo-18.jpg": {
-    "width": 1280,
-    "height": 960,
-    "v": "afa3a28e"
-  },
-  "/assets/gallery/veiculos/veiculo-18.webp": {
-    "width": 1280,
-    "height": 960,
-    "v": "496b36ed"
-  },
-  "/assets/gallery/veiculos/veiculo-19.jpg": {
-    "width": 960,
-    "height": 1280,
-    "v": "83aabe86"
-  },
-  "/assets/gallery/veiculos/veiculo-19.webp": {
-    "width": 960,
-    "height": 1280,
-    "v": "77c49234"
-  },
   "/assets/gallery/veiculos/veiculo-20.jpg": {
     "width": 960,
     "height": 1280,
@@ -699,19 +674,89 @@
     "height": 1280,
     "v": "603474a8"
   },
-  "/assets/gallery/veiculos/veiculo-21.jpg": {
-    "width": 1280,
-    "height": 960,
-    "v": "05aa88cc"
-  },
-  "/assets/gallery/veiculos/veiculo-21.webp": {
-    "width": 1280,
-    "height": 960,
-    "v": "77c9fc5a"
-  },
   "/assets/gallery/veiculos/veiculo-22.webp": {
     "width": 1024,
     "height": 1021,
     "v": "77563780"
+  },
+  "/assets/gallery/veiculos/veiculo-23.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "v": "8d2f46af"
+  },
+  "/assets/gallery/veiculos/veiculo-23.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "96530ab9"
+  },
+  "/assets/gallery/veiculos/veiculo-24.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "v": "7a6cfce1"
+  },
+  "/assets/gallery/veiculos/veiculo-24.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "70516d03"
+  },
+  "/assets/gallery/veiculos/veiculo-25.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "v": "ba397a76"
+  },
+  "/assets/gallery/veiculos/veiculo-25.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "22064677"
+  },
+  "/assets/gallery/veiculos/veiculo-26.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "v": "a9c78b09"
+  },
+  "/assets/gallery/veiculos/veiculo-26.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "7ac77df1"
+  },
+  "/assets/gallery/veiculos/veiculo-27.jpg": {
+    "width": 896,
+    "height": 1195,
+    "v": "a4cd4307"
+  },
+  "/assets/gallery/veiculos/veiculo-27.webp": {
+    "width": 896,
+    "height": 1195,
+    "v": "0a79320d"
+  },
+  "/assets/gallery/veiculos/veiculo-28.jpg": {
+    "width": 960,
+    "height": 1280,
+    "v": "722d7f01"
+  },
+  "/assets/gallery/veiculos/veiculo-28.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "4518bc85"
+  },
+  "/assets/gallery/veiculos/veiculo-29.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "v": "705920ca"
+  },
+  "/assets/gallery/veiculos/veiculo-29.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "5c185a03"
+  },
+  "/assets/gallery/veiculos/veiculo-30.jpg": {
+    "width": 960,
+    "height": 1280,
+    "v": "779b7625"
+  },
+  "/assets/gallery/veiculos/veiculo-30.webp": {
+    "width": 960,
+    "height": 1280,
+    "v": "4b16f1ee"
   }
 }

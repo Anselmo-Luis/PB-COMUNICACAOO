@@ -374,15 +374,25 @@ export const siteData = {
         galleryImage('veiculos', 'veiculo-07', 'Veículo Friboi adesivado em outro ângulo'),
         galleryImage('veiculos', 'veiculo-08', 'Detalhe da adesivação Friboi'),
       ]),
-      project('vehicle-sabesp', 'vehicles', 'Sabesp', [
-        galleryImage('veiculos', 'veiculo-18', 'Van Sabesp adesivada em vista lateral'),
-        galleryImage('veiculos', 'veiculo-21', 'Van Sabesp adesivada em outro ângulo'),
-        galleryImage('veiculos', 'veiculo-19', 'Van Sabesp adesivada em vista traseira'),
-      ]),
       project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
         galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
         galleryImage('frota', 'frota-13', 'Picape Sabesp adesivada em vista frontal'),
         galleryImage('frota', 'frota-17', 'Picape Sabesp adesivada em vista traseira'),
+      ]),
+      // Landscape shots share the top row and portrait shots the bottom one, so no photo is cropped.
+      project('vehicle-sabesp', 'vehicles', 'Sabesp', [
+        galleryImage('veiculos', 'veiculo-23', 'Van Sabesp adesivada em vista lateral'),
+        galleryImage('veiculos', 'veiculo-26', 'Van Sabesp adesivada em outro ângulo'),
+        galleryImage('veiculos', 'veiculo-24', 'Van Sabesp adesivada em vista traseira'),
+        galleryImage('veiculos', 'veiculo-25', 'Van Sabesp adesivada em vista frontal'),
+      ], 'pairs'),
+      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
+        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
+        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
+        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
+      ]),
+      project('vehicle-correios', 'vehicles', 'Correios', [
+        galleryImage('frota', 'frota-06', 'Van Correios adesivada com campanha "A vida segue"'),
       ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [
         galleryImage('veiculos', 'veiculo-05', 'Carro Roadstar com comunicação visual aplicada'),
@@ -401,9 +411,6 @@ export const siteData = {
         galleryImage('veiculos', 'veiculo-14', 'Veículo Swift e Degusta adesivado'),
         galleryImage('frota', 'frota-18', 'Veículo Swift de frota em campo'),
       ]),
-      project('vehicle-jbs', 'vehicles', 'JBS', [
-        galleryImage('frota', 'frota-03', 'Caminhão JBS adesivado'),
-      ]),
       project('vehicle-seara', 'vehicles', 'Seara', [
         galleryImage('frota', 'frota-08', 'Veículo Seara adesivado'),
         galleryImage('frota', 'frota-12', 'Veículo Seara em outro ângulo'),
@@ -415,24 +422,25 @@ export const siteData = {
       project('vehicle-uol', 'vehicles', 'UOL', [
         galleryImage('frota', 'frota-09', 'Veículo UOL adesivado'),
       ]),
-      project('vehicle-correios', 'vehicles', 'Correios', [
-        galleryImage('frota', 'frota-06', 'Van Correios adesivada com campanha "A vida segue"'),
+      project('vehicle-cartao-todos', 'vehicles', 'Cartão de TODOS / Rio de Prêmios', [
+        galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
+        galleryImage('veiculos', 'veiculo-20', 'Veículo Rio de Prêmios adesivado'),
       ]),
+      project('vehicle-jamtur', 'vehicles', 'Jamtur', [
+        galleryImage('frota', 'frota-20-b', 'Ônibus Jamtur Viagens e Turismo adesivado'),
+      ]),
+      project('vehicle-xando', 'vehicles', 'Xandô', [
+        galleryImage('veiculos', 'veiculo-27', 'Caminhão baú Xandô adesivado em vista traseira', 'center 50%'),
+        galleryImage('veiculos', 'veiculo-28', 'Caminhão baú Xandô adesivado em vista lateral', 'center 37%'),
+        galleryImage('veiculos', 'veiculo-29', 'Caminhão Xandô com logotipo adesivado no capô', 'center 40%'),
+        galleryImage('veiculos', 'veiculo-30', 'Caminhão baú Xandô adesivado no outro lado', 'center 50%'),
+      ], 'grid'),
       project('vehicle-smart-fit', 'vehicles', 'Smart Fit', [
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
         galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor'),
       ]),
       project('vehicle-instituto-taupet', 'vehicles', 'Instituto Taupet', [
         galleryImage('veiculos', 'veiculo-03', 'Van Instituto Taupet personalizada com identidade visual'),
-      ]),
-      project('vehicle-nocarbon', 'vehicles', 'NoCarbon', [
-        galleryImage('veiculos', 'veiculo-16', 'Veículo NoCarbon adesivado'),
-        galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
-        galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
-      ]),
-      project('vehicle-cartao-todos', 'vehicles', 'Cartão de TODOS / Rio de Prêmios', [
-        galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
-        galleryImage('veiculos', 'veiculo-20', 'Veículo Rio de Prêmios adesivado'),
       ]),
       project('vehicle-attos-rh', 'vehicles', 'Attos RH', [
         galleryImage('veiculos', 'veiculo-10', 'Veículo Attos RH personalizado com identidade visual'),
@@ -443,9 +451,6 @@ export const siteData = {
       ]),
       project('vehicle-edp', 'vehicles', 'EDP Energia', [
         galleryImage('frota', 'frota-10', 'Veículo EDP Energia adesivado'),
-      ]),
-      project('vehicle-jamtur', 'vehicles', 'Jamtur', [
-        galleryImage('frota', 'frota-20-b', 'Ônibus Jamtur Viagens e Turismo adesivado'),
       ]),
 
       project('general-future-intelbras', 'general', 'Future Intelbras', [

@@ -22,7 +22,7 @@ test.describe('site institucional P&B', () => {
     await expect(tabs.nth(2)).toContainText('Banner / Lona');
     await expect(tabs.nth(3)).toContainText('PDVs e materiais diversos');
     await expect(tabs.nth(4)).toContainText('Essência P&B');
-    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(37);
+    await expect(portfolio.locator('.portfolio-mosaic-tile')).toHaveCount(41);
     await expect(portfolio.locator('.portfolio-mosaic-group')).toHaveCount(22);
 
     await tabs.nth(1).click();

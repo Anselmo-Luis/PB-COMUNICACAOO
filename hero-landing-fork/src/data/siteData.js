@@ -112,12 +112,9 @@ export const siteData = {
       'Agilidade máxima e compromisso absoluto.',
     ],
     video: {
-      poster: '/assets/hero/hero-van-decal-poster-1280.webp',
-      posterSrcSet: '/assets/hero/hero-van-decal-poster-640.webp 640w, /assets/hero/hero-van-decal-poster-960.webp 960w, /assets/hero/hero-van-decal-poster-1280.webp 1280w',
-      sources: [
-        { src: '/assets/hero/hero-van-decal.mp4', type: 'video/mp4' },
-        { src: '/assets/hero/hero-van-decal.webm', type: 'video/webm' },
-      ],
+      poster: '/assets/hero/hero-video-01-poster-1280.webp',
+      posterSrcSet: '/assets/hero/hero-video-01-poster-640.webp 640w, /assets/hero/hero-video-01-poster-960.webp 960w, /assets/hero/hero-video-01-poster-1280.webp 1280w',
+      sources: [{ src: '/assets/hero/hero-video-01.mp4', type: 'video/mp4' }],
     },
   },
 

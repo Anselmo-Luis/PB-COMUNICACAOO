@@ -2665,14 +2665,6 @@ textarea:focus-visible {
     border-radius: 1.25rem;
   }
 
-  /* Full-bleed hero video is 16:9 covering a tall portrait viewport, so
-     most of its width gets cropped; shift the crop left so the painted
-     P&B logo stays in frame instead of only the van's cab. */
-  .hero-overlay .hero-video,
-  .hero-overlay .hero-poster {
-    object-position: 26% center;
-  }
-
   .portfolio-header,
   .portfolio-production-header {
     align-items: flex-start;

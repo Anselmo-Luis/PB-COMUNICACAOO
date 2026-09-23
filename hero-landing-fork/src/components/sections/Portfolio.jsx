@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import { useFlushColumns } from '../../hooks/useFlushColumns';
 import { useReveal } from '../../hooks/useReveal';
 import { getPrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { siteData } from '../../data/siteData';
@@ -168,6 +169,8 @@ export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState(portfolio.categories[0].id);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [isPending, startTransition] = useTransition();
+  const panelRef = useRef(null);
+  useFlushColumns(panelRef, activeCategory);
 
   const activeCategoryMeta = portfolio.categories.find(
     (category) => category.id === activeCategory,
@@ -319,6 +322,7 @@ export default function Portfolio() {
         </div>
 
         <div
+          ref={panelRef}
           id={`portfolio-panel-${activeCategory}`}
           className={
             isVideoOnly

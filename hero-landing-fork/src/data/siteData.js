@@ -25,7 +25,7 @@ export const gallerySrcSet = (path) => {
   return `${variant(480)} 480w, ${variant(800)} 800w, ${galleryUrl(path)} ${meta.width}w`;
 };
 
-const galleryImage = (folder, file, alt) => {
+const galleryImage = (folder, file, alt, objectPosition) => {
   const path = `/assets/gallery/${folder}/${file}.webp`;
   const meta = galleryImageRatios[path];
 
@@ -37,10 +37,12 @@ const galleryImage = (folder, file, alt) => {
     width: meta?.width ?? 800,
     height: meta?.height ?? 600,
     ratio: meta ? meta.width / meta.height : FALLBACK_RATIO,
+    objectPosition,
   };
 };
 
-const project = (id, category, title, images) => ({ id, category, title, images });
+// layout: 'grid' is an even 2x2 collage of square tiles; 'pairs' puts two photos per row.
+const project = (id, category, title, images, layout) => ({ id, category, title, images, layout });
 
 export const siteData = {
   company: {

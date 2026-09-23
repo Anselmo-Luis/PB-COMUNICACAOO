@@ -13,7 +13,6 @@ function MosaicTile({ image, imageIndex, startIndex, onOpenLightbox, isHero }) {
     <button
       type="button"
       className={isHero ? 'portfolio-mosaic-tile portfolio-mosaic-tile-hero' : 'portfolio-mosaic-tile'}
-      style={{ '--tile-ratio': image.ratio }}
       onClick={() => onOpenLightbox(startIndex + imageIndex)}
       aria-label={`Ampliar ${image.alt}`}
     >
@@ -24,6 +23,7 @@ function MosaicTile({ image, imageIndex, startIndex, onOpenLightbox, isHero }) {
         alt={image.alt}
         width={image.width}
         height={image.height}
+        style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
         loading="lazy"
         decoding="async"
       />
@@ -32,23 +32,34 @@ function MosaicTile({ image, imageIndex, startIndex, onOpenLightbox, isHero }) {
   );
 }
 
+// Every tile in a row gets the same size. Using the average ratio keeps the row
+// as tall as the photos laid out at their natural shapes, so the columns stay balanced.
+function MosaicRow({ images, firstIndex, startIndex, onOpenLightbox }) {
+  const rowRatio = images.reduce((sum, image) => sum + image.ratio, 0) / images.length;
+
+  return (
+    <div className="portfolio-mosaic-row" style={{ '--row-ratio': rowRatio }}>
+      {images.map((image, imageIndex) => (
+        <MosaicTile
+          key={image.src}
+          image={image}
+          imageIndex={firstIndex + imageIndex}
+          startIndex={startIndex}
+          onOpenLightbox={onOpenLightbox}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function ProjectMosaic({ project, categoryLabel, startIndex, onOpenLightbox }) {
   const { images } = project;
 
   let content = null;
 
-  if (images.length === 1) {
+  if (project.layout === 'grid') {
     content = (
-      <MosaicTile
-        image={images[0]}
-        imageIndex={0}
-        startIndex={startIndex}
-        onOpenLightbox={onOpenLightbox}
-      />
-    );
-  } else if (images.length === 2) {
-    content = (
-      <div className="portfolio-mosaic-row">
+      <div className="portfolio-mosaic-grid">
         {images.map((image, imageIndex) => (
           <MosaicTile
             key={image.src}
@@ -59,6 +70,29 @@ export default function ProjectMosaic({ project, categoryLabel, startIndex, onOp
           />
         ))}
       </div>
+    );
+  } else if (project.layout === 'pairs') {
+    content = mosaicRows(images, 2).map((row, rowIndex) => (
+      <MosaicRow
+        key={row[0].src}
+        images={row}
+        firstIndex={rowIndex * 2}
+        startIndex={startIndex}
+        onOpenLightbox={onOpenLightbox}
+      />
+    ));
+  } else if (images.length === 1) {
+    content = (
+      <MosaicTile
+        image={images[0]}
+        imageIndex={0}
+        startIndex={startIndex}
+        onOpenLightbox={onOpenLightbox}
+      />
+    );
+  } else if (images.length === 2) {
+    content = (
+      <MosaicRow images={images} firstIndex={0} startIndex={startIndex} onOpenLightbox={onOpenLightbox} />
     );
   } else {
     const [hero, ...rest] = images;
@@ -76,17 +110,13 @@ export default function ProjectMosaic({ project, categoryLabel, startIndex, onOp
           isHero
         />
         {mosaicRows(rest, rowSize).map((row, rowIndex) => (
-          <div className="portfolio-mosaic-row" key={row[0].src}>
-            {row.map((image, imageIndex) => (
-              <MosaicTile
-                key={image.src}
-                image={image}
-                imageIndex={rowIndex * rowSize + imageIndex + 1}
-                startIndex={startIndex}
-                onOpenLightbox={onOpenLightbox}
-              />
-            ))}
-          </div>
+          <MosaicRow
+            key={row[0].src}
+            images={row}
+            firstIndex={rowIndex * rowSize + 1}
+            startIndex={startIndex}
+            onOpenLightbox={onOpenLightbox}
+          />
         ))}
       </div>
     );

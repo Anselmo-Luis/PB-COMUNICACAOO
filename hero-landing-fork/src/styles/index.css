@@ -1845,6 +1845,7 @@ textarea:focus-visible {
 }
 
 .portfolio-mosaic-group {
+  --mosaic-gap: 0.25rem;
   display: inline-block;
   width: 100%;
   max-width: 100%;
@@ -1856,8 +1857,8 @@ textarea:focus-visible {
 .portfolio-mosaic-row {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
-  margin: 0 0 0.65rem;
+  gap: var(--mosaic-gap);
+  margin: 0 0 var(--mosaic-gap);
 }
 
 .portfolio-mosaic-row:last-child {
@@ -1865,35 +1866,53 @@ textarea:focus-visible {
 }
 
 .portfolio-mosaic-row .portfolio-mosaic-tile {
-  flex: var(--tile-ratio, 1) 1 0;
+  flex: 1 1 0;
   width: 0;
   min-width: 0;
+  aspect-ratio: var(--row-ratio);
   margin: 0;
 }
 
-.portfolio-mosaic-row .portfolio-mosaic-tile:only-child {
-  flex: 1 1 0;
-  width: 100%;
+.portfolio-mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--mosaic-gap);
+}
+
+.portfolio-mosaic-grid .portfolio-mosaic-tile {
+  aspect-ratio: 1;
+  margin: 0;
+}
+
+.portfolio-mosaic-tile.is-stretched {
+  aspect-ratio: auto;
+}
+
+.portfolio-mosaic-row .portfolio-mosaic-tile img,
+.portfolio-mosaic-grid .portfolio-mosaic-tile img,
+.portfolio-mosaic-tile.is-stretched img {
+  height: 100%;
+  object-fit: cover;
 }
 
 .portfolio-mosaic-cluster .portfolio-mosaic-tile-hero {
-  margin: 0 0 0.65rem;
+  margin: 0 0 var(--mosaic-gap);
 }
 
 .portfolio-mosaic-tile {
   position: relative;
   display: block;
   width: 100%;
-  margin: 0 0 0.65rem;
+  margin: 0;
   break-inside: avoid;
   border: 1px solid rgba(29, 29, 31, 0.09);
-  border-radius: 1.1rem;
+  border-radius: 0.55rem;
   overflow: hidden;
   background: #e8ecee;
   padding: 0;
   cursor: zoom-in;
-  box-shadow: 0 14px 34px rgba(29, 29, 31, 0.055);
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms ease, border-color 320ms ease;
+  box-shadow: 0 8px 20px rgba(29, 29, 31, 0.05);
+  transition: box-shadow 320ms ease, border-color 320ms ease;
 }
 
 .portfolio-mosaic-tile-hero {
@@ -1903,14 +1922,20 @@ textarea:focus-visible {
 .portfolio-mosaic-tile:hover,
 .portfolio-mosaic-tile:focus-visible {
   border-color: rgba(0, 19, 78, 0.25);
-  box-shadow: 0 22px 48px rgba(29, 29, 31, 0.14);
-  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(29, 29, 31, 0.14);
 }
 
 .portfolio-mosaic-tile img {
   display: block;
   width: 100%;
   height: auto;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tiles sit a hairline apart, so a lifted tile would overlap its neighbor; zoom the photo instead. */
+.portfolio-mosaic-tile:hover img,
+.portfolio-mosaic-tile:focus-visible img {
+  transform: scale(1.04);
 }
 
 .portfolio-mosaic-tile-hint {
@@ -2703,7 +2728,7 @@ textarea:focus-visible {
   .benefit-row:hover,
   .service-card:hover,
   .client-logo-card:hover,
-  .portfolio-mosaic-tile:hover,
+  .portfolio-mosaic-tile:hover img,
   .portfolio-video-carousel:hover,
   .cta-primary-button:hover,
   .cta-secondary-button-light:hover,

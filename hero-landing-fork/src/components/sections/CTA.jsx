@@ -8,18 +8,13 @@ export default function CTA() {
 
   return (
     <section aria-labelledby="cta-heading" className="relative z-10 overflow-hidden bg-[var(--color-pb-surface)] px-6 py-6">
-      <div ref={revealRef} className="reveal-section mx-auto max-w-6xl">
-        <div className="cta-panel-light rounded-[2rem] p-8 sm:p-10 md:p-12">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center">
+      <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
+        <div className="cta-panel-light rounded-[2rem] p-8 sm:p-10 lg:p-12">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
             <div>
-              <span className="section-kicker-light">Solicite seu orçamento</span>
-              <h2 id="cta-heading" className="mt-6 font-[var(--font-display)] text-4xl font-bold leading-[1.04] tracking-tight text-[var(--color-pb-accent-blue)] sm:text-5xl md:text-6xl">
-                {siteData.ctaBanner.headline.before}
-                {siteData.ctaBanner.headline.lineBreak && <br />}
-                {' '}{siteData.ctaBanner.headline.accent}
-              </h2>
+              <h2 id="cta-heading" className="section-kicker-light">Solicite seu orçamento</h2>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-pb-ink-2)] sm:text-lg">
+              <p className="mt-6 max-w-xl font-[var(--font-display)] text-xl font-medium leading-snug text-[var(--color-pb-ink)] [text-wrap:pretty] sm:text-2xl lg:text-[1.75rem]">
                 {siteData.ctaBanner.subheadline}
               </p>
 

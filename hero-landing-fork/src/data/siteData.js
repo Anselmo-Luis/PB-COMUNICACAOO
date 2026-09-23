@@ -748,6 +748,12 @@ export const siteData = {
         poster: '/assets/gallery/producao/producao-adesivacao-parede-escritorio-poster.jpg',
         alt: 'Adesivação de parede em ambiente de escritório',
       },
+      {
+        id: 'production-rest-corner',
+        src: '/assets/gallery/producao/producao-cantinho-descanso.mp4',
+        poster: '/assets/gallery/producao/producao-cantinho-descanso-poster.jpg',
+        alt: 'Cantinho de descanso da equipe na P&B',
+      },
     ],
   },
 
@@ -775,10 +781,6 @@ export const siteData = {
       {
         q: 'Como funciona a política de entregas?',
         a: 'Entrega garantida para a capital acima de R$ 300,00. Para demais regiões, realizamos envio por transportadora com rastreamento. Instalações são orçadas separadamente conforme a localização.',
-      },
-      {
-        q: 'Qual a vida útil dos adesivos veiculares?',
-        a: 'Os adesivos automotivos de última geração que utilizamos possuem vida útil média de 5 a 7 anos, dependendo das condições de exposição. Todos contam com laminação UV para proteção extra.',
       },
       {
         q: 'Qual o prazo médio de produção?',
@@ -831,19 +833,13 @@ export const siteData = {
   },
 
   ctaBanner: {
-    headline: {
-      before: 'Sua marca merece a mesma',
-      accent: 'autoridade das maiores',
-      lineBreak: true,
-    },
     subheadline:
       'Transforme espaços e ativos em ferramentas de visibilidade corporativa. Solicite seu orçamento e inicie seu projeto hoje.',
     ctas: [
       { text: 'Solicite seu Orçamento', variant: 'primary' },
       { text: '(11) 3836-0196', variant: 'phone' },
     ],
-    trustLine:
-      'Atendimento corporativo • Orçamento sem compromisso • Resposta em até 24h',
+    trustLine: 'Atendimento corporativo • Orçamento sem compromisso',
   },
 
   footer: {

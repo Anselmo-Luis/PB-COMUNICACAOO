@@ -126,8 +126,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Shared hero/nav logo gutter — tighter than max-w-7xl centering on wide viewports */
-  --page-inline-gutter: clamp(1.25rem, 4.5vw, 3rem);
+  /* The sections' column (px-6 + max-w-7xl). The fixed nav and the hero copy
+     use it too, so every edge on the page lines up at any width or zoom. */
+  --page-inline-gutter: 1.5rem;
+  --page-max-width: 80rem;
 }
 
 html {
@@ -244,7 +246,8 @@ textarea:focus-visible {
 
 .site-navbar__inner {
   width: 100%;
-  max-width: none;
+  max-width: calc(var(--page-max-width) + 2 * var(--page-inline-gutter));
+  margin-inline: auto;
   padding-inline: var(--page-inline-gutter);
 }
 
@@ -755,7 +758,10 @@ textarea:focus-visible {
   max-width: min(52rem, 78vw);
   min-height: 100vh; /* fallback p/ browsers sem svh */
   min-height: 100svh;
-  /* Same inline gutter as .site-navbar__inner — logo edges share one vertical line */
+  /* Starts on the page column. A margin rather than padding on .hero-shell: the video
+     frame spans the grid area, so shell padding would shrink it off the edges. */
+  margin-inline-start: max(0px, calc((100% - var(--page-max-width)) / 2 - var(--page-inline-gutter)));
+  /* Same gutter as the sections and .site-navbar__inner */
   padding:
     clamp(4.5rem, 10vh, 6.5rem)
     var(--page-inline-gutter)
@@ -820,6 +826,7 @@ textarea:focus-visible {
 
 .hero-overlay .hero-video-unblock {
   z-index: 3;
+  right: max(var(--page-inline-gutter), calc((100% - var(--page-max-width)) / 2));
 }
 
 .hero-media-visual {

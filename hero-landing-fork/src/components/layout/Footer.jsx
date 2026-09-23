@@ -25,62 +25,65 @@ const socialIcons = {
 export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-black/[0.07] bg-[var(--color-pb-white)] px-6 py-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           {/* Brand */}
-          <div className="sm:col-span-2">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
             <img
               src={siteData.company.logoSrc}
               alt={siteData.company.name}
               width={siteData.company.logoWidth}
               height={siteData.company.logoHeight}
-              className="mb-4 h-20 w-auto sm:h-24"
+              className="h-20 w-auto flex-shrink-0 self-start sm:h-24 sm:self-center"
             />
-            <h3 className="font-[var(--font-display)] text-lg sm:text-xl font-bold text-[var(--color-pb-ink)] mb-2">
-              {siteData.company.name}
-            </h3>
-            <p className="text-sm sm:text-base text-[var(--color-pb-ink)] leading-relaxed max-w-sm" style={{ opacity: 0.72 }}>
-              {siteData.company.description}
-            </p>
+            <div>
+              <h3 className="font-[var(--font-display)] text-lg sm:text-xl font-bold text-[var(--color-pb-ink)] mb-1.5">
+                {siteData.company.name}
+              </h3>
+              <p className="text-sm text-[var(--color-pb-ink)] leading-relaxed max-w-md" style={{ opacity: 0.72 }}>
+                {siteData.company.description}
+              </p>
+            </div>
           </div>
 
-          {/* Contact */}
-          <div>
-            <p className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-pb-ink)] mb-4">Contato</p>
-            <ul className="space-y-2 text-sm text-[var(--color-pb-ink-2)]">
-              <li className="flex items-center gap-2">
-                <Phone size={16} strokeWidth={1.5} className="flex-shrink-0" aria-hidden="true" />
-                <a href={siteData.contact.phoneLink} className="hover:text-[var(--color-pb-ink)]">
-                  {siteData.contact.phones}
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail size={16} strokeWidth={1.5} className="flex-shrink-0" aria-hidden="true" />
-                <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--color-pb-ink)]">
-                  {siteData.contact.email}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <p className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-pb-ink)] mb-4">Redes Sociais</p>
-            <div className="flex items-center gap-4">
-              {siteData.social.map((s) => (
-                <a
-                  key={s.icon}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.platform}
-                  className="w-10 h-10 rounded-lg glass-strong-light flex items-center justify-center text-[var(--color-pb-ink-2)] hover:text-[var(--color-pb-ink)] transition-all"
-                >
-                  {socialIcons[s.icon]}
-                </a>
-              ))}
+          <div className="flex flex-wrap gap-x-14 gap-y-6 lg:flex-shrink-0 lg:flex-nowrap">
+            {/* Contact */}
+            <div>
+              <p className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-pb-ink)] mb-3">Contato</p>
+              <ul className="space-y-2 text-sm text-[var(--color-pb-ink-2)]">
+                <li className="flex items-center gap-2">
+                  <Phone size={16} strokeWidth={1.5} className="flex-shrink-0" aria-hidden="true" />
+                  <a href={siteData.contact.phoneLink} className="whitespace-nowrap hover:text-[var(--color-pb-ink)]">
+                    {siteData.contact.phones}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail size={16} strokeWidth={1.5} className="flex-shrink-0" aria-hidden="true" />
+                  <a href={`mailto:${siteData.contact.email}`} className="hover:text-[var(--color-pb-ink)]">
+                    {siteData.contact.email}
+                  </a>
+                </li>
+              </ul>
             </div>
 
+            {/* Social */}
+            <div>
+              <p className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-pb-ink)] mb-3">Redes Sociais</p>
+              <div className="flex items-center gap-3">
+                {siteData.social.map((s) => (
+                  <a
+                    key={s.icon}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.platform}
+                    className="w-10 h-10 rounded-lg glass-strong-light flex items-center justify-center text-[var(--color-pb-ink-2)] hover:text-[var(--color-pb-ink)] transition-all"
+                  >
+                    {socialIcons[s.icon]}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 

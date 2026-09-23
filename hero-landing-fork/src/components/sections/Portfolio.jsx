@@ -263,10 +263,10 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="portfolio-section relative z-10 overflow-hidden bg-[var(--color-pb-surface)] py-6"
+      className="portfolio-section relative z-10 overflow-hidden bg-[var(--color-pb-surface)] px-6 py-6"
       aria-labelledby="portfolio-heading"
     >
-      <div ref={revealRef} className="reveal-section mx-auto max-w-7xl px-6">
+      <div ref={revealRef} className="reveal-section mx-auto max-w-7xl">
         <div className="portfolio-header">
           <div>
             <span className="section-kicker-light">Trabalhos realizados</span>

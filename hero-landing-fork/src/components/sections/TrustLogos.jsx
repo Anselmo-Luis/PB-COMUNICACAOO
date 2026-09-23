@@ -108,18 +108,18 @@ export default function TrustLogos() {
 
   return (
     <section
-      className="clients-section relative z-10 bg-[var(--color-pb-surface)] py-4"
+      className="clients-section relative z-10 bg-[var(--color-pb-surface)] px-6 py-4"
       aria-label={clients.label}
     >
       <div ref={revealRef} className="reveal-section">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl">
           <span className="section-kicker-light">{clients.label}</span>
           <h2 className="mt-4 max-w-xl font-[var(--font-display)] text-2xl font-semibold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-3xl">
             Clientes que confiam no nosso trabalho
           </h2>
         </div>
 
-        <div className="client-logo-marquee mt-8 px-6">
+        <div className="client-logo-marquee mx-auto mt-8 max-w-7xl">
           <ClientLogoRail logos={clients.logos} />
         </div>
       </div>

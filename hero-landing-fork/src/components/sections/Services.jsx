@@ -204,8 +204,8 @@ export default function Services() {
   };
 
   return (
-    <section id="servicos" aria-labelledby="servicos-heading" className="services-section relative z-10 bg-[var(--color-pb-white)] py-6">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="servicos" aria-labelledby="servicos-heading" className="services-section relative z-10 bg-[var(--color-pb-white)] px-6 py-6">
+      <div className="mx-auto max-w-7xl">
         <div ref={headerRevealRef} className="reveal-section mb-10 text-center">
           <span className="section-kicker-light">{services.label}</span>
           <h2 id="servicos-heading" className="mt-6 font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--color-pb-accent-blue)] sm:text-4xl md:text-5xl">

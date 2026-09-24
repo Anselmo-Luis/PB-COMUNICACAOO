@@ -219,16 +219,6 @@
     "height": 1280,
     "v": "b87b4f0e"
   },
-  "/assets/gallery/frota/frota-20-b.webp": {
-    "width": 1002,
-    "height": 960,
-    "v": "d0e1995e"
-  },
-  "/assets/gallery/frota/frota-20.webp": {
-    "width": 1280,
-    "height": 960,
-    "v": "e0d5d7a1"
-  },
   "/assets/gallery/frota/frota-video-01-poster.webp": {
     "width": 960,
     "height": 536,
@@ -763,5 +753,25 @@
     "width": 960,
     "height": 1280,
     "v": "4b16f1ee"
+  },
+  "/assets/gallery/veiculos/veiculo-31.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "v": "2fd1da40"
+  },
+  "/assets/gallery/veiculos/veiculo-31.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "0c2be29e"
+  },
+  "/assets/gallery/veiculos/veiculo-32.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "v": "23f840b7"
+  },
+  "/assets/gallery/veiculos/veiculo-32.webp": {
+    "width": 1280,
+    "height": 960,
+    "v": "f5497731"
   }
 }

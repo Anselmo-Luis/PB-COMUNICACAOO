@@ -371,10 +371,15 @@ export const siteData = {
       project('vehicle-seara-truck', 'vehicles', 'Seara', [
         galleryImage('veiculos', 'veiculo-22', 'Caminhão Seara adesivado'),
       ]),
-      project('vehicle-friboi', 'vehicles', 'Friboi', [
-        galleryImage('veiculos', 'veiculo-06', 'Veículo Friboi adesivado em vista lateral'),
-        galleryImage('veiculos', 'veiculo-07', 'Veículo Friboi adesivado em outro ângulo'),
-        galleryImage('veiculos', 'veiculo-08', 'Detalhe da adesivação Friboi'),
+      project('vehicle-xando', 'vehicles', 'Xandô', [
+        galleryImage('veiculos', 'veiculo-27', 'Caminhão baú Xandô adesivado em vista traseira', 'center 50%'),
+        galleryImage('veiculos', 'veiculo-28', 'Caminhão baú Xandô adesivado em vista lateral', 'center 37%'),
+        galleryImage('veiculos', 'veiculo-29', 'Caminhão Xandô com logotipo adesivado no capô', 'center 40%'),
+        galleryImage('veiculos', 'veiculo-30', 'Caminhão baú Xandô adesivado no outro lado', 'center 50%'),
+      ], 'grid'),
+      project('vehicle-seara', 'vehicles', 'Seara', [
+        galleryImage('frota', 'frota-08', 'Veículo Seara adesivado'),
+        galleryImage('frota', 'frota-12', 'Veículo Seara em outro ângulo'),
       ]),
       project('vehicle-sabesp-frota', 'vehicles', 'Sabesp', [
         galleryImage('frota', 'frota-15', 'Picape Sabesp adesivada em vista lateral'),
@@ -393,9 +398,6 @@ export const siteData = {
         galleryImage('frota', 'frota-02', 'Caminhão NoCarbon adesivado'),
         galleryImage('frota', 'frota-04', 'Caminhão NoCarbon em outro ângulo'),
       ]),
-      project('vehicle-correios', 'vehicles', 'Correios', [
-        galleryImage('frota', 'frota-06', 'Van Correios adesivada com campanha "A vida segue"'),
-      ]),
       project('vehicle-roadstar', 'vehicles', 'Roadstar', [
         galleryImage('veiculos', 'veiculo-05', 'Carro Roadstar com comunicação visual aplicada'),
       ]),
@@ -413,13 +415,17 @@ export const siteData = {
         galleryImage('veiculos', 'veiculo-14', 'Veículo Swift e Degusta adesivado'),
         galleryImage('frota', 'frota-18', 'Veículo Swift de frota em campo'),
       ]),
-      project('vehicle-seara', 'vehicles', 'Seara', [
-        galleryImage('frota', 'frota-08', 'Veículo Seara adesivado'),
-        galleryImage('frota', 'frota-12', 'Veículo Seara em outro ângulo'),
+      project('vehicle-friboi', 'vehicles', 'Friboi', [
+        galleryImage('veiculos', 'veiculo-06', 'Veículo Friboi adesivado em vista lateral'),
+        galleryImage('veiculos', 'veiculo-07', 'Veículo Friboi adesivado em outro ângulo'),
+        galleryImage('veiculos', 'veiculo-08', 'Detalhe da adesivação Friboi'),
       ]),
       project('vehicle-torra', 'vehicles', 'Torra', [
         galleryImage('veiculos', 'veiculo-13', 'Veículo Torra adesivado'),
         galleryImage('frota', 'frota-11', 'Veículo Torra de frota em campo'),
+      ]),
+      project('vehicle-correios', 'vehicles', 'Correios', [
+        galleryImage('frota', 'frota-06', 'Van Correios adesivada com campanha "A vida segue"'),
       ]),
       project('vehicle-uol', 'vehicles', 'UOL', [
         galleryImage('frota', 'frota-09', 'Veículo UOL adesivado'),
@@ -428,15 +434,10 @@ export const siteData = {
         galleryImage('veiculos', 'veiculo-17', 'Veículo Cartão de TODOS adesivado'),
         galleryImage('veiculos', 'veiculo-20', 'Veículo Rio de Prêmios adesivado'),
       ]),
-      project('vehicle-jamtur', 'vehicles', 'Jamtur', [
-        galleryImage('frota', 'frota-20-b', 'Ônibus Jamtur Viagens e Turismo adesivado'),
+      project('vehicle-italakinho', 'vehicles', 'Italakinho', [
+        galleryImage('veiculos', 'veiculo-31', 'Van Italakinho adesivada em vista lateral'),
+        galleryImage('veiculos', 'veiculo-32', 'Van Italakinho adesivada em vista traseira'),
       ]),
-      project('vehicle-xando', 'vehicles', 'Xandô', [
-        galleryImage('veiculos', 'veiculo-27', 'Caminhão baú Xandô adesivado em vista traseira', 'center 50%'),
-        galleryImage('veiculos', 'veiculo-28', 'Caminhão baú Xandô adesivado em vista lateral', 'center 37%'),
-        galleryImage('veiculos', 'veiculo-29', 'Caminhão Xandô com logotipo adesivado no capô', 'center 40%'),
-        galleryImage('veiculos', 'veiculo-30', 'Caminhão baú Xandô adesivado no outro lado', 'center 50%'),
-      ], 'grid'),
       project('vehicle-smart-fit', 'vehicles', 'Smart Fit', [
         galleryImage('frota', 'frota-16', 'Smart Truck Smart Fit adesivado'),
         galleryImage('veiculos', 'veiculo-09', 'Smart Truck Smart Fit amarelo com o Cristo Redentor'),

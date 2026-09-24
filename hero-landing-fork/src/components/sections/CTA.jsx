@@ -14,7 +14,7 @@ export default function CTA() {
             <div>
               <h2 id="cta-heading" className="section-kicker-light">Solicite seu orçamento</h2>
 
-              <p className="mt-6 max-w-xl font-[var(--font-display)] text-xl font-medium leading-snug text-[var(--color-pb-ink)] [text-wrap:pretty] sm:text-2xl lg:text-[1.75rem]">
+              <p className="mt-6 max-w-xl font-[var(--font-display)] text-xl font-medium leading-snug text-[var(--color-pb-accent-blue)] [text-wrap:pretty] sm:text-2xl lg:text-[1.75rem]">
                 {siteData.ctaBanner.subheadline}
               </p>
 

@@ -268,10 +268,10 @@ export default function Hero() {
         <div className="hero-copy">
           <img
             className="hero-brand-logo"
-            src="/assets/logo-original.png"
+            src="/assets/logo-original.webp"
             alt="P&B Comunicação Visual"
-            width={863}
-            height={666}
+            width={480}
+            height={362}
           />
 
           <h1 className="hero-title fade-in-up-delay-1">

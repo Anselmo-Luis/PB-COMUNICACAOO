@@ -50,9 +50,9 @@ export const siteData = {
     founded: 2002,
     description:
       'Desde 2002 desenvolvemos projetos de comunicação visual, impressão, produção e instalação para tornar marcas cada vez mais visíveis e próximas de seus clientes.',
-    logoSrc: '/assets/logo.png',
-    logoWidth: 700,
-    logoHeight: 504,
+    logoSrc: '/assets/logo.webp',
+    logoWidth: 480,
+    logoHeight: 346,
   },
 
   contact: {

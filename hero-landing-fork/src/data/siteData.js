@@ -806,7 +806,7 @@ export const siteData = {
       company: { label: 'Empresa (opcional)', placeholder: 'Nome da sua empresa' },
       contact: {
         label: 'E-mail ou WhatsApp',
-        placeholder: 'voce@empresa.com.br ou (11) 99999-9999',
+        placeholder: 'e-mail ou (11) 99999-9999',
         required: true,
       },
       message: {

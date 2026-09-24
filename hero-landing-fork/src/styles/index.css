@@ -593,6 +593,11 @@ textarea:focus-visible {
   grid-column: 1 / -1;
 }
 
+/* The media comes first in the markup for the overlay hero; the grid variants show it after the copy */
+.hero-section:not(.hero-overlay) .hero-media-frame {
+  order: 1;
+}
+
 .hero-copy {
   max-width: 42rem;
 }

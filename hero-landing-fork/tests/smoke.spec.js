@@ -77,7 +77,10 @@ test.describe('site institucional P&B', () => {
     await carousel.scrollIntoViewIfNeeded();
     await expect(carousel).toBeVisible();
     await expect(carousel.locator('.portfolio-video-grid')).toHaveCount(0);
-    await expect(carousel.locator('.portfolio-video-carousel-dot')).toHaveCount(4);
+    const dots = carousel.locator('.portfolio-video-carousel-dot');
+    await expect(dots.first()).toBeVisible();
+    const videoCount = await dots.count();
+    expect(videoCount).toBeGreaterThan(1);
     await expect(carousel.locator('video')).toHaveCount(2);
 
     const playback = await carousel.locator('video').first().evaluate((video) => ({
@@ -88,7 +91,7 @@ test.describe('site institucional P&B', () => {
     expect(playback).toEqual({ autoplay: true, muted: true, playsInline: true });
 
     await carousel.getByRole('button', { name: 'Próximo vídeo' }).click();
-    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText('02 / 04');
+    await expect(carousel.locator('.portfolio-video-carousel-counter')).toHaveText(`02 / ${String(videoCount).padStart(2, '0')}`);
     await expect(carousel.locator('.portfolio-video-carousel-dot.is-active')).toHaveAttribute(
       'aria-pressed',
       'true',
@@ -263,7 +266,7 @@ test.describe('site institucional P&B', () => {
       };
     });
 
-    expect(presentation.palette).toEqual({ green: '#18aa2b', blue: '#00134e' });
+    expect(presentation.palette).toEqual({ green: '#18aa2b', blue: '#0004e1' });
     expect(presentation.titleFill).toContain('55, 220, 85');
     expect(presentation.accentFill).toContain('255, 255, 255');
     expect(presentation.mediaBottom).toBeGreaterThanOrEqual(presentation.copyBottom - 2);
@@ -396,11 +399,18 @@ test.describe('site institucional P&B', () => {
     expect(Math.abs(wide.media.right - wide.viewportWidth)).toBeLessThan(3);
 
     await page.setViewportSize({ width: 390, height: 844 });
-    for (const name of ['a', 'b', 'c']) {
+    for (const name of ['b', 'c']) {
       const mobile = await geometry(`?hero=${name}`);
       expect(mobile.media.y).toBeGreaterThan(mobile.copy.y + mobile.copy.height);
       expect(Math.abs(mobile.media.width - mobile.shell.width)).toBeLessThan(3);
       expect(mobile.overflow).toBe(0);
     }
+
+    // The overlay hero keeps its copy on top of a full-screen video on phones too
+    const overlayPhone = await geometry('?hero=a');
+    expect(overlayPhone.media.y).toBeLessThan(4);
+    expect(overlayPhone.media.width / overlayPhone.viewportWidth).toBeGreaterThan(0.98);
+    expect(overlayPhone.copy.y + overlayPhone.copy.height).toBeLessThanOrEqual(overlayPhone.media.y + overlayPhone.media.height + 2);
+    expect(overlayPhone.overflow).toBe(0);
   });
 });

@@ -187,6 +187,40 @@ test.describe('site institucional P&B', () => {
     }
   });
 
+  test('mantém o botão flutuante do WhatsApp no canto em qualquer tela', async ({ page }) => {
+    for (const [width, height] of [[1280, 800], [320, 568]]) {
+      await page.setViewportSize({ width, height });
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+      const button = page.getByRole('link', { name: 'Fale conosco pelo WhatsApp' });
+      await expect(button).toHaveAttribute('href', /api\.whatsapp\.com\/send\?phone=5511965698725/);
+      await expect(button).toHaveAttribute('target', '_blank');
+      await expect(button).toBeInViewport();
+
+      await page.locator('#contato').scrollIntoViewIfNeeded();
+      await button.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)));
+      const box = await button.boundingBox();
+      // html reserves a stable scrollbar gutter, so only body's width excludes it
+      const visible = await page.evaluate(() => ({
+        width: document.body.clientWidth,
+        height: window.innerHeight,
+      }));
+      const label = `${width}x${height}`;
+      expect(visible.width - (box.x + box.width), `${label}: colado à direita`).toBeLessThan(24);
+      expect(visible.height - (box.y + box.height), `${label}: colado embaixo`).toBeLessThan(24);
+      expect(box.width, `${label}: alvo de toque`).toBeGreaterThanOrEqual(48);
+    }
+
+    // The open drawer must cover the button so it can't be tapped through it
+    await page.getByRole('button', { name: 'Abrir menu' }).click();
+    await expect(page.getByRole('dialog', { name: 'Menu de navegação' })).toBeVisible();
+    const topmost = await page.getByRole('link', { name: 'Fale conosco pelo WhatsApp' }).evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
+    });
+    expect(topmost).toBe(false);
+  });
+
   test('versiona as fotos da galeria em todas as variantes do srcset e no lightbox', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 

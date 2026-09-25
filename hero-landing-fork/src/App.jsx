@@ -2,6 +2,7 @@ import { Component, lazy, Suspense, useEffect } from 'react'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import TrustLogos from './components/sections/TrustLogos'
+import FloatingWhatsApp from './components/ui/FloatingWhatsApp'
 
 const Benefits = lazy(() => import('./components/sections/Benefits'))
 const Process = lazy(() => import('./components/sections/Process'))
@@ -98,6 +99,7 @@ function App() {
         <LazySection><LocationMapSection /></LazySection>
       </main>
       <LazySection><Footer /></LazySection>
+      <FloatingWhatsApp />
     </>
   )
 }

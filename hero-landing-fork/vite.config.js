@@ -16,13 +16,12 @@ function normalizeSiteUrl(value = fallbackSiteUrl) {
 }
 
 function resolveSiteUrl(env) {
-  // VERCEL_PROJECT_PRODUCTION_URL is the stable assigned domain (same for every
-  // deployment); VERCEL_URL is unique per-deployment and must never end up in
-  // canonical/og:url/sitemap URLs, or link previews (WhatsApp, etc.) break the
-  // moment a newer deployment supersedes the one that was shared.
-  return normalizeSiteUrl(
-    env.VITE_SITE_URL || env.VERCEL_PROJECT_PRODUCTION_URL || env.VERCEL_URL || fallbackSiteUrl,
-  )
+  // VITE_SITE_URL is pinned in the Vercel project for every environment.
+  // VERCEL_PROJECT_PRODUCTION_URL is the shortest production custom domain, so
+  // letting it leak into canonical/og:url/sitemap would point them at
+  // pbcomunicacao.com.br before its DNS leaves the old WordPress host. Flip the
+  // env value (not this file) once the domain is live.
+  return normalizeSiteUrl(env.VITE_SITE_URL || fallbackSiteUrl)
 }
 
 function absoluteUrl(siteUrl, pathname) {

@@ -18,9 +18,9 @@ function normalizeSiteUrl(value = fallbackSiteUrl) {
 }
 
 function resolveSiteUrl(env) {
-  return normalizeSiteUrl(
-    env.VITE_SITE_URL || env.VERCEL_PROJECT_PRODUCTION_URL || env.VERCEL_URL || fallbackSiteUrl,
-  );
+  // same rule as vite.config.js: only VITE_SITE_URL decides, never a
+  // Vercel-injected domain that could flip to the unpropagated custom domain
+  return normalizeSiteUrl(env.VITE_SITE_URL || fallbackSiteUrl);
 }
 
 const siteUrl = resolveSiteUrl(process.env);

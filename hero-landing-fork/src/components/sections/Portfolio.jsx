@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import { useFlushColumns } from '../../hooks/useFlushColumns';
 import { useReveal } from '../../hooks/useReveal';
+import { useScrollLock } from '../../hooks/useScrollLock';
 import { getPrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { siteData } from '../../data/siteData';
 import PortfolioVideoCarousel from './PortfolioVideoCarousel';
@@ -14,14 +15,13 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
   const previousFocusRef = useRef(null);
   const item = items[index];
 
+  useScrollLock(true);
+
   useEffect(() => {
     previousFocusRef.current = document.activeElement;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
     closeRef.current?.focus();
 
     return () => {
-      document.body.style.overflow = previousOverflow;
       previousFocusRef.current?.focus?.();
     };
   }, []);
@@ -58,8 +58,10 @@ function Lightbox({ items, index, onClose, onPrev, onNext, onJump }) {
       focusable[nextIndex]?.focus();
     };
 
-    dialog.addEventListener('keydown', handleKeyDown);
-    return () => dialog.removeEventListener('keydown', handleKeyDown);
+    // Document-level so Escape/arrows keep working after a pointer click moves
+    // focus off the (non-focusable) dialog into <body>.
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose, onNext, onPrev]);
 
   useEffect(() => {

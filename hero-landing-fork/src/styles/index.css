@@ -137,6 +137,9 @@ html {
   /* Garante que nenhum conteúdo alargue o layout além da tela — sem isso
      qualquer estouro escondido dá zoom-out no celular e corta o menu fixed. */
   overflow-x: hidden;
+  /* Keeps the scrollbar gutter reserved while dialogs lock scrolling
+     (useScrollLock), so the page content doesn't shift sideways. */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -1266,11 +1269,13 @@ textarea:focus-visible {
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-/* Hit area invisível para dedo (~36px) sem alterar o visual do dot */
+/* Hit area invisível para dedo (~36px) sem alterar o visual do dot. Lateral
+   de 0.2rem = exatamente o passo entre dots, senão a área de um cobre o
+   vizinho e o 1º ponto abre o vídeo 2. */
 .materials-video-dot::before {
   content: '';
   position: absolute;
-  inset: -0.85rem;
+  inset: -0.85rem -0.2rem;
 }
 
 .materials-video-dot:hover,

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { Component, lazy, Suspense, useEffect } from 'react'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import TrustLogos from './components/sections/TrustLogos'
@@ -14,11 +14,70 @@ const ContactForm = lazy(() => import('./components/sections/ContactForm'))
 const LocationMapSection = lazy(() => import('./components/sections/LocationMapSection'))
 const Footer = lazy(() => import('./components/layout/Footer'))
 
+const CHUNK_RELOAD_KEY = 'pb:chunk-reload-at'
+const CHUNK_LOAD_ERROR =
+  /failed to fetch dynamically imported module|error loading dynamically imported module|importing a module script failed/i
+
+class SectionErrorBoundary extends Component {
+  componentDidCatch(error) {
+    // A promote swaps the hashed chunk names, so a tab opened against the
+    // previous deployment 404s its lazy imports and would blank the section.
+    // One clean reload picks up the new build; the timestamp guards against
+    // reload loops if it keeps failing.
+    if (!(error instanceof TypeError) || !CHUNK_LOAD_ERROR.test(error.message)) return
+    const lastReload = Number(sessionStorage.getItem(CHUNK_RELOAD_KEY) || 0)
+    if (Date.now() - lastReload < 10000) return
+    sessionStorage.setItem(CHUNK_RELOAD_KEY, String(Date.now()))
+    window.location.reload()
+  }
+
+  render() {
+    return this.props.children
+  }
+}
+
 function LazySection({ children }) {
-  return <Suspense fallback={null}>{children}</Suspense>
+  return (
+    <Suspense fallback={null}>
+      <SectionErrorBoundary>{children}</SectionErrorBoundary>
+    </Suspense>
+  )
+}
+
+function useDeepLinkScroll() {
+  useEffect(() => {
+    let cancelled = false
+
+    const scrollToHash = () => {
+      const id = window.location.hash.slice(1)
+      if (!id) return
+      let frames = 0
+      // Lazy sections mount after the browser's own anchor attempt, so keep
+      // looking for a few seconds before giving up.
+      const look = () => {
+        if (cancelled) return
+        const target = document.getElementById(id)
+        if (target) {
+          target.scrollIntoView({ behavior: 'instant', block: 'start' })
+        } else if (frames++ < 300) {
+          requestAnimationFrame(look)
+        }
+      }
+      look()
+    }
+
+    scrollToHash()
+    window.addEventListener('hashchange', scrollToHash)
+    return () => {
+      cancelled = true
+      window.removeEventListener('hashchange', scrollToHash)
+    }
+  }, [])
 }
 
 function App() {
+  useDeepLinkScroll()
+
   return (
     <>
       <a href="#content" className="skip-link">

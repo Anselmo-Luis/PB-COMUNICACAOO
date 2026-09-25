@@ -821,8 +821,10 @@ export const siteData = {
     },
     submit: 'Enviar pelo WhatsApp',
     submitSecondary: 'Prefiro enviar por e-mail',
-    successMessage:
+    successWhatsApp:
       'Tudo certo! Abrimos o WhatsApp com sua mensagem — confira e aperte enviar.',
+    successEmail:
+      'Preparamos a mensagem no seu aplicativo de e-mail. Se nada abrir, escreva direto para vendas1@pbcomunicacao.com.br.',
     lgpd: {
       title: 'Privacidade e LGPD',
       bullets: [

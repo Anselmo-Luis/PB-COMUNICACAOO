@@ -104,18 +104,27 @@ export default function ContactForm() {
     }
 
     if (channel === 'email') {
+      // A mailto navigation can't be confirmed (no client installed = nothing
+      // happens), so the draft stays and the copy tells the user what to do.
       window.location.href = url;
-    } else {
-      const opened = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!opened) {
-        setStatus('blocked');
-        scheduleStatusReset();
-        return;
-      }
+      setStatus('sent-email');
+      scheduleStatusReset();
+      return;
     }
 
+    // 'noopener' in the features string makes window.open return null by spec,
+    // which read as a blocked popup on every successful send — open plainly
+    // and sever the opener afterwards instead.
+    const opened = window.open(url, '_blank');
+    if (!opened) {
+      setStatus('blocked');
+      scheduleStatusReset();
+      return;
+    }
+    opened.opener = null;
+
     setForm(INITIAL_STATE);
-    setStatus('sent');
+    setStatus('sent-whatsapp');
     scheduleStatusReset();
   };
 
@@ -283,10 +292,17 @@ function StatusMessage({ status, copy }) {
       </p>
     );
   }
-  if (status === 'sent') {
+  if (status === 'sent-whatsapp') {
     return (
       <p role="status" className="contact-success">
-        {copy.successMessage}
+        {copy.successWhatsApp}
+      </p>
+    );
+  }
+  if (status === 'sent-email') {
+    return (
+      <p role="status" className="contact-success">
+        {copy.successEmail}
       </p>
     );
   }

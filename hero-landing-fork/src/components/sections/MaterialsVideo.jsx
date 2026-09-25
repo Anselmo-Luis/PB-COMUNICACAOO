@@ -56,7 +56,11 @@ function MaterialsVideoCarousel({ videos }) {
 
       if (isActive && isInView && isPlaybackEnabled && !hasError) {
         if (media.ended) media.currentTime = 0;
-        media.play()?.catch?.(() => {});
+        media.play()?.catch?.((error) => {
+          // Autoplay rejected (e.g. iOS Low Power Mode): flip the toggle back
+          // so it doesn't claim the carousel is still playing.
+          if (error?.name === 'NotAllowedError') setIsPlaybackEnabled(false);
+        });
       } else {
         media.pause();
       }

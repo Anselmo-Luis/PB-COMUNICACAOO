@@ -182,6 +182,33 @@ export default function Hero() {
     };
   }, [isVideoEnabled]);
 
+  useEffect(() => {
+    const media = videoRef.current;
+    if (!isVideoEnabled || !media) return undefined;
+
+    const mediaQueries = [...new Set(
+      siteData.hero.video.sources.map((source) => source.media).filter(Boolean),
+    )];
+    if (!mediaQueries.length) return undefined;
+
+    const matchers = mediaQueries.map((query) => window.matchMedia(query));
+
+    const handleOrientationChange = () => {
+      // <source media> is only evaluated while parsing, so a portrait clip
+      // stays loaded after rotating to landscape. Reload picks the matching
+      // source; the poster stays visible until canplay refires.
+      media.load();
+      if (getPrefersReducedMotion()) return;
+      media.muted = true;
+      media.play()?.catch?.(() => {});
+    };
+
+    matchers.forEach((matcher) => matcher.addEventListener('change', handleOrientationChange));
+    return () => {
+      matchers.forEach((matcher) => matcher.removeEventListener('change', handleOrientationChange));
+    };
+  }, [isVideoEnabled]);
+
   const handleManualPlayback = async () => {
     const media = videoRef.current;
     if (!media) return;

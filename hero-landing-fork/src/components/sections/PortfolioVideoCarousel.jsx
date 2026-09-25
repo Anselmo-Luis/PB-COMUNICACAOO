@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+// Stage swap runs on a 720ms CSS animation; if its animationend never fires
+// (tab hidden mid-flight, animation canceled) the controls would stay locked.
+const LEAF_TRANSITION_FALLBACK_MS = 1200;
 
 function getReducedMotionPreference() {
   return typeof window !== 'undefined'
@@ -15,6 +18,7 @@ function VideoSlide({
   shouldPlay,
   onEnded,
   onError,
+  onPlaybackBlocked,
   onAnimationEnd,
 }) {
   const mediaRef = useRef(null);
@@ -32,13 +36,17 @@ function VideoSlide({
     if (isPlayable && isInView && shouldPlay && !hasError) {
       if (media.ended) media.currentTime = 0;
       const playback = media.play();
-      playback?.catch?.(() => {});
+      playback?.catch?.((error) => {
+        // iOS Low Power Mode and the like reject even muted autoplay; without
+        // this the toggle keeps claiming the carousel is playing.
+        if (error?.name === 'NotAllowedError') onPlaybackBlocked?.();
+      });
     } else {
       media.pause();
     }
 
     return undefined;
-  }, [hasError, isInView, isPlayable, shouldPlay, video.src]);
+  }, [hasError, isInView, isPlayable, onPlaybackBlocked, shouldPlay, video.src]);
 
   return (
     <div
@@ -132,6 +140,15 @@ export default function PortfolioVideoCarousel({ videos }) {
     return () => media.removeEventListener?.('change', handlePreferenceChange);
   }, []);
 
+  useEffect(() => {
+    if (!transition) return undefined;
+    const fallback = setTimeout(() => {
+      setActiveIndex(transition.to);
+      setTransition(null);
+    }, LEAF_TRANSITION_FALLBACK_MS);
+    return () => clearTimeout(fallback);
+  }, [transition]);
+
   if (!activeVideo) return null;
 
   const suspendAutoRotation = () => setIsAutoPlaying(false);
@@ -217,6 +234,7 @@ export default function PortfolioVideoCarousel({ videos }) {
               shouldPlay={isPlaybackEnabled}
               onEnded={handleVideoEnded}
               onError={() => setIsPlaybackEnabled(false)}
+              onPlaybackBlocked={() => setIsPlaybackEnabled(false)}
               onAnimationEnd={handleIncomingAnimationEnd}
             />
           </>
@@ -230,6 +248,7 @@ export default function PortfolioVideoCarousel({ videos }) {
               shouldPlay={isPlaybackEnabled}
               onEnded={handleVideoEnded}
               onError={() => setIsPlaybackEnabled(false)}
+              onPlaybackBlocked={() => setIsPlaybackEnabled(false)}
             />
             {nextVideo && (
               <VideoSlide
